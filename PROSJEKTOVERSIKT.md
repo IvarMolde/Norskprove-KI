@@ -14,12 +14,12 @@ delt infrastruktur.
 
 ## Forretningsmodell
 
-| Nivå | Pris | Økter | Ekstra |
-|---|---|---|---|
-| Gratis | 0 kr | 1–2 totalt | Engangssmakebit, ingen automatisk nivåtest |
-| Basis | 499 kr/mnd | 15/mnd | Pause-og-fortsett |
-| Pluss | 699 kr/mnd | 30/mnd | + Skriftlig KI-vurdering |
-| Komplett | 899 kr/mnd | 60/mnd | + Muntlig KI-vurdering, adaptiv prøve, full eksamenssimulering |
+| Nivå     | Pris       | Økter      | Ekstra                                                         |
+| -------- | ---------- | ---------- | -------------------------------------------------------------- |
+| Gratis   | 0 kr       | 1–2 totalt | Engangssmakebit, ingen automatisk nivåtest                     |
+| Basis    | 499 kr/mnd | 15/mnd     | Pause-og-fortsett                                              |
+| Pluss    | 699 kr/mnd | 30/mnd     | + Skriftlig KI-vurdering                                       |
+| Komplett | 899 kr/mnd | 60/mnd     | + Muntlig KI-vurdering, adaptiv prøve, full eksamenssimulering |
 
 Rettigheter styres via `plan_rettigheter`-tabellen, ikke hardkodet
 plansjekk i koden – koden spør alltid «har bruker rettighet X», aldri
@@ -38,6 +38,7 @@ ordet, påstand korrekt, rekkefølge, fritekst, diktat, hotspot-bilde, velg
 bilde, muntlig opptak.
 
 **Oppgavesett-størrelse** (validert mot ekte Norskprøve-struktur):
+
 - Leseforståelse: 14–16 (basis) / større på full eksamenssimulering (899 kr)
 - Lytting: 18–20
 - Skriftlig: 3–4, basert på ekte oppgavetyper (kort melding – identisk hver
@@ -145,7 +146,7 @@ A2-nivå uavhengig av øvingsnivå.
 - [x] KI-vurderingsprompt for skriftlig ferdig
 - [x] KI-vurderingsprompt for muntlig ferdig (fase 1-oppgaver)
 - [x] Next.js-prosjekt initialisert
-- [ ] Supabase-klient koblet til Next.js (pågår)
+- [x] Supabase-klient koblet til Next.js – verifisert med abonnement_plan
 - [ ] Admin-panel (opptaksstudio, bildebank, oppgave-editor)
 - [ ] Frontend for oppgavetypene
 - [ ] KI-genereringspipeline (Gemini tekst, Google TTS, Google Imagen)
