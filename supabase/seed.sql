@@ -1,0 +1,2 @@
+-- Bevisst tom. Test- og eksempeldata skal legges til eksplisitt og må aldri
+-- inneholde produksjonsdata eller hemmeligheter.

@@ -14,6 +14,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  database:
+    name: Database – migrasjoner og lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Hent kode
+        uses: actions/checkout@v4
+
+      - name: Sett opp Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: 2.118.0
+
+      - name: Start lokal Supabase og kjør migrasjoner
+        run: supabase start
+
+      - name: Verifiser reproducerbar database
+        run: supabase db reset
+
+      - name: Kjør databaselint
+        run: supabase db lint --level error
+
+      - name: Stopp lokal Supabase
+        if: always()
+        run: supabase stop --no-backup
+
   web:
     name: Web – lint, typer og bygg
     runs-on: ubuntu-latest
