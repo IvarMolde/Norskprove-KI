@@ -1,0 +1,50 @@
+name: Kvalitetskontroll
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Web – lint, typer og bygg
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      # Bygget trenger syntaktisk gyldige verdier, men kobler ikke til
+      # produksjonsdatabasen under CI.
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
+
+    steps:
+      - name: Hent kode
+        uses: actions/checkout@v4
+
+      - name: Sett opp Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Installer eksakte avhengigheter
+        run: npm ci
+
+      - name: Kjør lint
+        run: npm run lint
+
+      - name: Kontroller TypeScript
+        run: npx tsc --noEmit
+
+      - name: Bygg produksjonsappen
+        run: npm run build

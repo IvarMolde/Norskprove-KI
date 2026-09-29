@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment
+
+Copy the documented environment template before starting:
+
+```bash
+cp .env.example .env.local
+```
+
+Use credentials for the staging Supabase project during development. Never
+place a service role key in a variable prefixed with `NEXT_PUBLIC_`.
+
 ## Getting Started
 
 First, run the development server:
