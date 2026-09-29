@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request,
   });
@@ -27,8 +27,8 @@ export async function middleware(request: NextRequest) {
     },
   );
 
-  // Dette fornyer økten om nødvendig - må kalles, selv om vi
-  // ikke bruker resultatet direkte her.
+  // Fornyer økten når det er nødvendig. Ruteautorisasjon skjer fortsatt
+  // i serverkomponenter og serverhandlinger, ikke i proxyen.
   await supabase.auth.getUser();
 
   return response;
