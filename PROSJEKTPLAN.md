@@ -50,7 +50,7 @@ Sist oppdatert: 2026-09-29
 
 | Fase | Status | Dokumentert resultat |
 | ---- | ------ | -------------------- |
-| 1. Stabiliser fundamentet | Pågår | Foundation- og adminmigrasjonene er integrert og stagingverifisert med RLS for anonym, elev og administrator. Samlet CI, offentlig registrering, første varige stagingadministrator og filopplastingsporten gjenstår. |
+| 1. Stabiliser fundamentet | Pågår | Foundation- og adminmigrasjonene er integrert, samlet CI er grønn og staging-RLS er verifisert for anonym, elev og administrator. Offentlig registrering, første varige stagingadministrator, filopplastingsporten og preview gjenstår. |
 | 2. Datakontrakter | Ikke startet | Avventer fullført kvalitetsport for fase 1. |
 | 3. Første elevflyt | Ikke startet | Avventer oppgavekontrakt for `fyll_inn`. |
 | 4–9 | Ikke startet | Avventer foregående kvalitetsporter. |
@@ -67,11 +67,13 @@ Sist oppdatert: 2026-09-29
       består databaselint.
 - [x] Databasen håndhever opprinnelig bildestatus, godkjenningsspor,
       kvalitetssjekk før publisering og godkjente bilder i publiserte oppgaver.
+- [x] Samlet CI for admin og foundation består både webjobben og databasejobben
+      fra tom database.
 
 Foundation-migrasjonene er verifisert fra tom lokal database i CI.
 Adminmigrasjonen er nå integrert etter profil- og innholdsmigrasjonene og
-anvendt på det bekreftede stagingprosjektet. Samlet CI med adminmigrasjonen og
-den nye admin-RLS-testen er ennå ikke kjørt.
+anvendt på det bekreftede stagingprosjektet. Samlet CI på commit `eefbcd9`
+består med adminmigrasjonen og den nye admin-RLS-testen.
 
 ### Verifikasjonsstatus 2026-09-29
 
@@ -83,9 +85,9 @@ den nye admin-RLS-testen er ennå ikke kjørt.
   produksjonsbygg består for den integrerte webappen. Docker er ikke
   tilgjengelig i agentmiljøet, så samlet lokal database-reset, lint og pgTAP
   kunne ikke kjøres.
-- **CI-verifisert:** Commit `6141ab1` består webjobben og databasejobben fra
-  tom database, inkludert databaselint og foundation-pgTAP. Den integrerte
-  adminmigrasjonen og admin-RLS-testen er ikke CI-verifisert ennå.
+- **CI-verifisert:** Samlet commit `eefbcd9` består webjobben og databasejobben
+  fra tom database, inkludert databaselint, foundation-pgTAP,
+  adminmigrasjonen og admin-RLS-testen.
 - **Stagingidentitet:** Management API-kallet for eksakt
   `SUPABASE_PROJECT_ID` svarte HTTP 200 med samme ref, navnet
   `norskprove-ki-staging` og region `eu-west-1`. URL-ref samsvarte også.
@@ -117,16 +119,14 @@ den nye admin-RLS-testen er ennå ikke kjørt.
 
 ### Neste handling
 
-1. Kjør samlet CI fra tom database for den integrerte branchen, inkludert
-   adminmigrasjonen og `admin_rls.test.sql`.
-2. Gjenta offentlig registrering etter at e-postraten er tilgjengelig, og
+1. Gjenta offentlig registrering etter at e-postraten er tilgjengelig, og
    bekreft at profiltriggeren også virker i den offentlige registreringsflyten.
-3. Opprett den første varige stagingadministratoren med en autorisert
+2. Opprett den første varige stagingadministratoren med en autorisert
    servercredential og gjennomfør en UI-smoketest uten å legge privilegerte
    nøkler i klienten.
-4. Test filtype- og størrelsesavvisning i både applikasjon og Storage.
-5. Verifiser Vercel preview-miljøet med stagingkonfigurasjon.
-6. Valider eksisterende produksjonsdata før `NOT VALID`-constraints aktiveres
+3. Test filtype- og størrelsesavvisning i både applikasjon og Storage.
+4. Verifiser Vercel preview-miljøet med stagingkonfigurasjon.
+5. Valider eksisterende produksjonsdata før `NOT VALID`-constraints aktiveres
    fullt senere. Ingen produksjonsendring er utført i denne verifikasjonen.
 
 Når en leveranse fullføres, skal resultatet og verifikasjonen føres her før
@@ -343,6 +343,7 @@ Ved starten av en ny arbeidsøkt:
 
 | Dato       | Endring | Begrunnelse |
 | ---------- | ------- | ----------- |
+| 2026-09-29 | Verifiserte samlet CI for admin og foundation | Commit `eefbcd9` består både web- og databasejobben fra tom database, inkludert adminmigrasjonen og admin-RLS-testen |
 | 2026-09-29 | Integrerte adminpanelet og stagingverifiserte adminmigrasjon og RLS | Dry-run viste kun adminmigrasjonen; åtte migrasjoner samsvarer nå, adminskjemaet er verifisert og 21 transaksjonelle RLS-sjekker bestod med rollback og tom etterkontroll |
 | 2026-09-29 | Verifiserte foundation-migrasjoner og grunnleggende RLS i eksakt stagingprosjekt | Direkte prosjektoppslag bekreftet stagingidentiteten; syv forventede migrasjoner ble anvendt og profil/anon/elev-RLS ble testet med full opprydding, mens registreringsrate og manglende adminmigrasjon holder fase 1 åpen |
 | 2026-09-29 | Første versjon av gjennomføringsplanen | Etablerer robust arbeidsrekkefølge og kvalitetsporter for videre utvikling |
