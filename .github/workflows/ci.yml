@@ -37,6 +37,9 @@ jobs:
       - name: Kjør databaselint
         run: supabase db lint --level error
 
+      - name: Test RLS og innholdsregler
+        run: supabase test db
+
       - name: Stopp lokal Supabase
         if: always()
         run: supabase stop --no-backup
