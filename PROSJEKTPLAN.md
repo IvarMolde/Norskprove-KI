@@ -98,12 +98,14 @@ CI-verifisert og stagingverifisert:
   kombinerte admincommit-en `74eaaee` eller branchen
   `cursor/staging-verification-356b`. Foundation-kjøringen nedenfor er fortsatt
   siste dokumenterte databaseverifikasjon og omfatter ikke `090000`.
-- **Stagingidentitet:** Alle fem miljøvariabler var til stede, og
-  `SUPABASE_PROJECT_ID` samsvarte med prosjektreferansen i
-  `NEXT_PUBLIC_SUPABASE_URL`. Det nye tokenet ble likevel avvist av
-  `supabase projects list` med manglende `projects_read`. Prosjektnavnet kunne
-  derfor ikke kontrolleres mot det påkrevde navnet
-  `norskprove-ki-staging`, og miljøet kan ikke bevises å være staging.
+- **Stagingidentitet:** Kontroll gjentatt på commit `aa0f575`. Alle fem
+  miljøvariabler var til stede, og `SUPABASE_PROJECT_ID` samsvarte med
+  prosjektreferansen i `NEXT_PUBLIC_SUPABASE_URL`. Det prosjektavgrensede
+  tokenet som var lagret med «Project Settings: Read», «API Keys: Read» og
+  «API Key Secrets: Read», ble fortsatt avvist av `supabase projects list`
+  med manglende `projects_read`. Prosjektnavnet kunne derfor ikke kontrolleres
+  mot det påkrevde navnet `norskprove-ki-staging`, og miljøet kan ikke bevises
+  å være staging.
 - **Stagingverifisert:** Nei. Av sikkerhetshensyn ble `supabase link`,
   `supabase migration list`, `supabase db push --dry-run`, `supabase db push`,
   API-/registrerings-/RLS-testene og opprettelse av testdata ikke kjørt etter
@@ -116,10 +118,11 @@ staging.
 
 ### Neste handling
 
-1. Erstatt `SUPABASE_ACCESS_TOKEN` med et token som faktisk gir CLI-kallet
-   `supabase projects list` tillatelsen `projects_read`. «Project Settings
-   Read» på det nåværende prosjektavgrensede tokenet var ikke tilstrekkelig.
-   Ikke legg tokenet i repo eller logger.
+1. Opprett eller juster `SUPABASE_ACCESS_TOKEN` slik at CLI-kallet
+   `supabase projects list` faktisk får tillatelsen `projects_read`.
+   Kombinasjonen «Project Settings: Read», «API Keys: Read» og «API Key
+   Secrets: Read» på det prosjektavgrensede tokenet gir ikke denne
+   tillatelsen. Ikke legg tokenet i repo eller logger.
 2. Kjør identitetskontrollen på nytt og fortsett bare dersom prosjekt-ID, URL
    og et tydelig stagingnavn samsvarer.
 3. Kjør `supabase link`, `supabase migration list` og
@@ -346,5 +349,6 @@ Ved starten av en ny arbeidsøkt:
 
 | Dato       | Endring | Begrunnelse |
 | ---------- | ------- | ----------- |
+| 2026-09-29 | Kontrollerte det nye prosjektavgrensede tokenet og stoppet før remote-operasjoner | Fem variabler og URL/ID samsvarte, men `supabase projects list` manglet fortsatt `projects_read`; stagingnavnet kunne derfor ikke bevises og ingen remote data ble endret |
 | 2026-09-29 | Gjentok lokal kvalitetsport og stagingidentitetskontroll på kombinert branch; beholdt fase 1 som pågående | Webporten består, men kombinert CI mangler og det nye tokenet blir fortsatt avvist med manglende `projects_read`; ingen remote mutasjon ble utført |
 | 2026-09-29 | Første versjon av gjennomføringsplanen | Etablerer robust arbeidsrekkefølge og kvalitetsporter for videre utvikling |
