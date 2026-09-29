@@ -227,7 +227,7 @@ select throws_ok(
 );
 
 select is(
-  (select count(*) from public.bilder),
+  (select count(*) from public.bilder where status = 'venter_godkjenning'),
   0::bigint,
   'elev kan ikke lese bilde som venter på godkjenning'
 );
