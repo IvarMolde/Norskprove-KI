@@ -4,6 +4,10 @@ Dette dokumentet er kilden til sannhet for hvordan appen er tenkt å fungere.
 Oppdater det når beslutninger endres – ikke la det bli utdatert mens koden
 går videre.
 
+Prioritert arbeidsrekkefølge, kvalitetsporter og fast oppstartsprosedyre ligger
+i [`PROSJEKTPLAN.md`](PROSJEKTPLAN.md). Begge dokumentene skal leses før nytt
+arbeid starter og holdes synkronisert når beslutninger endres.
+
 ## Hva dette er
 
 En app for å øve til Norskprøven (A1–B2), under Lingx-merkevaren. Rettet
@@ -147,7 +151,8 @@ A2-nivå uavhengig av øvingsnivå.
 - [x] KI-vurderingsprompt for muntlig ferdig (fase 1-oppgaver)
 - [x] Next.js-prosjekt initialisert
 - [x] Supabase-klient koblet til Next.js – verifisert med abonnement_plan
-- [ ] Admin-panel (opptaksstudio, bildebank, oppgave-editor)
+- [x] Admin-panel (opptaksstudio, bildebank, oppgave-editor) – sikker
+      adminrolle, RLS og private Storage-bøtter inngår i adminmigrasjonen
 - [ ] Frontend for oppgavetypene
 - [ ] KI-genereringspipeline (Gemini tekst, Google TTS, Google Imagen)
 - [ ] Betalingsintegrasjon (Vipps + Stripe)

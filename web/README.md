@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Norskprøve-KI
 
-## Getting Started
+Next.js-appen for Norskprøve-KI.
 
-First, run the development server:
+## Miljø
+
+Kopier den dokumenterte miljømalen før lokal oppstart:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Bruk kun legitimasjon for Supabase-staging under utvikling. En service role-
+eller secret-nøkkel skal aldri ligge i en variabel med `NEXT_PUBLIC_`-prefiks
+eller brukes i klienten.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Lokal oppstart
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Opprett `web/.env.local`:
 
-## Learn More
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=<prosjekt-url>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
+```
 
-To learn more about Next.js, take a look at the following resources:
+Installer og start:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm ci
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Admin-panel
 
-## Deploy on Vercel
+Admin-panelet ligger på `/admin`. Tilgang gis i databasen, ikke med en
+hardkodet e-postadresse. Etter at migrasjonene er kjørt, opprettes første
+administrator med service role:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sql
+insert into public.admin_brukere (bruker_id, rolle)
+values ('<id-fra-auth.users>', 'admin');
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Alle adminoperasjoner kontrolleres både i serverlaget og med RLS. Bilder og
+lyd lagres i private Supabase Storage-bøtter og vises med kortvarige, signerte
+URL-er.
