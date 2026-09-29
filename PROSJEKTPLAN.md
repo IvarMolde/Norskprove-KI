@@ -112,15 +112,28 @@ består med adminmigrasjonen og den nye admin-RLS-testen.
   private objekter og kunne ikke skrive admininnhold. Transaksjonen ble rullet
   tilbake; etterkontroll viste null testbrukere, adminrader, oppgaver, bilder,
   lydfiler og Storage-objekter.
-- **Ikke stagingverifisert:** Offentlig registrering kunne ikke fullføres fordi
-  Auth svarte `over_email_send_rate_limit`; forsøkene opprettet ingen brukere.
-  Første varige stagingadministrator er ikke opprettet, og ugyldig filtype og
-  filstørrelse er ikke ende-til-ende-testet i både app og Storage.
+- **Offentlig registrering fortsatt blokkert:** Før ett kontrollert nytt forsøk
+  ble alle fem forventede miljøvariabler bekreftet som satt, URL og prosjekt-ref
+  samsvarte, og et direkte Management API GET svarte HTTP 200 med refen og
+  navnet `norskprove-ki-staging`. Det eneste offentlige signup-forsøket brukte
+  den unike syntetiske adressen
+  `norskprove-ki-staging-signup-check+20260929121337-977489dc43@example.com`,
+  men Auth svarte HTTP 429 med `over_email_send_rate_limit`. En
+  sertifikat- og vertsnavnverifisert TLS-forbindelse til stagingdatabasen viste
+  etter forsøket null rader i `auth.users`, `public.brukerprofil` og
+  `auth.identities`. Oppryddingskontrollen viste fortsatt null rader.
+  Profiltriggeren er derfor ikke bekreftet gjennom offentlig signup.
+- **Gjenstår i staging:** Første varige stagingadministrator er ikke opprettet,
+  og ugyldig filtype og filstørrelse er ikke ende-til-ende-testet i både app og
+  Storage.
 
 ### Neste handling
 
-1. Gjenta offentlig registrering etter at e-postraten er tilgjengelig, og
-   bekreft at profiltriggeren også virker i den offentlige registreringsflyten.
+1. Avklar en autorisert e-postløsning for staging før et nytt offentlig
+   registreringsforsøk. Neste eksterne handling bør være dedikert SMTP eller en
+   eksplisitt godkjent Auth-testinnstilling; ikke svekk e-postbekreftelse,
+   ratebegrensning eller andre sikkerhetsinnstillinger for å omgå sperren.
+   Gjenta deretter offentlig registrering én gang og bekreft profiltriggeren.
 2. Opprett den første varige stagingadministratoren med en autorisert
    servercredential og gjennomfør en UI-smoketest uten å legge privilegerte
    nøkler i klienten.
@@ -343,6 +356,7 @@ Ved starten av en ny arbeidsøkt:
 
 | Dato       | Endring | Begrunnelse |
 | ---------- | ------- | ----------- |
+| 2026-09-29 | Gjentok offentlig stagingregistrering med nøyaktig ett kontrollert forsøk | Fem miljøvariabler, URL/ref og stagingidentitet ble kontrollert først; Auth svarte HTTP 429 `over_email_send_rate_limit`, databasen viste ingen opprettet bruker, profil eller identitet, og null gjenværende testrader ble bekreftet. Autorisert SMTP eller godkjent Auth-testinnstilling er neste eksterne avklaring |
 | 2026-09-29 | Verifiserte samlet CI for admin og foundation | Commit `eefbcd9` består både web- og databasejobben fra tom database, inkludert adminmigrasjonen og admin-RLS-testen |
 | 2026-09-29 | Integrerte adminpanelet og stagingverifiserte adminmigrasjon og RLS | Dry-run viste kun adminmigrasjonen; åtte migrasjoner samsvarer nå, adminskjemaet er verifisert og 21 transaksjonelle RLS-sjekker bestod med rollback og tom etterkontroll |
 | 2026-09-29 | Verifiserte foundation-migrasjoner og grunnleggende RLS i eksakt stagingprosjekt | Direkte prosjektoppslag bekreftet stagingidentiteten; syv forventede migrasjoner ble anvendt og profil/anon/elev-RLS ble testet med full opprydding, mens registreringsrate og manglende adminmigrasjon holder fase 1 åpen |
