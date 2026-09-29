@@ -4,6 +4,10 @@ Dette dokumentet er kilden til sannhet for hvordan appen er tenkt å fungere.
 Oppdater det når beslutninger endres – ikke la det bli utdatert mens koden
 går videre.
 
+Prioritert arbeidsrekkefølge, kvalitetsporter og fast oppstartsprosedyre ligger
+i [`PROSJEKTPLAN.md`](PROSJEKTPLAN.md). Begge dokumentene skal leses før nytt
+arbeid starter og holdes synkronisert når beslutninger endres.
+
 ## Hva dette er
 
 En app for å øve til Norskprøven (A1–B2), under Lingx-merkevaren. Rettet
