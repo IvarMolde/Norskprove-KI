@@ -147,7 +147,8 @@ A2-nivå uavhengig av øvingsnivå.
 - [x] KI-vurderingsprompt for muntlig ferdig (fase 1-oppgaver)
 - [x] Next.js-prosjekt initialisert
 - [x] Supabase-klient koblet til Next.js – verifisert med abonnement_plan
-- [ ] Admin-panel (opptaksstudio, bildebank, oppgave-editor)
+- [x] Admin-panel (opptaksstudio, bildebank, oppgave-editor) – sikker
+      adminrolle, RLS og private Storage-bøtter inngår i adminmigrasjonen
 - [ ] Frontend for oppgavetypene
 - [ ] KI-genereringspipeline (Gemini tekst, Google TTS, Google Imagen)
 - [ ] Betalingsintegrasjon (Vipps + Stripe)

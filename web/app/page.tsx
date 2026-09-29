@@ -7,7 +7,8 @@ export default async function Home() {
     .select("*");
 
   if (error) {
-    return <div>Feil: {error.message}</div>;
+    console.error("Kunne ikke hente abonnementsplaner", { code: error.code });
+    return <div>Innholdet kunne ikke lastes. Prøv igjen senere.</div>;
   }
 
   return (
