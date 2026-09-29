@@ -50,7 +50,7 @@ Sist oppdatert: 2026-09-29
 
 | Fase | Status | Dokumentert resultat |
 | ---- | ------ | -------------------- |
-| 1. Stabiliser fundamentet | Pågår | Prosjektplan etablert. Adminpanel er implementert på egen branch, men staging- og produksjonsverifisering gjenstår. |
+| 1. Stabiliser fundamentet | Pågår | Adminpanelet er integrert med fundamentet og webappen er lokalt verifisert. Databasen er CI-verifisert før adminmigrasjonen, men samlet CI- og stagingverifisering gjenstår. |
 | 2. Datakontrakter | Ikke startet | Avventer fullført kvalitetsport for fase 1. |
 | 3. Første elevflyt | Ikke startet | Avventer oppgavekontrakt for `fyll_inn`. |
 | 4–9 | Ikke startet | Avventer foregående kvalitetsporter. |
@@ -68,16 +68,61 @@ Sist oppdatert: 2026-09-29
 - [x] Databasen håndhever opprinnelig bildestatus, godkjenningsspor,
       kvalitetssjekk før publisering og godkjente bilder i publiserte oppgaver.
 
-Migrasjonene er verifisert fra tom lokal database i CI, men regnes ikke som
-stagingverifisert før de er kjørt mot staging og registrering/RLS er testet
-der.
+Migrasjonene til og med `20260929085500_innholdsregler.sql` er verifisert fra
+tom lokal database i CI. Adminmigrasjonen
+`20260929090000_admin_panel.sql` ligger etter profil- og innholdsmigrasjonene,
+men er ennå ikke verifisert sammen med dem i databasejobben. Ingen av
+migrasjonene regnes som stagingverifisert før de er kjørt mot et bekreftet
+stagingprosjekt og registrering/RLS er testet der.
+
+### Verifikasjonsstatus 2026-09-29
+
+Statusene under skiller eksplisitt mellom implementert, lokalt verifisert,
+CI-verifisert og stagingverifisert:
+
+- **Implementert:** Adminpanelet fra `cursor/admin-panel-9323` er integrert med
+  foundation-endringene. Migrasjonsrekkefølgen er `085000` (brukerprofil),
+  `085500` (innholdsregler) og deretter `090000` (admin).
+- **Lokalt verifisert:** Alle fem nødvendige miljøvariabler var tilgjengelige
+  uten at verdiene ble skrevet ut. Fra en ren `npm ci` bestod `npm run lint`,
+  `npm run typecheck` og `npm run build` for den integrerte webappen. Docker er
+  ikke tilgjengelig i agentmiljøet, så lokal `supabase db reset`,
+  `supabase db lint` og pgTAP kunne ikke kjøres.
+- **CI-verifisert:** Foundation-commit `6141ab1` bestod både web- og
+  databasejobben i
+  [Kvalitetskontroll](https://github.com/IvarMolde/Norskprove-KI/actions/runs/36548108504).
+  Denne kjøringen beviser ren databaseoppbygging, lint og pgTAP til og med
+  `085500`; den beviser ikke den senere integrerte adminmigrasjonen.
+- **Stagingidentitet:** `SUPABASE_PROJECT_ID` samsvarte med prosjektreferansen
+  i `NEXT_PUBLIC_SUPABASE_URL`. `supabase projects list` ble deretter avvist
+  fordi tokenet mangler `projects_read`. Prosjektnavnet kunne derfor ikke
+  kontrolleres, og miljøet kan ikke bevises å være staging.
+- **Stagingverifisert:** Nei. Av sikkerhetshensyn ble `supabase link`,
+  `supabase migration list`, `supabase db push --dry-run`, `supabase db push`,
+  API-/registrerings-/RLS-testene og opprettelse av testdata ikke kjørt etter
+  den mislykkede identitetskontrollen. Ingen remote data ble endret.
+
+Statisk gjennomgang viser at adminmigrasjonen legger til adminroller,
+RLS-policyer, privat medielagring, lydmetadata og en valgfri lydreferanse på
+oppgaver. Dette er ikke en erstatning for migration dry-run eller testing mot
+staging.
 
 ### Neste handling
 
-1. Kjør profil- og adminmigrasjonene i staging.
-2. Verifiser registrering og RLS med anonym bruker, elev og administrator.
-3. Valider eksisterende produksjonsdata før `NOT VALID`-constraints aktiveres
-   fullt i staging og senere produksjon.
+1. Gi `SUPABASE_ACCESS_TOKEN` lesetilgangen `projects_read`, eller erstatt det
+   med et token som har denne tilgangen, uten å legge tokenet i repo eller
+   logger.
+2. Kjør identitetskontrollen på nytt og fortsett bare dersom prosjekt-ID, URL
+   og et tydelig stagingnavn samsvarer.
+3. Kjør `supabase link`, `supabase migration list` og
+   `supabase db push --dry-run`; inspiser pending migrasjoner før en ordinær
+   `supabase db push`.
+4. Verifiser anvendte migrasjoner, API-health, profiltrigger og RLS for anonym,
+   elev og administrator med tydelig merkede, midlertidige stagingdata. Første
+   administrator må tildeles eksplisitt med en autorisert servercredential;
+   tilgangskontrollen skal ikke svekkes for å automatisere dette.
+5. Kjør den samlede databasejobben med adminmigrasjonen og valider eksisterende
+   stagingdata før constraints senere vurderes for produksjon.
 
 Når en leveranse fullføres, skal resultatet og verifikasjonen føres her før
 arbeidet avsluttes. «Implementert» og «produksjonsverifisert» skal ikke brukes
