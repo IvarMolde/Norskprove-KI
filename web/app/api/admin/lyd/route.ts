@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAdmin } from "@/lib/admin/auth";
+import { harGyldigOrigin } from "@/lib/admin/request";
 import { lydMetadataSchema } from "@/lib/admin/schemas";
 
 const FILTYPER: Record<string, string> = {
@@ -16,6 +17,9 @@ export async function POST(request: Request) {
     const admin = await getAdmin();
     if (!admin) {
       return NextResponse.json({ melding: "Ingen tilgang." }, { status: 403 });
+    }
+    if (!harGyldigOrigin(request)) {
+      return NextResponse.json({ melding: "Ugyldig forespørsel." }, { status: 403 });
     }
 
     const formData = await request.formData();
