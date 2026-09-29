@@ -1,47 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Norskprøve-KI
 
-## Environment
+Next.js-appen for Norskprøve-KI.
 
-Copy the documented environment template before starting:
+## Miljø
+
+Kopier den dokumenterte miljømalen før lokal oppstart:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Use credentials for the staging Supabase project during development. Never
-place a service role key in a variable prefixed with `NEXT_PUBLIC_`.
+Bruk credentials for staging-prosjektet under utvikling. En service role-nøkkel
+skal aldri ligge i en variabel med prefikset `NEXT_PUBLIC_`.
 
-## Getting Started
+## Lokal oppstart
 
-First, run the development server:
+Fyll ut `web/.env.local`:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=<prosjekt-url>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Installer og start:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm ci
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Admin-panel
 
-## Learn More
+Admin-panelet ligger på `/admin`. Tilgang gis i databasen, ikke med en
+hardkodet e-postadresse. Etter at migrasjonene er kjørt, opprettes første
+administrator med service role:
 
-To learn more about Next.js, take a look at the following resources:
+```sql
+insert into public.admin_brukere (bruker_id, rolle)
+values ('<id-fra-auth.users>', 'admin');
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Alle adminoperasjoner kontrolleres både i serverlaget og med RLS. Bilder og
+lyd lagres i private Supabase Storage-bøtter og vises med kortvarige, signerte
+URL-er.
