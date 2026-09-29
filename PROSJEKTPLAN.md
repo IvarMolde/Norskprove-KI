@@ -50,7 +50,7 @@ Sist oppdatert: 2026-09-29
 
 | Fase | Status | Dokumentert resultat |
 | ---- | ------ | -------------------- |
-| 1. Stabiliser fundamentet | Pågår | Foundation-migrasjonene på denne branchen er stagingverifisert. Adminpanelet ligger fortsatt på en annen branch og offentlig registrering samt admin-RLS gjenstår. |
+| 1. Stabiliser fundamentet | Pågår | Foundation- og adminmigrasjonene er integrert og stagingverifisert med RLS for anonym, elev og administrator. Samlet CI, offentlig registrering, første varige stagingadministrator og filopplastingsporten gjenstår. |
 | 2. Datakontrakter | Ikke startet | Avventer fullført kvalitetsport for fase 1. |
 | 3. Første elevflyt | Ikke startet | Avventer oppgavekontrakt for `fyll_inn`. |
 | 4–9 | Ikke startet | Avventer foregående kvalitetsporter. |
@@ -68,49 +68,65 @@ Sist oppdatert: 2026-09-29
 - [x] Databasen håndhever opprinnelig bildestatus, godkjenningsspor,
       kvalitetssjekk før publisering og godkjente bilder i publiserte oppgaver.
 
-Migrasjonene på denne branchen er verifisert fra tom lokal database i CI og
-anvendt på det bekreftede stagingprosjektet. Adminmigrasjonen ligger ikke på
-denne branchen og er derfor ikke omfattet av stagingverifikasjonen.
+Foundation-migrasjonene er verifisert fra tom lokal database i CI.
+Adminmigrasjonen er nå integrert etter profil- og innholdsmigrasjonene og
+anvendt på det bekreftede stagingprosjektet. Samlet CI med adminmigrasjonen og
+den nye admin-RLS-testen er ennå ikke kjørt.
 
 ### Verifikasjonsstatus 2026-09-29
 
-- **Implementert:** Profiltrigger, grunnskjema, RLS og sentrale innholdsregler
-  er implementert. Adminpanelet og adminmigrasjonen ligger på en annen branch.
+- **Implementert:** Profiltrigger, grunnskjema, innholdsregler, adminpanel,
+  adminmigrasjon og en transaksjonell pgTAP-test for admin-RLS er integrert.
+  Migrasjonsrekkefølgen er `085000` (profil), `085500` (innholdsregler) og
+  `090000` (admin).
 - **Lokalt verifisert:** `npm ci`, lint, TypeScript-typekontroll og
-  produksjonsbygg består. Bygget varsler om at `middleware`-konvensjonen er
-  utdatert, men fullfører.
+  produksjonsbygg består for den integrerte webappen. Docker er ikke
+  tilgjengelig i agentmiljøet, så samlet lokal database-reset, lint og pgTAP
+  kunne ikke kjøres.
 - **CI-verifisert:** Commit `6141ab1` består webjobben og databasejobben fra
-  tom database, inkludert databaselint og pgTAP-testene på denne branchen.
+  tom database, inkludert databaselint og foundation-pgTAP. Den integrerte
+  adminmigrasjonen og admin-RLS-testen er ikke CI-verifisert ennå.
 - **Stagingidentitet:** Management API-kallet for eksakt
   `SUPABASE_PROJECT_ID` svarte HTTP 200 med samme ref, navnet
   `norskprove-ki-staging` og region `eu-west-1`. URL-ref samsvarte også.
 - **Stagingmigrasjoner:** CLI ble linket til staging. Nettverket mangler IPv6,
   og tokenet mangler lesetilgang til pooler-konfigurasjonen, så migrasjonskall
-  ble kjørt gjennom stagingprosjektets IPv4 session-pooler. Dry-run viste
-  nøyaktig de syv forventede migrasjonene. Alle syv ble anvendt uten seed,
-  roller, Vault-endringer eller reset, og etterkontrollen viser identiske
-  lokale og remote migrasjonsversjoner.
+  ble kjørt gjennom stagingprosjektets IPv4 session-pooler. Ny dry-run viste
+  kun `20260929090000_admin_panel.sql` som pending. Den ble anvendt uten seed,
+  roller, Vault-endringer eller reset. Etterkontrollen viser alle åtte lokale
+  og remote migrasjonsversjoner i samsvar.
 - **API og RLS i staging:** Auth-health svarte HTTP 200, og tabellkall gjennom
   REST svarte HTTP 200. En midlertidig serveropprettet testbruker fikk profil
   automatisk, kunne lese bare sin egen profil og bare den publiserte av to
   testoppgaver. Anonym bruker så ingen av testoppgavene, og elevens forsøk på
   å opprette en oppgave ble avvist med HTTP 403. Testbrukeren og alle
   testoppgaver ble slettet; etterkontrollen viste null gjenværende rader.
+- **Admin i staging:** Tabellene `admin_brukere` og `lydfiler`, den
+  `SECURITY DEFINER`-merkede funksjonen `er_admin`, to private Storage-bøtter
+  og åtte adminpolicyer er verifisert. En eksplisitt SQL-transaksjon med
+  midlertidig admin og elev bestod 21 pgTAP-sjekker: admin kunne lese, opprette
+  og redigere kladder, godkjenne bilde, skrive lydmetadata og bruke privat
+  Storage. Elev og anonym bruker kunne ikke lese kladder, lydmetadata eller
+  private objekter og kunne ikke skrive admininnhold. Transaksjonen ble rullet
+  tilbake; etterkontroll viste null testbrukere, adminrader, oppgaver, bilder,
+  lydfiler og Storage-objekter.
 - **Ikke stagingverifisert:** Offentlig registrering kunne ikke fullføres fordi
   Auth svarte `over_email_send_rate_limit`; forsøkene opprettet ingen brukere.
-  Admin-RLS og adminfunksjoner kan ikke testes før adminmigrasjonen er med på
-  branchen og en administrator er tildelt på en autorisert måte.
+  Første varige stagingadministrator er ikke opprettet, og ugyldig filtype og
+  filstørrelse er ikke ende-til-ende-testet i både app og Storage.
 
 ### Neste handling
 
-1. Integrer adminbranchen, kjør samlet CI og gjennomfør ny staging-dry-run før
-   adminmigrasjonen anvendes.
+1. Kjør samlet CI fra tom database for den integrerte branchen, inkludert
+   adminmigrasjonen og `admin_rls.test.sql`.
 2. Gjenta offentlig registrering etter at e-postraten er tilgjengelig, og
    bekreft at profiltriggeren også virker i den offentlige registreringsflyten.
-3. Tildel første stagingadministrator med en autorisert servercredential og
-   verifiser admin-RLS, oppretting, redigering og godkjenning.
+3. Opprett den første varige stagingadministratoren med en autorisert
+   servercredential og gjennomfør en UI-smoketest uten å legge privilegerte
+   nøkler i klienten.
 4. Test filtype- og størrelsesavvisning i både applikasjon og Storage.
-5. Valider eksisterende produksjonsdata før `NOT VALID`-constraints aktiveres
+5. Verifiser Vercel preview-miljøet med stagingkonfigurasjon.
+6. Valider eksisterende produksjonsdata før `NOT VALID`-constraints aktiveres
    fullt senere. Ingen produksjonsendring er utført i denne verifikasjonen.
 
 Når en leveranse fullføres, skal resultatet og verifikasjonen føres her før
@@ -327,5 +343,6 @@ Ved starten av en ny arbeidsøkt:
 
 | Dato       | Endring | Begrunnelse |
 | ---------- | ------- | ----------- |
+| 2026-09-29 | Integrerte adminpanelet og stagingverifiserte adminmigrasjon og RLS | Dry-run viste kun adminmigrasjonen; åtte migrasjoner samsvarer nå, adminskjemaet er verifisert og 21 transaksjonelle RLS-sjekker bestod med rollback og tom etterkontroll |
 | 2026-09-29 | Verifiserte foundation-migrasjoner og grunnleggende RLS i eksakt stagingprosjekt | Direkte prosjektoppslag bekreftet stagingidentiteten; syv forventede migrasjoner ble anvendt og profil/anon/elev-RLS ble testet med full opprydding, mens registreringsrate og manglende adminmigrasjon holder fase 1 åpen |
 | 2026-09-29 | Første versjon av gjennomføringsplanen | Etablerer robust arbeidsrekkefølge og kvalitetsporter for videre utvikling |
