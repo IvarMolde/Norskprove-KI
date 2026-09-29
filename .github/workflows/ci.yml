@@ -44,7 +44,7 @@ jobs:
         run: npm run lint
 
       - name: Kontroller TypeScript
-        run: npx tsc --noEmit
+        run: npm run typecheck
 
       - name: Bygg produksjonsappen
         run: npm run build

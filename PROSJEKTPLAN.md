@@ -55,11 +55,23 @@ Sist oppdatert: 2026-09-29
 | 3. Første elevflyt | Ikke startet | Avventer oppgavekontrakt for `fyll_inn`. |
 | 4–9 | Ikke startet | Avventer foregående kvalitetsporter. |
 
+### Fullført i fase 1
+
+- [x] CI definert for ren installasjon, lint, genererte Next.js-rutetyper,
+      TypeScript og produksjonsbygg.
+- [x] Offentlig miljøkonfigurasjon dokumentert i `web/.env.example`.
+- [x] Idempotent migrasjon oppretter `brukerprofil` ved registrering og
+      backfiller eksisterende Auth-brukere.
+- [x] Lokal verifisering: lint, typekontroll og produksjonsbygg består.
+
+Migrasjonen er implementert, men regnes ikke som stagingverifisert før den er
+kjørt mot staging og registrering er testet der.
+
 ### Neste handling
 
-1. Etabler CI og dokumentert miljøkonfigurasjon.
-2. Opprett `brukerprofil` automatisk og sikkert ved registrering.
-3. Kjør adminmigrasjonen i staging og verifiser RLS med tre roller.
+1. Kjør profil- og adminmigrasjonene i staging.
+2. Verifiser registrering og RLS med anonym bruker, elev og administrator.
+3. Håndhev bilde­godkjenning og publiseringsregler i databasen.
 
 Når en leveranse fullføres, skal resultatet og verifikasjonen føres her før
 arbeidet avsluttes. «Implementert» og «produksjonsverifisert» skal ikke brukes
