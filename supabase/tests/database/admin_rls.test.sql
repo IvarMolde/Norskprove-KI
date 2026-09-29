@@ -1,7 +1,7 @@
 begin;
 
 create extension if not exists pgtap with schema extensions;
-select plan(19);
+select plan(21);
 
 insert into auth.users (
   id,
@@ -116,6 +116,15 @@ select lives_ok(
 
 select lives_ok(
   $sql$
+    update public.oppgaver
+    set tema = 'oppdatert av administrator'
+    where id = '31000000-0000-0000-0000-000000000001'
+  $sql$,
+  'administrator kan redigere kladder'
+);
+
+select lives_ok(
+  $sql$
     insert into public.bilder (
       id, url, beskrivelse, kilde, opprettet_av
     )
@@ -128,6 +137,18 @@ select lives_ok(
     )
   $sql$,
   'administrator kan opprette bildemetadata'
+);
+
+select lives_ok(
+  $sql$
+    update public.bilder
+    set
+      status = 'godkjent',
+      godkjent_av = '11000000-0000-0000-0000-000000000001',
+      godkjent_dato = now()
+    where id = '21000000-0000-0000-0000-000000000001'
+  $sql$,
+  'administrator kan godkjenne bilde'
 );
 
 select lives_ok(
