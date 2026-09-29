@@ -63,15 +63,21 @@ Sist oppdatert: 2026-09-29
 - [x] Idempotent migrasjon oppretter `brukerprofil` ved registrering og
       backfiller eksisterende Auth-brukere.
 - [x] Lokal verifisering: lint, typekontroll og produksjonsbygg består.
+- [x] CI bygger Supabase fra tom database, kjører alle migrasjoner på nytt og
+      består databaselint.
+- [x] Databasen håndhever opprinnelig bildestatus, godkjenningsspor,
+      kvalitetssjekk før publisering og godkjente bilder i publiserte oppgaver.
 
-Migrasjonen er implementert, men regnes ikke som stagingverifisert før den er
-kjørt mot staging og registrering er testet der.
+Migrasjonene er verifisert fra tom lokal database i CI, men regnes ikke som
+stagingverifisert før de er kjørt mot staging og registrering/RLS er testet
+der.
 
 ### Neste handling
 
 1. Kjør profil- og adminmigrasjonene i staging.
 2. Verifiser registrering og RLS med anonym bruker, elev og administrator.
-3. Håndhev bilde­godkjenning og publiseringsregler i databasen.
+3. Valider eksisterende produksjonsdata før `NOT VALID`-constraints aktiveres
+   fullt i staging og senere produksjon.
 
 Når en leveranse fullføres, skal resultatet og verifikasjonen føres her før
 arbeidet avsluttes. «Implementert» og «produksjonsverifisert» skal ikke brukes
