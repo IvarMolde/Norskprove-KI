@@ -44,6 +44,27 @@ Adminpanelet er første leveranse, men må migrasjons- og tilgangstestes i et
 stagingmiljø før det regnes som produksjonsklart. Deretter er neste
 utviklingsoppgave å definere datakontraktene for oppgavetypene.
 
+## Fremdrift
+
+Sist oppdatert: 2026-09-29
+
+| Fase | Status | Dokumentert resultat |
+| ---- | ------ | -------------------- |
+| 1. Stabiliser fundamentet | Pågår | Prosjektplan etablert. Adminpanel er implementert på egen branch, men staging- og produksjonsverifisering gjenstår. |
+| 2. Datakontrakter | Ikke startet | Avventer fullført kvalitetsport for fase 1. |
+| 3. Første elevflyt | Ikke startet | Avventer oppgavekontrakt for `fyll_inn`. |
+| 4–9 | Ikke startet | Avventer foregående kvalitetsporter. |
+
+### Neste handling
+
+1. Etabler CI og dokumentert miljøkonfigurasjon.
+2. Opprett `brukerprofil` automatisk og sikkert ved registrering.
+3. Kjør adminmigrasjonen i staging og verifiser RLS med tre roller.
+
+Når en leveranse fullføres, skal resultatet og verifikasjonen føres her før
+arbeidet avsluttes. «Implementert» og «produksjonsverifisert» skal ikke brukes
+som synonymer.
+
 ---
 
 ## Fase 1 – Stabiliser fundamentet
