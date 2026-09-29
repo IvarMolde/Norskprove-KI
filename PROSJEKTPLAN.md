@@ -50,7 +50,7 @@ Sist oppdatert: 2026-09-29
 
 | Fase | Status | Dokumentert resultat |
 | ---- | ------ | -------------------- |
-| 1. Stabiliser fundamentet | Pågår | Adminpanelet er integrert med fundamentet og webappen er lokalt verifisert. Databasen er CI-verifisert før adminmigrasjonen, men samlet CI- og stagingverifisering gjenstår. |
+| 1. Stabiliser fundamentet | Pågår | Adminpanelet er integrert med fundamentet og den kombinerte webappen er lokalt verifisert. Databasen er CI-verifisert før adminmigrasjonen, men samlet CI- og stagingverifisering gjenstår. |
 | 2. Datakontrakter | Ikke startet | Avventer fullført kvalitetsport for fase 1. |
 | 3. Første elevflyt | Ikke startet | Avventer oppgavekontrakt for `fyll_inn`. |
 | 4–9 | Ikke startet | Avventer foregående kvalitetsporter. |
@@ -84,19 +84,26 @@ CI-verifisert og stagingverifisert:
   foundation-endringene. Migrasjonsrekkefølgen er `085000` (brukerprofil),
   `085500` (innholdsregler) og deretter `090000` (admin).
 - **Lokalt verifisert:** Alle fem nødvendige miljøvariabler var tilgjengelige
-  uten at verdiene ble skrevet ut. Fra en ren `npm ci` bestod `npm run lint`,
-  `npm run typecheck` og `npm run build` for den integrerte webappen. Docker er
-  ikke tilgjengelig i agentmiljøet, så lokal `supabase db reset`,
-  `supabase db lint` og pgTAP kunne ikke kjøres.
+  uten at verdiene ble skrevet ut. På den kombinerte commit-en `0dd1621`
+  bestod en ny ren `npm ci`, `npm run lint`, `npm run typecheck` og
+  `npm run build` for den integrerte webappen. Docker er ikke tilgjengelig i
+  agentmiljøet, så lokal `supabase db reset`, `supabase db lint` og pgTAP kunne
+  ikke kjøres.
 - **CI-verifisert:** Foundation-commit `6141ab1` bestod både web- og
   databasejobben i
   [Kvalitetskontroll](https://github.com/IvarMolde/Norskprove-KI/actions/runs/36548108504).
   Denne kjøringen beviser ren databaseoppbygging, lint og pgTAP til og med
   `085500`; den beviser ikke den senere integrerte adminmigrasjonen.
-- **Stagingidentitet:** `SUPABASE_PROJECT_ID` samsvarte med prosjektreferansen
-  i `NEXT_PUBLIC_SUPABASE_URL`. `supabase projects list` ble deretter avvist
-  fordi tokenet mangler `projects_read`. Prosjektnavnet kunne derfor ikke
-  kontrolleres, og miljøet kan ikke bevises å være staging.
+- **Samlet CI-verifisert:** Nei. Det finnes ingen workflow-kjøring for den
+  kombinerte admincommit-en `74eaaee` eller branchen
+  `cursor/staging-verification-356b`. Foundation-kjøringen nedenfor er fortsatt
+  siste dokumenterte databaseverifikasjon og omfatter ikke `090000`.
+- **Stagingidentitet:** Alle fem miljøvariabler var til stede, og
+  `SUPABASE_PROJECT_ID` samsvarte med prosjektreferansen i
+  `NEXT_PUBLIC_SUPABASE_URL`. Det nye tokenet ble likevel avvist av
+  `supabase projects list` med manglende `projects_read`. Prosjektnavnet kunne
+  derfor ikke kontrolleres mot det påkrevde navnet
+  `norskprove-ki-staging`, og miljøet kan ikke bevises å være staging.
 - **Stagingverifisert:** Nei. Av sikkerhetshensyn ble `supabase link`,
   `supabase migration list`, `supabase db push --dry-run`, `supabase db push`,
   API-/registrerings-/RLS-testene og opprettelse av testdata ikke kjørt etter
@@ -109,9 +116,10 @@ staging.
 
 ### Neste handling
 
-1. Gi `SUPABASE_ACCESS_TOKEN` lesetilgangen `projects_read`, eller erstatt det
-   med et token som har denne tilgangen, uten å legge tokenet i repo eller
-   logger.
+1. Erstatt `SUPABASE_ACCESS_TOKEN` med et token som faktisk gir CLI-kallet
+   `supabase projects list` tillatelsen `projects_read`. «Project Settings
+   Read» på det nåværende prosjektavgrensede tokenet var ikke tilstrekkelig.
+   Ikke legg tokenet i repo eller logger.
 2. Kjør identitetskontrollen på nytt og fortsett bare dersom prosjekt-ID, URL
    og et tydelig stagingnavn samsvarer.
 3. Kjør `supabase link`, `supabase migration list` og
@@ -338,4 +346,5 @@ Ved starten av en ny arbeidsøkt:
 
 | Dato       | Endring | Begrunnelse |
 | ---------- | ------- | ----------- |
+| 2026-09-29 | Gjentok lokal kvalitetsport og stagingidentitetskontroll på kombinert branch; beholdt fase 1 som pågående | Webporten består, men kombinert CI mangler og det nye tokenet blir fortsatt avvist med manglende `projects_read`; ingen remote mutasjon ble utført |
 | 2026-09-29 | Første versjon av gjennomføringsplanen | Etablerer robust arbeidsrekkefølge og kvalitetsporter for videre utvikling |
