@@ -29,7 +29,7 @@ export default async function LesingPage() {
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Øv på lesing</h1>
-      <p>Les en kort tekst. Svar ja eller nei på påstandene.</p>
+      <p>Du får flere typer oppgaver. Les, og svar på hver oppgave.</p>
       {aktiv ? (
         <Link className="underline" href={`/ov/lesing/${aktiv}`}>
           Fortsett økten

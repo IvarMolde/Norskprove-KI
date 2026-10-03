@@ -2,11 +2,12 @@ import { z } from "zod";
 import {
   leseoktSchema,
   poengsumSchema,
-  type Leseokt,
   type Poengsum,
-} from "@/lib/oppgaver/pastand-korrekt";
+} from "@/lib/oppgaver/lesing";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { createClient } from "@/lib/supabase/server";
+
+type Leseokt = z.infer<typeof leseoktSchema>;
 
 export type OktResultat<T> =
   | { ok: true; data: T }

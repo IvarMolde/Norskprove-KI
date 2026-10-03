@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { svarSchema } from "@/lib/oppgaver/pastand-korrekt";
+import { lagreSvarSchema } from "@/lib/oppgaver/lesing";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { erOmdirigering } from "@/lib/okt/omdirigering";
 import { createClient } from "@/lib/supabase/server";
@@ -43,7 +43,7 @@ export async function lagreSvar(
   try {
     const okt = uuidSchema.safeParse(oktId);
     const oppgave = uuidSchema.safeParse(oppgaveId);
-    const parsed = svarSchema.safeParse(svar);
+    const parsed = lagreSvarSchema.safeParse(svar);
 
     if (!okt.success || !oppgave.success || !parsed.success) {
       return { feil: oktFeilTekst("ugyldig_svar") };

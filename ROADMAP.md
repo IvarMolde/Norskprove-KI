@@ -30,7 +30,8 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Fase 1 er ferdig 2026-10-03. Neste er **2. Lesing som kan øves på**.
+Fase 2 er ferdig 2026-10-03. Neste er **3. Redigere innhold uten SQL**.
+Fase 1 er ferdig 2026-10-03.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -61,14 +62,19 @@ besvart.
 
 ## Fase 2. Lesing som kan øves på
 
-Ferdig når en leseøkt kan inneholde flere oppgavetyper, fortsatt uten bilder
-og lyd, og settet er i størrelsesorden 14–16 oppgaver.
+Ferdig 2026-10-03. En leseøkt inneholder flere oppgavetyper, uten bilder
+og lyd, og har 15 oppgaver når banken har nok.
 
 - Legg til `fyll_inn`, `synonym`, `antonym` og `rekkefolge`, én type om
   gangen, med jsonb-kontrakt i denne filen før UI.
 - Hold dra-og-slipp (`dra_til_forklaring`, `merk_ordet`) til de har et
   tastaturalternativ.
 - Poengsum skal tåle flere typer i samme økt.
+
+Beslutning 2026-10-03: en leseøkt har 15 oppgaver når banken har nok,
+og høyst 6 av samme type. Utvalget går på omgang mellom typene, med
+minst brukte oppgave først innen hver type. Poeng er summen av delpoeng:
+hver påstand, hvert hull, hvert ordvalg og hver rekkefølge.
 
 ## Fase 3. Redigere innhold uten SQL
 
@@ -172,12 +178,102 @@ SELECT-policyen på publiserte oppgaver er tatt bort, fordi `innhold` har
 fasiten. Svar kan heller ikke skrives rett i `bruker_svar` eller
 `okt_tilstand` fra nettleseren. Øktfunksjonene gjør det.
 
+### `fyll_inn`
+
+Låst 2026-10-03. En setning med ett eller flere hull. Eleven skriver
+ordet. `fasit` sendes ikke til nettleseren før oppgaven er besvart.
+Sammenligningen ignorerer store bokstaver og ekstra mellomrom.
+
+Innhold i `oppgaver.innhold`:
+
+```json
+{
+  "tittel": "Om morgenen",
+  "tekst": "Per liker varm drikke til frokost.",
+  "deler": [
+    { "type": "tekst", "tekst": "Jeg drikker " },
+    { "type": "hull", "id": "drikke-1" },
+    { "type": "tekst", "tekst": " om morgenen." }
+  ],
+  "fasit": [{ "id": "drikke-1", "ord": ["kaffe"] }]
+}
+```
+
+Svar i `bruker_svar.svar_tekst`:
+
+```json
+{ "hull": [{ "id": "drikke-1", "svar": "kaffe" }] }
+```
+
+Hvert hull er ett poeng når det normaliserte svaret finnes i `ord`.
+
+### `synonym` og `antonym`
+
+Låst 2026-10-03. Ett ord i en setning, og tre alternativer. Eleven velger
+med tastatur. `korrekt` sendes ikke før oppgaven er besvart. `synonym`
+ber om samme betydning. `antonym` ber om motsatt betydning.
+
+```json
+{
+  "tittel": "Samme betydning",
+  "ord": "glad",
+  "setning": "Barnet er glad i dag.",
+  "alternativer": [
+    { "id": "glad-a", "tekst": "lykkelig" },
+    { "id": "glad-b", "tekst": "trist" },
+    { "id": "glad-c", "tekst": "sint" }
+  ],
+  "korrekt": "glad-a"
+}
+```
+
+Svar:
+
+```json
+{ "valgId": "glad-a" }
+```
+
+Ett poeng når `valgId` er lik `korrekt`.
+
+### `rekkefolge`
+
+Låst 2026-10-03. Tre eller flere ledd som skal stå i riktig rekkefølge.
+`visning` er rekkefølgen eleven ser. `riktig` sendes ikke før oppgaven
+er besvart. Eleven flytter ledd med knappene Opp og Ned, ikke med
+dra-og-slipp.
+
+```json
+{
+  "tittel": "Morgenrutine",
+  "ledd": [
+    { "id": "m1", "tekst": "Først lager han kaffe." },
+    { "id": "m2", "tekst": "Så spiser han brød." },
+    { "id": "m3", "tekst": "Til slutt går han ut." }
+  ],
+  "visning": ["m3", "m1", "m2"],
+  "riktig": ["m1", "m2", "m3"]
+}
+```
+
+Svar:
+
+```json
+{ "rekkefolge": ["m1", "m2", "m3"] }
+```
+
+Ett poeng når listen er lik `riktig`.
+
 ## Logg
 
 Nyeste øverst.
 
 ### 2026-10-03
 
+- Fase 2 verifisert. En ny bruker fikk 15 oppgaver, tre av hver av
+  `pastand_korrekt`, `fyll_inn`, `synonym`, `antonym` og `rekkefolge`.
+  Poengsummen tålte alle typene. Besvart oppgave kom ikke igjen.
+- Kontrakter låst for `fyll_inn`, `synonym`, `antonym` og `rekkefolge`.
+  En leseøkt har 15 oppgaver, høyst 6 av samme type.
 - Fase 1 verifisert mot lokal Supabase og i nettleseren. Gratisbruker fikk
   poengsum, møtte ikke besvarte oppgaver igjen, og ble stoppet på tredje
   økt. Skjemaet nullstilles mellom oppgavene. En falsk feilmelding etter

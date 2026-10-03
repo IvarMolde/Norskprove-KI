@@ -71,6 +71,7 @@ export default async function OktPage({
   return (
     <Ramme>
       <OppgaveSkjema
+        antall={okt.oppgaver.length}
         gjennomgang={Boolean(vist)}
         key={`${oppgave.id}:${vist ? "gjennomgang" : "svar"}`}
         oktId={okt.id}
