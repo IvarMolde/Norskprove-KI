@@ -180,7 +180,8 @@ Nyeste øverst.
 
 - Fase 1 verifisert mot lokal Supabase og i nettleseren. Gratisbruker fikk
   poengsum, møtte ikke besvarte oppgaver igjen, og ble stoppet på tredje
-  økt. Skjemaet nullstilles mellom oppgavene.
+  økt. Skjemaet nullstilles mellom oppgavene. En falsk feilmelding etter
+  innsending er fjernet, så fasiten vises alene.
 - Beslutning: fasit og øktgrense ligger i databasefunksjoner. Eleven leser
   ikke `oppgaver` direkte.
 - Fase 1 er kodet: seed, rettigheter, øktfunksjoner og siden `/ov/lesing`.

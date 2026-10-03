@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { svarSchema } from "@/lib/oppgaver/pastand-korrekt";
 import { oktFeilTekst } from "@/lib/okt/feil";
+import { erOmdirigering } from "@/lib/okt/omdirigering";
 import { createClient } from "@/lib/supabase/server";
 
 const uuidSchema = z.string().uuid();
@@ -105,12 +106,3 @@ export async function fullforOkt(
   }
 }
 
-function erOmdirigering(error: unknown): boolean {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "digest" in error &&
-    typeof error.digest === "string" &&
-    error.digest.startsWith("NEXT_REDIRECT")
-  );
-}

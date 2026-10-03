@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import type { Leseoppgave } from "@/lib/oppgaver/pastand-korrekt";
+import { erOmdirigering } from "@/lib/okt/omdirigering";
 import { lagreSvar } from "./actions";
 
 export function OppgaveSkjema({
@@ -47,7 +48,10 @@ export function OppgaveSkjema({
           return;
         }
         setStatus("Lagret");
-      } catch {
+      } catch (error) {
+        if (erOmdirigering(error)) {
+          return;
+        }
         setFeil("Noe gikk galt. Prøv igjen.");
         setStatus(null);
       }
@@ -61,9 +65,14 @@ export function OppgaveSkjema({
         const resultat = await lagreSvar(oktId, oppgave.id, { valg }, true);
         if (resultat?.feil) {
           setFeil(resultat.feil);
+          setStatus(null);
         }
-      } catch {
+      } catch (error) {
+        if (erOmdirigering(error)) {
+          return;
+        }
         setFeil("Noe gikk galt. Prøv igjen.");
+        setStatus(null);
       }
     });
   }
