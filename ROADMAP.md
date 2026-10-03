@@ -183,8 +183,7 @@ Nyeste øverst.
   økt. Skjemaet nullstilles mellom oppgavene.
 - Beslutning: fasit og øktgrense ligger i databasefunksjoner. Eleven leser
   ikke `oppgaver` direkte.
-- Fase 1 er kodet (seed, rettigheter, økt, side `/ov/lesing`). Verifisering
-  mot lokal Supabase står igjen før fasen merkes ferdig.
+- Fase 1 er kodet: seed, rettigheter, øktfunksjoner og siden `/ov/lesing`.
 - Veikart opprettet. Aktiv fase satt til 1, første leseøkt.
 - Første oppgavetype valgt: `pastand_korrekt`, A2, lesing, håndskrevet seed.
 - Personvernutkast kan starte parallelt, uten å flytte den aktive fasen.
