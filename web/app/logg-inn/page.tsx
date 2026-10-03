@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -49,6 +50,12 @@ export default function LoggInn() {
       </button>
       <button onClick={loggInn}>Logg inn</button>
       {melding && <p>{melding}</p>}
+      <p>
+        <Link href="/ov/lesing">Øv på lesing</Link>
+      </p>
+      <p>
+        <Link href="/">Hjem</Link>
+      </p>
     </div>
   );
 }

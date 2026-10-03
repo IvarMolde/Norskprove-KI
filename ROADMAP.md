@@ -49,8 +49,9 @@ nådd. Samme oppgave dukker ikke opp igjen etter at den er besvart.
    `okter_grense = 2` med `okter_periode = totalt`.
 4. Start økt: skriv `okt_tilstand` og frys oppgavene i `okt_oppgaver`.
    Hopp over oppgaver som allerede ligger i `bruker_oppgave_historikk`.
-5. Vis én oppgave om gangen. Autolagre i `bruker_svar`. Øk
-   `siste_posisjon` og `sist_lagret`.
+5. Vis én oppgave om gangen. I fase 1 har en økt inntil 2 oppgaver, så
+   grensen på 2 økter kan prøves med det lille settet. Autolagre i
+   `bruker_svar`. Øk `siste_posisjon` og `sist_lagret`.
 6. Ved besvarelse: skriv `bruker_oppgave_historikk` og øk
    `oppgaver.ganger_servert`.
 7. Avslutt økten som `fullfort` og vis poengsum.
@@ -74,8 +75,8 @@ Ferdig når en innlogget redaktør kan opprette, publisere og arkivere en
 leseoppgave i appen, og en elev bare ser `status = publisert`.
 
 - Én oppgaveeditor for typene fra fase 1 og 2.
-- Rolle skilles fra elev. Eksisterende RLS utvides slik at redaktør kan
-  skrive oppgaver, og elev fortsatt bare leser publiserte rader.
+- Rolle skilles fra elev. Redaktør kan skrive oppgaver. Eleven ser
+  publiserte oppgaver gjennom øktfunksjonene, uten fasit før svar.
 - Bildebank og opptaksstudio venter til lyd og bilder trengs.
 
 ## Fase 4. Lytting
@@ -138,7 +139,37 @@ Jsonb-former låses her før tilhørende UI bygges.
 
 ### `pastand_korrekt`
 
-Ikke låst ennå. Dette er første punkt i fase 1.
+Låst 2026-10-03. Én tekst og en eller flere påstander. Eleven svarer ja
+eller nei på hver påstand. Riktig svar ligger i `korrekt` og sendes ikke
+til nettleseren før påstanden er besvart.
+
+Innhold i `oppgaver.innhold`:
+
+```json
+{
+  "tittel": "Bussen til jobb",
+  "tekst": "Anna tar buss nummer 31 til jobb.",
+  "pastander": [
+    { "id": "buss-1", "tekst": "Anna kjører bil til jobb.", "korrekt": false }
+  ]
+}
+```
+
+Svar i `bruker_svar.svar_tekst`:
+
+```json
+{
+  "valg": [{ "id": "buss-1", "svar": false }]
+}
+```
+
+`id` i svaret må finnes blant påstandene. Ved besvarelse skal hver påstand
+ha ett ja/nei-svar. Poeng er antall påstander der `svar` er lik `korrekt`.
+
+Eleven leser ikke tabellen `oppgaver` direkte. Beslutning 2026-10-03:
+SELECT-policyen på publiserte oppgaver er tatt bort, fordi `innhold` har
+fasiten. Svar kan heller ikke skrives rett i `bruker_svar` eller
+`okt_tilstand` fra nettleseren. Øktfunksjonene gjør det.
 
 ## Logg
 
@@ -146,6 +177,10 @@ Nyeste øverst.
 
 ### 2026-10-03
 
+- Beslutning: fasit og øktgrense ligger i databasefunksjoner. Eleven leser
+  ikke `oppgaver` direkte.
+- Fase 1 er kodet (seed, rettigheter, økt, side `/ov/lesing`). Verifisering
+  mot lokal Supabase står igjen før fasen merkes ferdig.
 - Veikart opprettet. Aktiv fase satt til 1, første leseøkt.
 - Første oppgavetype valgt: `pastand_korrekt`, A2, lesing, håndskrevet seed.
 - Personvernutkast kan starte parallelt, uten å flytte den aktive fasen.

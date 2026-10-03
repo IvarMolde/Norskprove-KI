@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
@@ -7,7 +8,14 @@ export default async function Home() {
     .select("*");
 
   if (error) {
-    return <div>Feil: {error.message}</div>;
+    return (
+      <div style={{ padding: "2rem" }}>
+        <p>Vi fikk ikke hentet planene. Prøv igjen.</p>
+        <p>
+          <Link href="/ov/lesing">Øv på lesing</Link>
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -21,6 +29,12 @@ export default async function Home() {
           </li>
         ))}
       </ul>
+      <p>
+        <Link href="/ov/lesing">Øv på lesing</Link>
+      </p>
+      <p>
+        <Link href="/logg-inn">Logg inn</Link>
+      </p>
     </div>
   );
 }
