@@ -139,6 +139,12 @@ A2-nivå uavhengig av øvingsnivå.
   avgrenset modul, klar til å kopieres inn i en fremtidig app den dagen
   det faktisk trengs – ingen delt pakke/tjeneste bygget på forskudd
 
+## Leveranse
+
+Rekkefølgen vi bygger i, og loggen over hva som er gjort, ligger i
+`ROADMAP.md`. Oppdater den filen i samme endring som arbeidet. Dette
+dokumentet forblir kilden til hvordan produktet skal fungere.
+
 ## Status – hva som faktisk er bygget
 
 - [x] Datamodell ferdig spesifisert og anvendt i produksjon (5
