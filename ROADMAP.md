@@ -30,16 +30,17 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **1. Første leseøkt**.
+Fase 1 er ferdig 2026-10-03. Neste er **2. Lesing som kan øves på**.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
 
 ## Fase 1. Første leseøkt
 
-Ferdig når en innlogget bruker med gratisplan kan gjennomføre én leseøkt,
-får poengsum, og ikke kan starte en ny økt når grensen på 2 økter totalt er
-nådd. Samme oppgave dukker ikke opp igjen etter at den er besvart.
+Ferdig 2026-10-03. En innlogget bruker med gratisplan gjennomførte en
+leseøkt, fikk poengsum, og kunne ikke starte en ny økt da grensen på 2
+økter totalt var nådd. Samme oppgave kom ikke igjen etter at den var
+besvart.
 
 1. Lås jsonb-formen for `pastand_korrekt` i avsnittet «Kontrakter» under.
 2. Legg inn et lite publisert A2-lesesett (`ferdighet = lesing`,
@@ -177,6 +178,9 @@ Nyeste øverst.
 
 ### 2026-10-03
 
+- Fase 1 verifisert mot lokal Supabase og i nettleseren. Gratisbruker fikk
+  poengsum, møtte ikke besvarte oppgaver igjen, og ble stoppet på tredje
+  økt. Skjemaet nullstilles mellom oppgavene.
 - Beslutning: fasit og øktgrense ligger i databasefunksjoner. Eleven leser
   ikke `oppgaver` direkte.
 - Fase 1 er kodet (seed, rettigheter, økt, side `/ov/lesing`). Verifisering
