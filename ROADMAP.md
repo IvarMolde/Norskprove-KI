@@ -447,6 +447,10 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Lydsletting verifisert. En adresse på 31 dager ble nullstilt. Teksten
+  ble liggende. En adresse på 1 dag ble liggende. Elev og anonym bruker
+  kan ikke kalle funksjonen. Leseøkt kunne startes etterpå. Ingen
+  brukeropptak finnes ennå. Fasen er ikke ferdig.
 - Beslutning: lydadresse eldre enn 30 dager nullstilles av serveren.
   Skriftlig tekst blir liggende. Muntlig økt er ikke startet.
 - Kjøp verifisert. Med lokal test ble Basis kjøpt, og siden sa at ingen
