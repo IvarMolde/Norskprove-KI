@@ -46,8 +46,9 @@ Fase 7, ut til brukere:
 - Personvernerklæring og databehandleravtaler skal signeres.
   Navn, organisasjonsnummer, adresse og e-post skal skrives inn.
   Utkastet på `/personvern` og `/databehandlere` er ikke nok.
-- Før åpen lansering skal kjøp gå gjennom Vipps, eller skjules.
-  `BETALING_LOKAL_BEKREFTELSE` skal ikke stå på i produksjon.
+- Før åpen lansering skal kjøp gå gjennom Vipps. Siden skjuler
+  kjøpsknappene til Vipps er koblet på. Lokal test kan fortsatt vise
+  dem. `BETALING_LOKAL_BEKREFTELSE` skal ikke stå på i produksjon.
 - Few-shot mot offentlige sensorsvar fra HK-dir, slik
   `prompts/skriveprove-vurdering-prompt.md` ber om før lansering.
 

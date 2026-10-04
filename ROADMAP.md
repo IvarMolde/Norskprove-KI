@@ -249,6 +249,11 @@ Beslutning 2026-10-04: en innlogget bruker kan se egne opplysninger på
 aldersmetode kan ikke endres der. E-posten vises, men endres ikke.
 Vercel og domene venter. Fasen er ikke ferdig.
 
+Beslutning 2026-10-04: kjøpsknappene vises bare når den lokale
+testbekreftelsen er tillatt. Uten den sier siden at kjøp ikke er åpent.
+Serveren avviser kjøpet likevel. Vipps er ikke koblet på. Ingen penger
+trekkes. Fasen er ikke ferdig.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
@@ -435,6 +440,8 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning: kjøpsknapper vises bare i lokal test. Uten Vipps sier
+  siden at kjøp ikke er åpent. Fasen er ikke ferdig.
 - Etterarbeid samlet i `ETTER_VEIKARTET.md`. Der ligger oppgavetyper,
   studio, generering, Stripe, SMS, muntlig fase 2 og institusjon.
   Fase 7 og 8 gjøres ferdig først. Aktiv fase er uendret.

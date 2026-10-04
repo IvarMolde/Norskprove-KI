@@ -72,20 +72,28 @@ export default async function BetalingPage({
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Betaling</h1>
-      <p>Velg Basis, Pluss eller Komplett.</p>
-      {lokal ? <p>Ingen penger trekkes i denne testen.</p> : null}
+      {lokal ? (
+        <>
+          <p>Velg Basis, Pluss eller Komplett.</p>
+          <p>Ingen penger trekkes i denne testen.</p>
+        </>
+      ) : (
+        <p>Kjøp er ikke åpent. Vi tar ikke betalt før Vipps er koblet på.</p>
+      )}
       {kjopt === "1" ? <p>Planen er endret.</p> : null}
       {pause ? <p>Du kan pause en økt.</p> : null}
       {skriftlig ? <p>Du kan få vurdering av tekst.</p> : null}
       {muntlig ? <p>Du kan øve på muntlig.</p> : null}
       {adaptiv ? <p>Du kan ta en adaptiv prøve.</p> : null}
-      <ul className="flex flex-col gap-6">
-        {planer.data.map((plan) => (
-          <li key={plan.id}>
-            <KjopKnapp navn={plan.navn} planId={plan.id} />
-          </li>
-        ))}
-      </ul>
+      {lokal ? (
+        <ul className="flex flex-col gap-6">
+          {planer.data.map((plan) => (
+            <li key={plan.id}>
+              <KjopKnapp navn={plan.navn} planId={plan.id} />
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </Ramme>
   );
 }
