@@ -35,6 +35,9 @@ Aktiv fase: **7. Ut til brukere**. Fase 1 til 6 er ferdige.
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
 
+Det som venter til fase 1–8 er ferdige, ligger i `ETTER_VEIKARTET.md`.
+Den filen flytter ikke aktiv fase.
+
 ## Fase 1. Første leseøkt
 
 Ferdig 2026-10-03. En innlogget bruker med gratisplan gjennomførte en
@@ -432,6 +435,9 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Etterarbeid samlet i `ETTER_VEIKARTET.md`. Der ligger oppgavetyper,
+  studio, generering, Stripe, SMS, muntlig fase 2 og institusjon.
+  Fase 7 og 8 gjøres ferdig først. Aktiv fase er uendret.
 - Innsyn verifisert lokalt. En ny bruker så e-post, plan Gratis og
   aldersbekreftelse, og én pågående leseøkt. Nivå B2 ble lagret. Plan,
   rolle og alder ble stående. Anonym bruker kan ikke kalle

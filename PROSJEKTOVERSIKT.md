@@ -142,8 +142,9 @@ A2-nivå uavhengig av øvingsnivå.
 ## Leveranse
 
 Rekkefølgen vi bygger i, og loggen over hva som er gjort, ligger i
-`ROADMAP.md`. Oppdater den filen i samme endring som arbeidet. Dette
-dokumentet forblir kilden til hvordan produktet skal fungere.
+`ROADMAP.md`. Det som venter til veikartet er gjennomført, ligger i
+`ETTER_VEIKARTET.md`. Oppdater veikartet i samme endring som arbeidet.
+Dette dokumentet forblir kilden til hvordan produktet skal fungere.
 
 ## Status – hva som faktisk er bygget
 
