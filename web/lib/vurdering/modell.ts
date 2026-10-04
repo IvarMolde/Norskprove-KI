@@ -7,6 +7,71 @@ type Kall = {
   choices?: { message?: { content?: string | null } }[];
 };
 
+const nivaSkjema = {
+  type: "string",
+  enum: ["Under A1", "A1", "A2", "B1", "B2"],
+};
+
+const kriteriumSkjema = {
+  type: "object",
+  properties: {
+    niva: nivaSkjema,
+    begrunnelse: { type: "string", maxLength: 280 },
+  },
+  required: ["niva", "begrunnelse"],
+  additionalProperties: false,
+};
+
+const jsonSkjema = {
+  type: "json_schema",
+  json_schema: {
+    name: "skriftlig_vurdering",
+    strict: true,
+    schema: {
+      type: "object",
+      properties: {
+        kriterier: {
+          type: "object",
+          properties: {
+            tekstoppbygging: kriteriumSkjema,
+            rettskriving: kriteriumSkjema,
+            tegnsetting: kriteriumSkjema,
+            ordforrad: kriteriumSkjema,
+            grammatikk: kriteriumSkjema,
+          },
+          required: [
+            "tekstoppbygging",
+            "rettskriving",
+            "tegnsetting",
+            "ordforrad",
+            "grammatikk",
+          ],
+          additionalProperties: false,
+        },
+        samlet_niva: nivaSkjema,
+        forbedringspunkter: {
+          type: "array",
+          items: { type: "string", maxLength: 200 },
+          minItems: 3,
+          maxItems: 3,
+        },
+        positivt_element: { type: "string", maxLength: 200 },
+        tilbakemelding_til_elev: { type: "string", maxLength: 450 },
+        usikker_vurdering: { type: "boolean" },
+      },
+      required: [
+        "kriterier",
+        "samlet_niva",
+        "forbedringspunkter",
+        "positivt_element",
+        "tilbakemelding_til_elev",
+        "usikker_vurdering",
+      ],
+      additionalProperties: false,
+    },
+  },
+};
+
 function lesJson(tekst: string): unknown {
   const trimmet = tekst.trim();
   try {
@@ -34,7 +99,7 @@ async function kallModell(
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-      signal: AbortSignal.timeout(120_000),
+      signal: AbortSignal.timeout(300_000),
     });
 
     if (svar.status === 400 && "response_format" in body) {
@@ -94,29 +159,37 @@ export async function vurderTekst(prompt: string): Promise<SkriveVurdering> {
   const felles = {
     model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
     temperature: 0.2,
+    max_tokens: 1100,
     messages: [{ role: "user", content: prompt }],
   };
 
-  let data: Kall;
-  try {
-    data = await kallModell(base, nokkel, {
-      ...felles,
-      response_format: { type: "json_object" },
-    });
-  } catch (error) {
-    if (error instanceof Error && error.message === "vurdering_format") {
-      data = await kallModell(base, nokkel, felles);
-    } else {
+  const forsok = [
+    { ...felles, response_format: jsonSkjema },
+    { ...felles, response_format: { type: "json_object" } },
+    felles,
+  ];
+
+  let data: Kall | null = null;
+  let brukt = forsok[0];
+  for (const kropp of forsok) {
+    try {
+      data = await kallModell(base, nokkel, kropp);
+      brukt = kropp;
+      break;
+    } catch (error) {
+      if (error instanceof Error && error.message === "vurdering_format") {
+        continue;
+      }
       throw error;
     }
   }
 
-  const forste = lesVurdering(data);
+  const forste = data ? lesVurdering(data) : null;
   if (forste) {
     return forste;
   }
 
-  const nytt = await kallModell(base, nokkel, felles);
+  const nytt = await kallModell(base, nokkel, brukt);
   const andre = lesVurdering(nytt);
   if (!andre) {
     console.error("vurderTekst ugyldig_json");

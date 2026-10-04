@@ -145,8 +145,9 @@ ser ikke plan-id.
 
 Hele den utfylte systemprompten er hele modellkallet. Backend bytter bare
 ut `{{NIVAGRUPPE}}`, `{{OPPGAVETYPE}}`, `{{OPPGAVETEKST}}`,
-`{{MIN_ORDANTALL}}` og `{{ELEVSVAR}}`. Promptfilen endres ikke. Appen
-kaller et OpenAI-kompatibelt chat-API. `OPENAI_API_KEY` kreves.
+`{{MIN_ORDANTALL}}` og `{{ELEVSVAR}}`. Promptfilen endres ikke. Kallet ber
+i tillegg om JSON i skjemaet prompten allerede beskriver, så svaret kan
+lagres. Appen kaller et OpenAI-kompatibelt chat-API. `OPENAI_API_KEY` kreves.
 `OPENAI_BASE_URL` og `OPENAI_MODEL` kan overstyres. Standard er
 `gpt-4o-mini` mot `https://api.openai.com/v1`. Nøkkelen ligger i miljøet,
 ikke i repo. Mangler nøkkelen, får eleven en kort forklaring, og ingen

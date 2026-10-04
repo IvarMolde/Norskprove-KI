@@ -3,7 +3,7 @@ import { hentSkriveokt } from "@/lib/okt/skriving";
 import { Ramme } from "../../lesing/ramme";
 import { SkriveSkjema } from "../skjema";
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 export default async function SkriveOktPage({
   params,
