@@ -432,6 +432,11 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Innsyn verifisert lokalt. En ny bruker så e-post, plan Gratis og
+  aldersbekreftelse, og én pågående leseøkt. Nivå B2 ble lagret. Plan,
+  rolle og alder ble stående. Anonym bruker kan ikke kalle
+  `sett_valgt_niva`. Direkte oppdatering av profilen feilet. Vercel og
+  domene venter. Fasen er ikke ferdig.
 - Beslutning: innlogget bruker ser egne opplysninger på `/mine-data`
   og kan velge nivå. Plan, rolle og alder endres ikke der. Fasen er
   ikke ferdig.
