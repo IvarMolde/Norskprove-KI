@@ -25,6 +25,12 @@ export default async function Home() {
         <p>
           <Link href="/betaling">Betaling</Link>
         </p>
+        <p>
+          <Link href="/personvern">Personvern</Link>
+        </p>
+        <p>
+          <Link href="/prove">Info om prøvene</Link>
+        </p>
         {redaktor ? (
           <p>
             <Link href="/rediger">Rediger oppgaver</Link>
@@ -59,6 +65,12 @@ export default async function Home() {
       </p>
       <p>
         <Link href="/logg-inn">Logg inn</Link>
+      </p>
+      <p>
+        <Link href="/personvern">Personvern</Link>
+      </p>
+      <p>
+        <Link href="/prove">Info om prøvene</Link>
       </p>
       {redaktor ? (
         <p>

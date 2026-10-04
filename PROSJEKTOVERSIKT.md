@@ -158,7 +158,7 @@ dokumentet forblir kilden til hvordan produktet skal fungere.
 - [ ] KI-genereringspipeline (Gemini tekst, Google TTS, Google Imagen)
 - [ ] Betalingsintegrasjon (Vipps + Stripe)
 - [ ] Personvernerklæring + databehandleravtaler
-- [ ] «Info om prøvene»-side
+- [x] «Info om prøvene»-side
 - [ ] Vercel-oppsett og domene
 - [ ] Muntlig fase 2 (samtale-oppgave)
 

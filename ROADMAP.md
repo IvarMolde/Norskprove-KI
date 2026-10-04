@@ -206,13 +206,25 @@ pauses. Eleven kan ikke endre egen plan.
 ## Fase 7. Ut til brukere
 
 Ferdig når en ny bruker kan lese personvernerklæringen, opprette konto og
-ta en leseøkt på det offentlige domenet.
+ta en leseøkt på det offentlige domenet. Det offentlige domenet er ikke
+satt opp. Fasen er derfor ikke ferdig.
 
 - Personvernerklæring og databehandleravtaler (Supabase, og senere Google,
   Vercel, Stripe, Vipps) skrives før åpen lansering. Utkast kan starte
   parallelt med fase 1.
 - «Info om prøvene»-side.
 - Vercel-prosjekt og domene. Supabase forblir i EU West (Irland).
+
+Beslutning 2026-10-04: første del er et utkast på `/personvern` og en
+side på `/prove`. Utkastet sier hva vi lagrer, at grunnlaget er avtale,
+og at sletting av konto ikke er bygd ennå. Vi finner ikke på
+organisasjonsnummer, adresse eller e-post. Databehandleravtaler skrives
+ikke i denne delen.
+
+Registrering krever to avhukinger: at personvernerklæringen er lest, og
+at brukeren er 18 år. Etterpå kaller appen `bekreft_alder()`. Den setter
+`alder_bekreftet_metode` til `egenerklaert`, og bare når feltet er tomt.
+Innlogging krever ikke avhukingene. Vercel, domene og avtalene venter.
 
 ## Fase 8. Muntlig og adaptiv prøve
 
@@ -400,6 +412,10 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning for fase 7: utkast til personvern på `/personvern`, info om
+  prøvene på `/prove`, og registrering som lagrer alder som
+  `egenerklaert`. Vercel, domene og databehandleravtaler er ikke gjort.
+  Fasen er ikke ferdig. Det offentlige domenet finnes ikke ennå.
 - Fase 6 verifisert. Gratisbruker ble Basis, så Pluss, så Komplett.
   Rettighetene fulgte tabellen. Leseøkten «Regn i dag» var den samme etter
   pause. Eleven kan ikke endre egen plan eller bekrefte betaling selv.
