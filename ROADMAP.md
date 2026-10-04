@@ -110,6 +110,14 @@ Ferdig når en lytteøkt på 18–20 oppgaver kan spilles av med synlig
   Whisper-sjekk kommer etter at avspilling og svar fungerer.
 - `diktat` får egen kontrakt før den bygges.
 
+Beslutning 2026-10-04: første lytteoppgave er `pastand_korrekt`. Innholdet
+er det samme som i lesing. `lyd_url` er en fil i appen, på formen
+`/lyd/navn.mp3`. `transkripsjon` vises alltid, og er teksten eleven hører.
+`korrekt` sendes ikke før svar. En lytteøkt har 18 oppgaver når banken har
+nok, og bare denne typen. Har banken færre, får eleven de som finnes.
+Gratisgrensen teller fortsatt alle fullførte økter. Redaktør for lyd og
+`diktat` venter til avspilling og svar virker.
+
 ## Fase 5. Skriftlig øving og KI-vurdering
 
 Ferdig når en bruker med rettigheten `skriftlig_ki_vurdering` kan levere en
@@ -277,6 +285,26 @@ Svar:
 ```
 
 Ett poeng når listen er lik `riktig`.
+
+### Lytting `pastand_korrekt`
+
+Låst 2026-10-04. Samme `innhold` som lesingens `pastand_korrekt`. I tillegg
+skal raden ha `lyd_url` og `transkripsjon`.
+
+`lyd_url` peker på en lydfil appen selv har, for eksempel `/lyd/buss.mp3`.
+Eleven spiller den av i nettleseren. Transkripsjonen er den samme teksten
+som blir sagt, og den vises på siden. Den er ikke fasit. Fasiten er fortsatt
+`korrekt` på hver påstand, og den sendes ikke før oppgaven er besvart.
+
+Svaret er det samme som i lesing:
+
+```json
+{
+  "valg": [{ "id": "buss-1", "svar": false }]
+}
+```
+
+Poeng er antall påstander der `svar` er lik `korrekt`.
 
 ## Logg
 
