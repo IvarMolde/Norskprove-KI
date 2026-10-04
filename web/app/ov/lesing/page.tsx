@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { hentAktivLeseoktId } from "@/lib/okt/lesing";
 import { hentOktGrense, oktGrenseTekst } from "@/lib/rettigheter";
+import { erRedaktor } from "@/lib/rolle";
 import { createClient } from "@/lib/supabase/server";
 import { Ramme } from "./ramme";
 import { StartKnapp } from "./start-knapp";
@@ -25,6 +26,7 @@ export default async function LesingPage() {
 
   const aktiv = await hentAktivLeseoktId();
   const grense = await hentOktGrense();
+  const redaktor = await erRedaktor();
 
   return (
     <Ramme>
@@ -39,6 +41,11 @@ export default async function LesingPage() {
       ) : (
         <StartKnapp />
       )}
+      {redaktor ? (
+        <Link className="underline" href="/rediger">
+          Rediger oppgaver
+        </Link>
+      ) : null}
     </Ramme>
   );
 }

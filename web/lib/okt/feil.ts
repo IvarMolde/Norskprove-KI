@@ -9,6 +9,9 @@ const TEKSTER: Record<string, string> = {
   mangler_profil: "Noe gikk galt. Prøv igjen.",
   ugyldig_svar: "Svaret er ikke gyldig. Prøv igjen.",
   allerede_besvart: "Du har allerede svart på denne oppgaven.",
+  ikke_redaktor: "Du kan ikke redigere oppgaver.",
+  ugyldig_innhold: "Oppgaven er ikke ferdig utfylt.",
+  oppgave_ikke_funnet: "Vi fant ikke oppgaven.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

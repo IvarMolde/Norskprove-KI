@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { erRedaktor } from "@/lib/rolle";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
   const supabase = await createClient();
+  const redaktor = await erRedaktor();
   const { data: planer, error } = await supabase
     .from("abonnement_plan")
     .select("*");
@@ -14,6 +16,11 @@ export default async function Home() {
         <p>
           <Link href="/ov/lesing">Øv på lesing</Link>
         </p>
+        {redaktor ? (
+          <p>
+            <Link href="/rediger">Rediger oppgaver</Link>
+          </p>
+        ) : null}
       </div>
     );
   }
@@ -35,6 +42,11 @@ export default async function Home() {
       <p>
         <Link href="/logg-inn">Logg inn</Link>
       </p>
+      {redaktor ? (
+        <p>
+          <Link href="/rediger">Rediger oppgaver</Link>
+        </p>
+      ) : null}
     </div>
   );
 }

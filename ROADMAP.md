@@ -30,8 +30,7 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Fase 2 er ferdig 2026-10-03. Neste er **3. Redigere innhold uten SQL**.
-Fase 1 er ferdig 2026-10-03.
+Aktiv fase: **3. Redigere innhold uten SQL**. Fase 1 og 2 er ferdige.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -85,6 +84,21 @@ leseoppgave i appen, og en elev bare ser `status = publisert`.
 - Rolle skilles fra elev. Redaktør kan skrive oppgaver. Eleven ser
   publiserte oppgaver gjennom øktfunksjonene, uten fasit før svar.
 - Bildebank og opptaksstudio venter til lyd og bilder trengs.
+
+Beslutning 2026-10-04: `brukerprofil.rolle` er `elev` eller `redaktor`.
+Eleven kan ikke endre rollen selv. Rollen settes i databasen til det
+finnes et eget verktøy for det. Redaktør leser og skriver oppgaver
+gjennom funksjoner, ikke ved å åpne tabellen. Eleven ser fortsatt bare
+`status = publisert`, og bare uten fasit før svar.
+
+Editoren har én form for de fem lesetypene. Formen er fast: to
+påstander, ett hull mellom to tekstdeler, tre alternativer, eller tre
+ledd i riktig rekkefølge. For rekkefølge settes visningen til omvendt
+rekkefølge. Stemmer ikke en lagret oppgave med formen, kan den
+arkiveres, men ikke endres i skjemaet. En ny oppgave lagres som kladd
+eller publiseres. Typen låses etter opprettelse. `kvalitetssjekket`
+settes når oppgaven publiseres. Hullets id skal ikke inneholde
+fasitordet.
 
 ## Fase 4. Lytting
 
