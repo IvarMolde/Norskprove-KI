@@ -30,7 +30,7 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **3. Redigere innhold uten SQL**. Fase 1 og 2 er ferdige.
+Aktiv fase: **4. Lytting**. Fase 1, 2 og 3 er ferdige.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -77,8 +77,9 @@ hver påstand, hvert hull, hvert ordvalg og hver rekkefølge.
 
 ## Fase 3. Redigere innhold uten SQL
 
-Ferdig når en innlogget redaktør kan opprette, publisere og arkivere en
-leseoppgave i appen, og en elev bare ser `status = publisert`.
+Ferdig 2026-10-04. En innlogget redaktør opprettet, publiserte og
+arkiverte en leseoppgave i appen. Eleven så den publiserte oppgaven uten
+fasitordet. En ny elev fikk den ikke etter arkivering.
 
 - Én oppgaveeditor for typene fra fase 1 og 2.
 - Rolle skilles fra elev. Redaktør kan skrive oppgaver. Eleven ser
@@ -280,6 +281,16 @@ Ett poeng når listen er lik `riktig`.
 ## Logg
 
 Nyeste øverst.
+
+### 2026-10-04
+
+- Fase 3 verifisert. Redaktør lagret en fyll-inn-oppgave som kladd,
+  publiserte den og arkiverte den. Kladden kom ikke med i en økt. Den
+  publiserte oppgaven kom som oppgave 2, uten ordet «lampe». Etter
+  arkivering kom den ikke med for en ny elev. Eleven kan ikke lese
+  oppgavetabellen eller endre egen rolle.
+- Beslutning: `brukerprofil.rolle` er `elev` eller `redaktor`. Editoren
+  bruker faste former for de fem lesetypene.
 
 ### 2026-10-03
 
