@@ -240,6 +240,12 @@ følge våre instruksjoner. Navn, organisasjonsnummer, adresse og e-post
 står tomme. Avkrysningen i prosjektoversikten blir stående åpen.
 Vercel og domene venter. Fasen er ikke ferdig.
 
+Beslutning 2026-10-04: en innlogget bruker kan se egne opplysninger på
+`/mine-data`. Der kan de velge nivå A1, A2, B1 eller B2.
+`sett_valgt_niva()` endrer bare `valgt_niva`. Plan, rolle og
+aldersmetode kan ikke endres der. E-posten vises, men endres ikke.
+Vercel og domene venter. Fasen er ikke ferdig.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
@@ -426,6 +432,9 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning: innlogget bruker ser egne opplysninger på `/mine-data`
+  og kan velge nivå. Plan, rolle og alder endres ikke der. Fasen er
+  ikke ferdig.
 - Utkast til databehandleravtaler verifisert lokalt. Siden viser
   Supabase, Vercel, Google, Stripe og Vipps som ikke signert. Navn,
   organisasjonsnummer, adresse og e-post står som ikke skrevet.

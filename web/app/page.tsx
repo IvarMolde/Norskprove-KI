@@ -44,6 +44,9 @@ export default async function Home({
         <p>
           <Link href="/konto">Konto</Link>
         </p>
+        <p>
+          <Link href="/mine-data">Mine data</Link>
+        </p>
         {redaktor ? (
           <p>
             <Link href="/rediger">Rediger oppgaver</Link>
@@ -91,6 +94,9 @@ export default async function Home({
       </p>
       <p>
         <Link href="/konto">Konto</Link>
+      </p>
+      <p>
+        <Link href="/mine-data">Mine data</Link>
       </p>
       {redaktor ? (
         <p>

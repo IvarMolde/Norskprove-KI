@@ -44,9 +44,11 @@ export default function Personvern() {
       </p>
       <h2 className="text-xl font-semibold">Dine rettigheter</h2>
       <p>Du kan slette kontoen din selv. Se under.</p>
+      <p>Du kan se det vi har lagret, og velge nivå.</p>
       <p>
-        Du kan be om å se det vi har lagret, og om å rette det. Den
-        knappen er ikke bygd ennå. Den kommer før vi åpner for alle.
+        <Link className="underline" href="/mine-data">
+          Mine data
+        </Link>
       </p>
       <p>Du kan klage til Datatilsynet.</p>
       <h2 className="text-xl font-semibold">Slette konto</h2>
