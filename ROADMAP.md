@@ -30,7 +30,7 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **4. Lytting**. Fase 1, 2 og 3 er ferdige.
+Aktiv fase: **5. Skriftlig øving og KI-vurdering**. Fase 1 til 4 er ferdige.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -103,8 +103,9 @@ fasitordet.
 
 ## Fase 4. Lytting
 
-Ferdig når en lytteøkt på 18–20 oppgaver kan spilles av med synlig
-`transkripsjon`.
+Ferdig 2026-10-04. En lytteøkt hadde 18 oppgaver. Hver oppgave hadde
+lydfil og synlig transkripsjon. Eleven fikk 36 av 36 riktige. Besvarte
+oppgaver kom ikke igjen.
 
 - Lyd kommer fra opplastede filer. Generering med Google TTS og
   Whisper-sjekk kommer etter at avspilling og svar fungerer.
@@ -312,6 +313,12 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Fase 4 verifisert. En ny elev fikk 18 lytteoppgaver, med lydfil og
+  transkripsjon på hver. Poengsummen ble 36 av 36. Besvarte oppgaver kom
+  ikke igjen. Lydfilene er lest inn fra den skrevne teksten og lagret i
+  appen.
+- Redaktør for lyd og `diktat` er ikke bygd. De hører ikke til
+  ferdigkriteriet for denne fasen.
 - Første lytteøkt verifisert med fire A2-oppgaver. Eleven hører lydfilen,
   ser transkripsjonen, og får fasiten etter svar. Poengsummen ble 8 av 8.
   Besvarte oppgaver kom ikke igjen. Leseøkten tar ikke med lytteoppgaver.
