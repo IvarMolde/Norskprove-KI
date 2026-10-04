@@ -312,6 +312,13 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Første lytteøkt verifisert med fire A2-oppgaver. Eleven hører lydfilen,
+  ser transkripsjonen, og får fasiten etter svar. Poengsummen ble 8 av 8.
+  Besvarte oppgaver kom ikke igjen. Leseøkten tar ikke med lytteoppgaver.
+  Lydfilene er lagret i appen. De er lest inn fra den skrevne teksten, og
+  kan byttes til ekte opptak senere.
+- Fase 4 er ikke ferdig. En full lytteøkt skal ha 18 oppgaver. Redaktør
+  for lyd og `diktat` venter.
 - Fase 3 verifisert. Redaktør lagret en fyll-inn-oppgave som kladd,
   publiserte den og arkiverte den. Kladden kom ikke med i en økt. Den
   publiserte oppgaven kom som oppgave 2, uten ordet «lampe». Etter
