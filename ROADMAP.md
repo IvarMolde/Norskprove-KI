@@ -226,6 +226,13 @@ at brukeren er 18 år. Etterpå kaller appen `bekreft_alder()`. Den setter
 `alder_bekreftet_metode` til `egenerklaert`, og bare når feltet er tomt.
 Innlogging krever ikke avhukingene. Vercel, domene og avtalene venter.
 
+Beslutning 2026-10-04: en innlogget bruker kan slette egen konto på
+`/konto`. Knappen er av til de har huket av at de vil slette.
+`slett_egen_konto()` tar ingen bruker-id fra klienten. Den sletter svar,
+økter, vurdering, historikk og bestillinger, og deretter brukeren.
+Oppgaver og bilder i banken blir liggende. Feltet som pekte på brukeren
+settes tomt. Fasen er fortsatt ikke ferdig.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
@@ -412,6 +419,9 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning: innlogget bruker kan slette egen konto på `/konto`.
+  Svar, økter, vurdering og bestillinger slettes. Oppgaver i banken
+  blir liggende. Fasen er ikke ferdig.
 - Lokal flyt verifisert. En ny bruker leste personvernutkastet, huket av
   begge boksene, og ble registrert. `alder_bekreftet_metode` ble
   `egenerklaert`. Deretter startet en leseøkt, oppgave 1 av 15. Registrer

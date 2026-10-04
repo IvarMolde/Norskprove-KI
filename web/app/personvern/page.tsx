@@ -44,8 +44,13 @@ export default function Personvern() {
       </p>
       <h2 className="text-xl font-semibold">Slette konto</h2>
       <p>
-        Vi har ikke en knapp for å slette kontoen ennå. Den kommer før vi
-        åpner for alle.
+        Når du er innlogget, kan du slette kontoen din. Da slettes svar,
+        økter, vurdering og bestillinger. Oppgaver i banken blir liggende.
+      </p>
+      <p>
+        <Link className="underline" href="/konto">
+          Slett konto
+        </Link>
       </p>
       <p>
         Avtaler med leverandørene er ikke ferdige. De skal være på plass

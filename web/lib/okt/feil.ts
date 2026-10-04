@@ -20,6 +20,7 @@ const TEKSTER: Record<string, string> = {
   ugyldig_plan: "Velg en plan.",
   ingen_pause: "Du kan ikke pause økten.",
   okt_pauset: "Økten er pauset.",
+  konto_ikke_slettet: "Vi fikk ikke slettet kontoen. Prøv igjen.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";
