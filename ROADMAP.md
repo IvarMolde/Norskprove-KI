@@ -440,6 +440,10 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Kjøp verifisert. Med lokal test ble Basis kjøpt, og siden sa at ingen
+  penger trekkes. Uten lokal test var kjøpsknappene borte, og teksten
+  sa at kjøp ikke er åpent. Vipps er ikke koblet på. Fasen er ikke
+  ferdig.
 - Beslutning: kjøpsknapper vises bare i lokal test. Uten Vipps sier
   siden at kjøp ikke er åpent. Fasen er ikke ferdig.
 - Etterarbeid samlet i `ETTER_VEIKARTET.md`. Der ligger oppgavetyper,
