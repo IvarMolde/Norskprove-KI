@@ -419,6 +419,11 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Sletting verifisert lokalt. En ny bruker startet en leseøkt, huket av,
+  og slettet kontoen. Brukeren, økten, svaret, vurderingen og
+  bestillingen var borte. Oppgaven i banken ble liggende, uten peker
+  til brukeren. Innlogging etterpå feilet. Anonym bruker kan ikke kalle
+  funksjonen. Knappen er av uten avhuking. Fasen er ikke ferdig.
 - Beslutning: innlogget bruker kan slette egen konto på `/konto`.
   Svar, økter, vurdering og bestillinger slettes. Oppgaver i banken
   blir liggende. Fasen er ikke ferdig.
