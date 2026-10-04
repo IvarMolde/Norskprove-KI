@@ -30,7 +30,7 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **6. Betaling**. Fase 1 til 5 er ferdige.
+Aktiv fase: **7. Ut til brukere**. Fase 1 til 6 er ferdige.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -172,6 +172,13 @@ skriver `bruker_svar`, vurderingen, historikk og øktstatus. Stikkprøve-
 dashbord og KI-generering av oppgaver venter.
 
 ## Fase 6. Betaling
+
+Ferdig 2026-10-04. En gratisbruker kjøpte Basis, Pluss og deretter
+Komplett. Rettighetene fulgte `plan_rettigheter`: pause etter Basis,
+skriftlig vurdering etter Pluss, muntlig og adaptiv prøve etter Komplett.
+Samme side, uten kode per plan. En leseøkt ble pauset og tatt opp igjen
+med samme oppgave. Ingen penger ble trukket. Vipps, Stripe og
+SMS-verifisering er ikke bygd.
 
 Ferdig når en bruker kan gå fra gratis til Basis, Pluss eller Komplett, og
 rettighetene følger `plan_rettigheter` uten kodeendring per plan.
@@ -393,6 +400,10 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Fase 6 verifisert. Gratisbruker ble Basis, så Pluss, så Komplett.
+  Rettighetene fulgte tabellen. Leseøkten «Regn i dag» var den samme etter
+  pause. Eleven kan ikke endre egen plan eller bekrefte betaling selv.
+  Vipps, Stripe og SMS er ikke bygd.
 - Beslutning for fase 6: planen endres først når ordren er betalt.
   Beløpet kommer fra databasen. Uten Vipps-nøkler kan lokal utvikling
   bekrefte ordren. Stripe og SMS venter.
