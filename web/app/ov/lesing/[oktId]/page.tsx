@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { hentLeseokt, hentPoengsum } from "@/lib/okt/lesing";
+import { harRettighet } from "@/lib/rettigheter";
 import { FerdigKnapp } from "../ferdig-knapp";
 import { OppgaveSkjema } from "../oppgave-skjema";
+import { GjenopptaKnapp, PauseKnapp } from "../pause-knapp";
 import { Ramme } from "../ramme";
 
 export default async function OktPage({
@@ -28,6 +30,20 @@ export default async function OktPage({
   }
 
   const okt = resultat.data;
+  const kanPause = await harRettighet("pause_gjenoppta");
+
+  if (okt.status === "avbrutt_lagret") {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Økten er pauset</h1>
+        <p>Oppgavene er de samme når du fortsetter.</p>
+        {kanPause ? <GjenopptaKnapp oktId={okt.id} /> : null}
+        <Link className="underline" href="/ov/lesing">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
 
   if (okt.status === "fullfort") {
     const poeng = await hentPoengsum(okt.id);
@@ -60,6 +76,7 @@ export default async function OktPage({
         <h1 className="text-2xl font-semibold">Økten er klar</h1>
         <p>Du har svart på alle oppgavene.</p>
         <FerdigKnapp oktId={okt.id} />
+        {kanPause ? <PauseKnapp oktId={okt.id} /> : null}
       </Ramme>
     );
   }
@@ -83,6 +100,7 @@ export default async function OktPage({
         </Link>
       ) : null}
       {vist && !flereUbesvart ? <FerdigKnapp oktId={okt.id} /> : null}
+      {kanPause ? <PauseKnapp oktId={okt.id} /> : null}
     </Ramme>
   );
 }

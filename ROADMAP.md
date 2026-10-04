@@ -181,6 +181,21 @@ rettighetene følger `plan_rettigheter` uten kodeendring per plan.
   tas opp igjen med samme rader i `okt_oppgaver`.
 - SMS-verifisering gjelder bare gratis-registrering.
 
+Beslutning 2026-10-04: en innlogget bruker velger Basis, Pluss eller
+Komplett. Beløpet leses fra `abonnement_plan`, ikke fra nettleseren.
+Ordren lagres som `venter`. Planen endres først når ordren er `betalt`.
+Bekreftelsen kan bare skje fra serveren. Uten Vipps-nøkler kan lokal
+utvikling bekrefte ordren når `BETALING_LOKAL_BEKREFTELSE=1` og databasen
+er lokal. Da trekkes ingen penger. Samme bekreftelse skal brukes når
+Vipps kobles på. Stripe og SMS-verifisering venter. De er ikke en del av
+ferdigkriteriet nå.
+
+Etter kjøpet spør siden «har bruker rettighet X». Den spør ikke hvilken
+plan som ble kjøpt. `pause_okt` setter en pågående leseøkt til
+`avbrutt_lagret` uten å endre `okt_oppgaver`. `gjenoppta_okt` setter den
+tilbake til `pagaende`. Uten rettigheten `pause_gjenoppta` kan økten ikke
+pauses. Eleven kan ikke endre egen plan.
+
 ## Fase 7. Ut til brukere
 
 Ferdig når en ny bruker kan lese personvernerklæringen, opprette konto og
@@ -378,6 +393,9 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning for fase 6: planen endres først når ordren er betalt.
+  Beløpet kommer fra databasen. Uten Vipps-nøkler kan lokal utvikling
+  bekrefte ordren. Stripe og SMS venter.
 - Fase 5 verifisert. En bruker med rettigheten skrev en sms og fikk
   vurderingen på siden. Nivået var A2. Teksten til eleven var kort.
   `usikker_vurdering` ble lagret. En bruker uten rettigheten fikk ikke

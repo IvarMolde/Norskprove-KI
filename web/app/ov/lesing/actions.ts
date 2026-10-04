@@ -106,3 +106,66 @@ export async function fullforOkt(
   }
 }
 
+export async function pauseLeseokt(
+  _forrige: { feil: string } | null,
+  formData: FormData,
+): Promise<{ feil: string } | null> {
+  try {
+    const okt = uuidSchema.safeParse(formData.get("oktId"));
+    if (!okt.success) {
+      return { feil: oktFeilTekst("okt_ikke_funnet") };
+    }
+
+    const supabase = await createClient();
+    const { error } = await supabase.rpc("pause_okt", { p_okt_id: okt.data });
+
+    if (error) {
+      console.error("pauseLeseokt", error.code);
+      return { feil: oktFeilTekst(error.message) };
+    }
+
+    redirect("/ov/lesing");
+  } catch (error) {
+    if (erOmdirigering(error)) {
+      throw error;
+    }
+    console.error("pauseLeseokt", error);
+    return { feil: oktFeilTekst(undefined) };
+  }
+}
+
+export async function gjenopptaLeseokt(
+  _forrige: { feil: string } | null,
+  formData: FormData,
+): Promise<{ feil: string } | null> {
+  try {
+    const okt = uuidSchema.safeParse(formData.get("oktId"));
+    if (!okt.success) {
+      return { feil: oktFeilTekst("okt_ikke_funnet") };
+    }
+
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("gjenoppta_okt", {
+      p_okt_id: okt.data,
+    });
+
+    if (error) {
+      console.error("gjenopptaLeseokt", error.code);
+      return { feil: oktFeilTekst(error.message) };
+    }
+
+    const id = uuidSchema.safeParse(data);
+    if (!id.success) {
+      return { feil: oktFeilTekst(undefined) };
+    }
+
+    redirect(`/ov/lesing/${id.data}`);
+  } catch (error) {
+    if (erOmdirigering(error)) {
+      throw error;
+    }
+    console.error("gjenopptaLeseokt", error);
+    return { feil: oktFeilTekst(undefined) };
+  }
+}
+

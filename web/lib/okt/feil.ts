@@ -15,6 +15,11 @@ const TEKSTER: Record<string, string> = {
   mangler_rettighet: "Du kan ikke få vurdering av teksten.",
   vurdering_utilgjengelig: "Vurdering er ikke klar nå. Prøv igjen senere.",
   vurdering_feilet: "Vi fikk ikke vurdert teksten. Prøv igjen.",
+  betaling_utilgjengelig: "Betaling er ikke klar nå. Prøv igjen senere.",
+  betaling_ikke_funnet: "Vi fant ikke betalingen.",
+  ugyldig_plan: "Velg en plan.",
+  ingen_pause: "Du kan ikke pause økten.",
+  okt_pauset: "Økten er pauset.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

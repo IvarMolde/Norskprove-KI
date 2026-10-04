@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { hentAktivLeseoktId } from "@/lib/okt/lesing";
+import { hentAktivLeseoktId, hentPausetLeseoktId } from "@/lib/okt/lesing";
 import { hentOktGrense, oktGrenseTekst } from "@/lib/rettigheter";
 import { erRedaktor } from "@/lib/rolle";
 import { createClient } from "@/lib/supabase/server";
+import { GjenopptaKnapp } from "./pause-knapp";
 import { Ramme } from "./ramme";
 import { StartKnapp } from "./start-knapp";
 
@@ -25,6 +26,7 @@ export default async function LesingPage() {
   }
 
   const aktiv = await hentAktivLeseoktId();
+  const pauset = aktiv ? null : await hentPausetLeseoktId();
   const grense = await hentOktGrense();
   const redaktor = await erRedaktor();
 
@@ -36,6 +38,8 @@ export default async function LesingPage() {
         <Link className="underline" href={`/ov/lesing/${aktiv}`}>
           Fortsett økten
         </Link>
+      ) : pauset ? (
+        <GjenopptaKnapp oktId={pauset} />
       ) : grense && !grense.kanStarte ? (
         <p>{oktGrenseTekst()}</p>
       ) : (

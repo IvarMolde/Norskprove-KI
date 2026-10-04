@@ -17,7 +17,9 @@ function somFeil(message: string | undefined): OktResultat<never> {
   return { ok: false, feil: oktFeilTekst(message) };
 }
 
-export async function hentAktivLeseoktId(): Promise<string | null> {
+async function hentLeseoktId(
+  status: "pagaende" | "avbrutt_lagret",
+): Promise<string | null> {
   try {
     const supabase = await createClient();
     const {
@@ -33,14 +35,14 @@ export async function hentAktivLeseoktId(): Promise<string | null> {
       .select("id")
       .eq("bruker_id", user.id)
       .eq("ferdighet", "lesing")
-      .eq("status", "pagaende")
+      .eq("status", status)
       .order("startet", { ascending: false })
       .limit(1)
       .maybeSingle();
 
     if (error || !data) {
       if (error) {
-        console.error("hentAktivLeseoktId", error.code);
+        console.error("hentLeseoktId", error.code);
       }
       return null;
     }
@@ -48,9 +50,17 @@ export async function hentAktivLeseoktId(): Promise<string | null> {
     const id = z.string().uuid().safeParse(data.id);
     return id.success ? id.data : null;
   } catch (error) {
-    console.error("hentAktivLeseoktId", error);
+    console.error("hentLeseoktId", error);
     return null;
   }
+}
+
+export function hentAktivLeseoktId(): Promise<string | null> {
+  return hentLeseoktId("pagaende");
+}
+
+export function hentPausetLeseoktId(): Promise<string | null> {
+  return hentLeseoktId("avbrutt_lagret");
 }
 
 export async function hentLeseokt(
