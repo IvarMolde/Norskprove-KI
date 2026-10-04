@@ -412,6 +412,13 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Lokal flyt verifisert. En ny bruker leste personvernutkastet, huket av
+  begge boksene, og ble registrert. `alder_bekreftet_metode` ble
+  `egenerklaert`. Deretter startet en leseøkt, oppgave 1 av 15. Registrer
+  er av uten avhuking. Innlogging virker uten avhuking. Anonym bruker kan
+  ikke kalle `bekreft_alder`. Eleven kan ikke sette metoden selv. Et felt
+  som allerede er `vipps` blir ikke overskrevet. Vercel, domene og
+  databehandleravtaler er ikke gjort. Fasen er ikke ferdig.
 - Beslutning for fase 7: utkast til personvern på `/personvern`, info om
   prøvene på `/prove`, og registrering som lagrer alder som
   `egenerklaert`. Vercel, domene og databehandleravtaler er ikke gjort.
