@@ -42,6 +42,13 @@ export default function Personvern() {
         Du må være 18 år. Når du registrerer deg, sier du det selv. Vi
         lagrer det som egenerklæring.
       </p>
+      <h2 className="text-xl font-semibold">Dine rettigheter</h2>
+      <p>Du kan slette kontoen din selv. Se under.</p>
+      <p>
+        Du kan be om å se det vi har lagret, og om å rette det. Den
+        knappen er ikke bygd ennå. Den kommer før vi åpner for alle.
+      </p>
+      <p>Du kan klage til Datatilsynet.</p>
       <h2 className="text-xl font-semibold">Slette konto</h2>
       <p>
         Når du er innlogget, kan du slette kontoen din. Da slettes svar,
@@ -53,8 +60,13 @@ export default function Personvern() {
         </Link>
       </p>
       <p>
-        Avtaler med leverandørene er ikke ferdige. De skal være på plass
+        Avtaler med leverandørene er ikke signert. De skal være på plass
         før vi åpner for alle.
+      </p>
+      <p>
+        <Link className="underline" href="/databehandlere">
+          Databehandleravtaler
+        </Link>
       </p>
       <p>
         <Link className="underline" href="/prove">

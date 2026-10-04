@@ -36,6 +36,9 @@ export default async function Home({
           <Link href="/personvern">Personvern</Link>
         </p>
         <p>
+          <Link href="/databehandlere">Databehandleravtaler</Link>
+        </p>
+        <p>
           <Link href="/prove">Info om prøvene</Link>
         </p>
         <p>
@@ -79,6 +82,9 @@ export default async function Home({
       </p>
       <p>
         <Link href="/personvern">Personvern</Link>
+      </p>
+      <p>
+        <Link href="/databehandlere">Databehandleravtaler</Link>
       </p>
       <p>
         <Link href="/prove">Info om prøvene</Link>

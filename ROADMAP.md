@@ -233,6 +233,13 @@ Beslutning 2026-10-04: en innlogget bruker kan slette egen konto på
 Oppgaver og bilder i banken blir liggende. Feltet som pekte på brukeren
 settes tomt. Fasen er fortsatt ikke ferdig.
 
+Beslutning 2026-10-04: utkast til databehandleravtaler ligger på
+`/databehandlere`. Hver leverandør har status «ikke signert». Utkastet
+sier hva de skulle behandle, hvor det skal ligge, og at de bare skal
+følge våre instruksjoner. Navn, organisasjonsnummer, adresse og e-post
+står tomme. Avkrysningen i prosjektoversikten blir stående åpen.
+Vercel og domene venter. Fasen er ikke ferdig.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
@@ -419,6 +426,10 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning: utkast til databehandleravtaler på `/databehandlere`.
+  Ingen avtale er signert. Navn, organisasjonsnummer, adresse og e-post
+  står tomme. Avkrysningen i prosjektoversikten blir stående åpen.
+  Fasen er ikke ferdig.
 - Sletting verifisert lokalt. En ny bruker startet en leseøkt, huket av,
   og slettet kontoen. Brukeren, økten, svaret, vurderingen og
   bestillingen var borte. Oppgaven i banken ble liggende, uten peker

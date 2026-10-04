@@ -116,7 +116,7 @@ samtykkebanner – kun nødvendige cookies. Ingen institusjonsvisning av
 enkeltelevers fremgang i v1. Rettslig grunnlag er avtale (ikke samtykke)
 for kjernefunksjonalitet. Personvernerklæring og databehandleravtaler med
 alle underleverandører (Supabase, Google, Vercel, Stripe, Vipps) er
-obligatorisk og under arbeid.
+obligatorisk og under arbeid. Utkastet i appen er ikke signert.
 
 ## WCAG / Universell utforming
 
