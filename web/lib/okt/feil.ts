@@ -12,6 +12,9 @@ const TEKSTER: Record<string, string> = {
   ikke_redaktor: "Du kan ikke redigere oppgaver.",
   ugyldig_innhold: "Oppgaven er ikke ferdig utfylt.",
   oppgave_ikke_funnet: "Vi fant ikke oppgaven.",
+  mangler_rettighet: "Du kan ikke få vurdering av teksten.",
+  vurdering_utilgjengelig: "Vurdering er ikke klar nå. Prøv igjen senere.",
+  vurdering_feilet: "Vi fikk ikke vurdert teksten. Prøv igjen.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

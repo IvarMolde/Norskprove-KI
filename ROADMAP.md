@@ -131,6 +131,39 @@ fritekst og få vurdering tilbake ett nivå enklere enn vurdert nivå, lagret i
 - Bank sjekkes før eventuell KI-generering av nye oppgaver. Generering er
   ikke en del av ferdigkriteriet for denne fasen.
 
+Beslutning 2026-10-04: første skriveoppgave er én håndskrevet, publisert
+A2-oppgave. `ferdighet = skriving`, `type = fritekst`, `kilde = autentisk`.
+Oppgavetypen er `kort_melding` på nivågruppen `A1-A2`. Kort melding har
+ikke ordkrav (`min_ord = 0`). For kort tekst setter sensoren
+`usikker_vurdering`. En skriveøkt har denne ene oppgaven. Den blir
+`fullfort` når vurderingen er lagret, og teller mot samme øktgrense som
+lesing og lytting.
+
+Rettigheten sjekkes i databasefunksjonen, ikke bare på siden. Uten
+rettighet avvises både start og lagring med `mangler_rettighet`. Eleven
+ser ikke plan-id.
+
+Hele den utfylte systemprompten er hele modellkallet. Backend bytter bare
+ut `{{NIVAGRUPPE}}`, `{{OPPGAVETYPE}}`, `{{OPPGAVETEKST}}`,
+`{{MIN_ORDANTALL}}` og `{{ELEVSVAR}}`. Promptfilen endres ikke. Appen
+kaller et OpenAI-kompatibelt chat-API. `OPENAI_API_KEY` kreves.
+`OPENAI_BASE_URL` og `OPENAI_MODEL` kan overstyres. Standard er
+`gpt-4o-mini` mot `https://api.openai.com/v1`. Nøkkelen ligger i miljøet,
+ikke i repo. Mangler nøkkelen, får eleven en kort forklaring, og ingen
+vurdering lagres.
+
+`tilbakemelding_til_elev` skrives ett nivå enklere av sensoren, slik
+promptregel 5 sier. Appen viser den teksten. Den skriver den ikke om med
+en ny modell. Eleven ser også samlet nivå, tre forbedringspunkter og det
+positive elementet. Begrunnelsene i `kriterier` lagres, men vises ikke på
+siden.
+
+Lagring skjer i `lagre_skriftlig_vurdering`, som bare `service_role` kan
+kalle. Serveren leser `SUPABASE_SERVICE_ROLE_KEY`. Nøkkelen sendes ikke til
+nettleseren. Eleven kan ikke sette inn i `skriftlig_vurdering`. Funksjonen
+skriver `bruker_svar`, vurderingen, historikk og øktstatus. Stikkprøve-
+dashbord og KI-generering av oppgaver venter.
+
 ## Fase 6. Betaling
 
 Ferdig når en bruker kan gå fra gratis til Basis, Pluss eller Komplett, og
@@ -307,12 +340,40 @@ Svaret er det samme som i lesing:
 
 Poeng er antall påstander der `svar` er lik `korrekt`.
 
+### `fritekst`
+
+Låst 2026-10-04. Én oppgavetekst eleven skal svare på med fri tekst.
+Fasit finnes ikke. Sensoren vurderer svaret etter prompten.
+
+Innhold i `oppgaver.innhold`:
+
+```json
+{
+  "tittel": "Sms til en kollega",
+  "tekst": "Skriv en kort sms til en kollega. Si at du blir sen til møtet i dag, og si når du kommer.",
+  "oppgavetype": "kort_melding",
+  "nivagruppe": "A1-A2",
+  "min_ord": 0
+}
+```
+
+`oppgavetype` er `kort_melding`, `bildebeskrivelse`, `kjent_tema` eller
+`meningsytring`. `nivagruppe` er `A1-A2`, `A2-B1` eller `B1-B2`.
+`min_ord` er et heltall fra 0 og opp. `tittel` og `tekst` er ikke tomme.
+
+Svaret er ren tekst, ikke json. Det lagres i `bruker_svar.svar_tekst`.
+Vurderingen lagres i `skriftlig_vurdering` med formen fra
+`prompts/skriveprove-vurdering-prompt.md`.
+
 ## Logg
 
 Nyeste øverst.
 
 ### 2026-10-04
 
+- Kontrakt låst for `fritekst`. Første skriveoppgave er én håndskrevet
+  kort melding. Vurderingen bruker prompten som den er, og lagres bare
+  fra serveren.
 - Fase 4 verifisert. En ny elev fikk 18 lytteoppgaver, med lydfil og
   transkripsjon på hver. Poengsummen ble 36 av 36. Besvarte oppgaver kom
   ikke igjen. Lydfilene er lest inn fra den skrevne teksten og lagret i

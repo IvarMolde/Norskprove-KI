@@ -19,6 +19,9 @@ export default async function Home() {
         <p>
           <Link href="/ov/lytting">Øv på lytting</Link>
         </p>
+        <p>
+          <Link href="/ov/skriving">Øv på skriving</Link>
+        </p>
         {redaktor ? (
           <p>
             <Link href="/rediger">Rediger oppgaver</Link>
@@ -44,6 +47,9 @@ export default async function Home() {
       </p>
       <p>
         <Link href="/ov/lytting">Øv på lytting</Link>
+      </p>
+      <p>
+        <Link href="/ov/skriving">Øv på skriving</Link>
       </p>
       <p>
         <Link href="/logg-inn">Logg inn</Link>
