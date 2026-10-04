@@ -426,6 +426,11 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Utkast til databehandleravtaler verifisert lokalt. Siden viser
+  Supabase, Vercel, Google, Stripe og Vipps som ikke signert. Navn,
+  organisasjonsnummer, adresse og e-post står som ikke skrevet.
+  Personvern lenker dit. Avkrysningen i prosjektoversikten er åpen.
+  Fasen er ikke ferdig.
 - Beslutning: utkast til databehandleravtaler på `/databehandlere`.
   Ingen avtale er signert. Navn, organisasjonsnummer, adresse og e-post
   står tomme. Avkrysningen i prosjektoversikten blir stående åpen.
