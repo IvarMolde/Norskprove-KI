@@ -5,12 +5,14 @@ import { z } from "zod";
 import { lagreSvarSchema } from "@/lib/oppgaver/lesing";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { erOmdirigering } from "@/lib/okt/omdirigering";
+import { slettGammelLyd } from "@/lib/personvern/slett-lyd";
 import { createClient } from "@/lib/supabase/server";
 
 const uuidSchema = z.string().uuid();
 
 export async function startLeseokt(): Promise<{ feil: string } | null> {
   try {
+    await slettGammelLyd();
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("start_leseokt");
 

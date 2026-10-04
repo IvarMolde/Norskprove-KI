@@ -6,6 +6,7 @@ import {
   ferdighetTekst,
   oktStatusTekst,
 } from "@/lib/personvern/mine-data";
+import { slettGammelLyd } from "@/lib/personvern/slett-lyd";
 import { createClient } from "@/lib/supabase/server";
 import { NivaSkjema } from "./niva-skjema";
 
@@ -31,6 +32,8 @@ export default async function MineData({
       </Ramme>
     );
   }
+
+  await slettGammelLyd();
 
   try {
     const profil = await supabase

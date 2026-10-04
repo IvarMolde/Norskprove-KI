@@ -254,13 +254,20 @@ testbekreftelsen er tillatt. Uten den sier siden at kjøp ikke er åpent.
 Serveren avviser kjøpet likevel. Vipps er ikke koblet på. Ingen penger
 trekkes. Fasen er ikke ferdig.
 
+Beslutning 2026-10-04: `slett_gammel_lyd()` nullstiller
+`bruker_svar.svar_lyd_url` når svaret er eldre enn 30 dager.
+Skriftlig tekst blir liggende. Bare serveren kan kalle funksjonen.
+Det finnes ingen brukeropptak å slette ennå. Muntlig økt er fortsatt
+fase 8. Fasen ut til brukere er ikke ferdig.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
 etter reglene i prosjektoversikten.
 
 - Muntlig fase 1 bruker `prompts/muntlig-vurdering-prompt.md` og
-  `muntlig_vurdering`. Lyd slettes etter 30 dager.
+  `muntlig_vurdering`. Lydadressen i databasen nullstilles etter 30
+  dager. Selve opptaket slettes når muntlig økt lagrer en fil.
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -440,6 +447,8 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Beslutning: lydadresse eldre enn 30 dager nullstilles av serveren.
+  Skriftlig tekst blir liggende. Muntlig økt er ikke startet.
 - Kjøp verifisert. Med lokal test ble Basis kjøpt, og siden sa at ingen
   penger trekkes. Uten lokal test var kjøpsknappene borte, og teksten
   sa at kjøp ikke er åpent. Vipps er ikke koblet på. Fasen er ikke

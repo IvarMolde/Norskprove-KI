@@ -56,7 +56,8 @@ Fase 8, muntlig og adaptiv prøve:
 
 - Muntlig fase 1 med `prompts/muntlig-vurdering-prompt.md` og
   `muntlig_vurdering`.
-- Lyd slettes etter 30 dager.
+- Lydadressen i databasen nullstilles etter 30 dager. Filen slettes
+  når muntlig økt begynner å lagre opptak.
 - Adaptiv prøve med tersklene som finnes. De er startestimater.
 - Tersklene justeres når det finnes brukerdata. Ekte IRT venter til
   etter veikartet.
