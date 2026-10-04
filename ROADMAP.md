@@ -30,7 +30,7 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **5. Skriftlig øving og KI-vurdering**. Fase 1 til 4 er ferdige.
+Aktiv fase: **6. Betaling**. Fase 1 til 5 er ferdige.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -120,6 +120,11 @@ Gratisgrensen teller fortsatt alle fullførte økter. Redaktør for lyd og
 `diktat` venter til avspilling og svar virker.
 
 ## Fase 5. Skriftlig øving og KI-vurdering
+
+Ferdig 2026-10-04. En bruker med rettigheten leverte en kort melding og fikk
+vurderingen tilbake. Samlet nivå var A2. Tilbakemeldingen var kort, og den
+ble lagret i `skriftlig_vurdering` sammen med `usikker_vurdering`. En bruker
+uten rettigheten ble avvist. Besvart oppgave kom ikke igjen.
 
 Ferdig når en bruker med rettigheten `skriftlig_ki_vurdering` kan levere en
 fritekst og få vurdering tilbake ett nivå enklere enn vurdert nivå, lagret i
@@ -373,6 +378,12 @@ Nyeste øverst.
 
 ### 2026-10-04
 
+- Fase 5 verifisert. En bruker med rettigheten skrev en sms og fikk
+  vurderingen på siden. Nivået var A2. Teksten til eleven var kort.
+  `usikker_vurdering` ble lagret. En bruker uten rettigheten fikk ikke
+  starte. Samme oppgave kom ikke igjen. Eleven kan ikke sette inn
+  vurderingen selv. Stikkprøve-dashbord og generering av oppgaver er ikke
+  bygd.
 - Kontrakt låst for `fritekst`. Første skriveoppgave er én håndskrevet
   kort melding. Vurderingen bruker prompten som den er, og lagres bare
   fra serveren.
