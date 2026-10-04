@@ -127,6 +127,30 @@ async function kallModell(
   }
 }
 
+const modellnavn = /qwen|alibaba|openai|chatgpt|gpt-4|llama/i;
+
+function utenSignatur(tekst: string): string {
+  const deler = tekst
+    .split(/(?<=[.!?])\s+/)
+    .filter((del) => !modellnavn.test(del));
+  const samlet = deler.join(" ").trim();
+  return samlet.length > 0 ? samlet : tekst.trim();
+}
+
+function utenModellsignatur(vurdering: SkriveVurdering): SkriveVurdering {
+  const punkter = vurdering.forbedringspunkter.map((punkt) => {
+    const renset = utenSignatur(punkt);
+    return renset.length > 0 ? renset : punkt;
+  });
+
+  return {
+    ...vurdering,
+    positivt_element: utenSignatur(vurdering.positivt_element),
+    tilbakemelding_til_elev: utenSignatur(vurdering.tilbakemelding_til_elev),
+    forbedringspunkter: [punkter[0], punkter[1], punkter[2]],
+  };
+}
+
 function lesVurdering(data: Kall): SkriveVurdering | null {
   const innhold = data.choices?.[0]?.message?.content;
   if (!innhold) {
@@ -135,7 +159,7 @@ function lesVurdering(data: Kall): SkriveVurdering | null {
 
   try {
     const parsed = skriveVurderingSchema.safeParse(lesJson(innhold));
-    return parsed.success ? parsed.data : null;
+    return parsed.success ? utenModellsignatur(parsed.data) : null;
   } catch {
     return null;
   }

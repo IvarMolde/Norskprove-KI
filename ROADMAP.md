@@ -155,7 +155,8 @@ vurdering lagres.
 
 `tilbakemelding_til_elev` skrives ett nivå enklere av sensoren, slik
 promptregel 5 sier. Appen viser den teksten. Den skriver den ikke om med
-en ny modell. Eleven ser også samlet nivå, tre forbedringspunkter og det
+en ny modell. En setning som nevner modellens eget navn, tas bort før
+lagring. Resten lagres som sensoren skrev den. Eleven ser også samlet nivå, tre forbedringspunkter og det
 positive elementet. Begrunnelsene i `kriterier` lagres, men vises ikke på
 siden.
 
