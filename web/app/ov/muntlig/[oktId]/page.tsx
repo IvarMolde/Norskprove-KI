@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { oktFeilTekst } from "@/lib/okt/feil";
 import { hentMuntligOkt } from "@/lib/okt/muntlig";
 import { Ramme } from "../../lesing/ramme";
+import { MuntligBilde } from "../bilde";
 import { MuntligSkjema } from "../skjema";
 
 export const maxDuration = 300;
@@ -44,6 +46,13 @@ export default async function MuntligOktPage({
     return (
       <Ramme>
         <h1 className="text-2xl font-semibold">Din vurdering</h1>
+        <h2 className="text-xl font-semibold">{oppgave.tittel}</h2>
+        {oppgave.bilde ? (
+          <MuntligBilde
+            beskrivelse={oppgave.bilde.beskrivelse}
+            url={oppgave.bilde.url}
+          />
+        ) : null}
         <p>Nivå: {vurdering.samlet_niva}</p>
         {vurdering.usikker_vurdering ? <p>Vi er ikke sikre på vurderingen.</p> : null}
         {vurdering.usikker_pga_lyd ? <p>Vi er ikke sikre på uttale og flyt.</p> : null}
@@ -74,10 +83,23 @@ export default async function MuntligOktPage({
     );
   }
 
+  if (oppgave.oppgavetype === "individuell_beskrive_bilde" && !oppgave.bilde) {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Øv på muntlig</h1>
+        <p role="alert">{oktFeilTekst("bilde_mangler")}</p>
+        <Link className="underline" href="/ov/muntlig">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
+
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Øv på muntlig</h1>
       <MuntligSkjema
+        bilde={oppgave.bilde}
         oktId={resultat.data.id}
         oppgaveId={oppgave.id}
         tekst={oppgave.tekst}

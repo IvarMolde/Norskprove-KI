@@ -332,6 +332,15 @@ Poeng på 0 til 3 gir den lette veien. Poeng på 4 eller mer gir den
 vanskelige. Lytteoppgavene blandes ikke med leseoppgavene. En vanlig
 lytteøkt holdes utenfor prøven. Banken har bare A2. Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: muntlig fase 1 har også én bildeoppgave. Typen er
+`individuell_beskrive_bilde`. Bildet ligger i `bilder` med status
+`godkjent`. `beskrivelse` er alt-teksten. Adressen er en fil under
+`/bilder/`. Eleven ser bildet og forteller hva som skjer. En oppgave
+uten godkjent bilde blir ikke delt ut. Fortelle-oppgaven har ikke
+bilde. Promptfilen endres ikke. Modellen får fortsatt bare
+oppgavetekst og transkripsjon. Fasen er ikke ferdig. Muntlig fase 2
+venter.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -511,6 +520,9 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: muntlig fase 1 har også én bildeoppgave. Eleven ser
+  bildet og forteller. En oppgave uten godkjent bilde blir ikke delt
+  ut. Fasen er ikke ferdig.
 - Adaptiv lytteprøve verifisert. Uten rettigheten ble brukeren avvist.
   Ugyldig ferdighet ble avvist. Alle riktige svar ga B1-B2. Alle feil
   svar ga A1-A2. Tre riktige i del 1 og full pott i del 2 ga A2-B1.

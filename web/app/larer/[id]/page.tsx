@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { datoTekst, hentInnlevering, markerHort } from "@/lib/larer";
 import { Ramme } from "../../ov/lesing/ramme";
+import { MuntligBilde } from "../../ov/muntlig/bilde";
 import { KommentarSkjema } from "../kommentar-skjema";
 
 export default async function InnleveringPage({
@@ -39,6 +40,9 @@ export default async function InnleveringPage({
       <p>{rad.epost}</p>
       <p>{datoTekst(rad.innsendt)}</p>
       <p>{rad.oppgavetekst}</p>
+      {rad.bilde ? (
+        <MuntligBilde beskrivelse={rad.bilde.beskrivelse} url={rad.bilde.url} />
+      ) : null}
       <audio controls preload="none" src={`/larer/lyd/${rad.id}`}>
         Nettleseren kan ikke spille av lyden.
       </audio>

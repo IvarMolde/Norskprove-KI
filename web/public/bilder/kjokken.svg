@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img">
+  <title>En person sitter på en stol ved et bord. Det står en kopp på bordet. Det er et vindu bak personen.</title>
+  <rect width="640" height="400" fill="#f6f1e7"/>
+  <rect x="390" y="36" width="180" height="120" fill="#d7ebf7" stroke="#243247" stroke-width="6"/>
+  <line x1="480" y1="36" x2="480" y2="156" stroke="#243247" stroke-width="6"/>
+  <line x1="390" y1="96" x2="570" y2="96" stroke="#243247" stroke-width="6"/>
+  <circle cx="530" cy="68" r="16" fill="#f2c14e" stroke="#243247" stroke-width="4"/>
+  <rect x="150" y="250" width="250" height="18" fill="#8c5a3c" stroke="#243247" stroke-width="4"/>
+  <rect x="170" y="268" width="16" height="70" fill="#8c5a3c"/>
+  <rect x="364" y="268" width="16" height="70" fill="#8c5a3c"/>
+  <rect x="210" y="292" width="70" height="12" fill="#5c6b7a" stroke="#243247" stroke-width="3"/>
+  <rect x="228" y="304" width="12" height="48" fill="#5c6b7a"/>
+  <rect x="250" y="304" width="12" height="48" fill="#5c6b7a"/>
+  <rect x="232" y="210" width="16" height="70" fill="#243247"/>
+  <circle cx="240" cy="188" r="24" fill="#f3d2b3" stroke="#243247" stroke-width="4"/>
+  <path d="M214 236 h52 v54 h-16 l-8 28 h-12 l-6 -28 h-10 z" fill="#2f6f9f" stroke="#243247" stroke-width="4"/>
+  <rect x="300" y="214" width="28" height="34" rx="4" fill="#ffffff" stroke="#243247" stroke-width="4"/>
+  <path d="M328 222 h10 v16 h-10" fill="none" stroke="#243247" stroke-width="4"/>
+</svg>

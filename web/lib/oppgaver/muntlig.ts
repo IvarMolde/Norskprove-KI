@@ -46,6 +46,12 @@ export const muntligOktSchema = z.object({
       "individuell_beskrive_bilde",
     ]),
     nivagruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
+    bilde: z
+      .object({
+        url: z.string().regex(/^\/bilder\/[a-z0-9-]+\.(svg|png|webp)$/),
+        beskrivelse: z.string().min(1),
+      })
+      .nullable(),
     svar: z.string().nullable(),
     har_lyd: z.boolean(),
     larer: z
