@@ -48,6 +48,7 @@ export const skriveoktSchema = z.object({
     nivagruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
     min_ord: z.number().int().nonnegative(),
     svar: z.string().nullable(),
+    kladd: z.string().nullable(),
     vurdering: elevVurderingSchema.nullable(),
   }),
 });

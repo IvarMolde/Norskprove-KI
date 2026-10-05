@@ -33,7 +33,8 @@ Ikke la veikartet ligge etter koden.
 Aktiv fase: **8. Muntlig og adaptiv prøve**. Fase 1 til 6 er ferdige.
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Betalende kan
 pause en muntlig fase-1-økt, en adaptiv prøve, og en vanlig lytte- eller
-skriveøkt. Fasen er ikke ferdig.
+skriveøkt. Teksten i skriving og muntlig lagres mens eleven skriver.
+Fasen er ikke ferdig.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -392,6 +393,14 @@ gjenopptakelse. En pauset økt fortsettes, den byttes ikke ut. En pauset
 adaptiv lytteprøve er en annen økt og blir ikke en vanlig lytteøkt.
 Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: teksten lagres mens eleven skriver i en skriveøkt
+og i en muntlig fase-1-oppgave. Det gjelder alle som kan ta økten.
+Lagringen kaller ikke modellen, skriver ikke historikk og gjør ikke
+økten ferdig. En kladd åpner ikke neste muntlige oppgave, og læreren
+ser den ikke. Tom tekst fjerner kladden. Etter pause eller ny lasting
+står teksten i feltet. Lydfilen lagres når eleven sender inn. Fasen er
+ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -571,6 +580,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: teksten i skriving og muntlig lagres mens eleven skriver.
+  En kladd er ikke et svar. Fasen er ikke ferdig.
 - Pause av vanlig øving er verifisert. Lytteøkten viste Oppgave 1 av
   18, Hunden. Etter pause viste listen at økten er pauset. Fortsett
   åpnet samme oppgave. Skriveøkten viste Sms til en kollega. Etter

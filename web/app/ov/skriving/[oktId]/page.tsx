@@ -85,6 +85,7 @@ export default async function SkriveOktPage({
     <Ramme>
       <h1 className="text-2xl font-semibold">Øv på skriving</h1>
       <SkriveSkjema
+        kladd={oppgave.kladd ?? ""}
         oktId={resultat.data.id}
         oppgaveId={oppgave.id}
         tekst={oppgave.tekst}

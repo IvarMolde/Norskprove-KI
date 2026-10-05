@@ -53,6 +53,7 @@ const muntligOppgaveSchema = z.object({
   nivagruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
   bilde: oppgaveBildeSchema,
   svar: z.string().nullable(),
+  kladd: z.string().nullable(),
   har_lyd: z.boolean(),
   larer: z
     .object({

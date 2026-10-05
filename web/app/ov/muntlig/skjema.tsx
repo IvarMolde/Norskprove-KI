@@ -1,7 +1,9 @@
 "use client";
 
-import { useActionState, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import type { OppgaveBilde } from "@/lib/oppgaver/bilde";
+import { LagreLinje } from "../lesing/lagre-linje";
+import { useTekstkladd } from "../use-tekstkladd";
 import { MuntligBilde } from "./bilde";
 import { sendMuntligSvar } from "./actions";
 
@@ -42,6 +44,7 @@ export function MuntligSkjema({
   bilde,
   nummer,
   antall,
+  kladd,
 }: {
   oktId: string;
   oppgaveId: string;
@@ -50,11 +53,16 @@ export function MuntligSkjema({
   bilde: OppgaveBilde;
   nummer: number;
   antall: number;
+  kladd: string;
 }) {
   const [tilstand, handling, venter] = useActionState(sendMuntligSvar, null);
   const [tarOpp, setTarOpp] = useState(false);
   const [harLyd, setHarLyd] = useState(false);
-  const [tekstverdi, setTekstverdi] = useState("");
+  const { tekst: tekstverdi, oppdater, status, feil, settAktiv } = useTekstkladd(
+    oktId,
+    oppgaveId,
+    kladd,
+  );
   const [mikrofonFeil, setMikrofonFeil] = useState<string | null>(null);
   const opptaker = useRef<MediaRecorder | null>(null);
   const gjenkjenning = useRef<Talegjenkjenning | null>(null);
@@ -116,7 +124,7 @@ export function MuntligSkjema({
           }
           const samlet = deler.join(" ").trim();
           if (samlet) {
-            setTekstverdi(samlet);
+            oppdater(samlet);
           }
         };
         tale.onerror = () => {
@@ -147,6 +155,10 @@ export function MuntligSkjema({
     stoppSpor();
     setTarOpp(false);
   }
+
+  useEffect(() => {
+    settAktiv(!venter);
+  }, [settAktiv, venter]);
 
   return (
     <form action={handling} className="flex flex-col gap-4">
@@ -206,12 +218,13 @@ export function MuntligSkjema({
           id="tekst"
           maxLength={4000}
           name="tekst"
-          onChange={(event) => setTekstverdi(event.target.value)}
+          onChange={(event) => oppdater(event.target.value)}
           required
           rows={6}
           value={tekstverdi}
         />
       </label>
+      <LagreLinje feil={feil} status={venter ? null : status} />
       <p>Rett teksten hvis noe er feil.</p>
       <button
         className="rounded border border-current px-4 py-2"

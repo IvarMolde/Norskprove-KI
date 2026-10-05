@@ -151,6 +151,7 @@ export default async function MuntligOktPage({
       <MuntligSkjema
         antall={antall}
         bilde={oppgave.bilde}
+        kladd={oppgave.kladd ?? ""}
         nummer={nummer}
         oktId={resultat.data.id}
         oppgaveId={oppgave.id}
