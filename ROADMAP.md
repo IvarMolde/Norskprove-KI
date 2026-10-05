@@ -504,6 +504,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Adaptiv leseprøve verifisert. Uten rettigheten ble brukeren avvist.
+  Alle riktige svar ga B1-B2. Alle feil svar ga A1-A2. Tre riktige i
+  del 1 og full pott i del 2 ga A2-B1. Eleven kunne ikke endre
+  nivågruppen. En vanlig leseøkt ble ikke den adaptive prøven.
+  Lytting venter. Fasen er ikke ferdig.
 - Beslutning: første adaptive prøve er lesing. Forgreningen følger
   tersklene. Nivågruppen settes av poengene. Lytting venter.
 - Lærerkommentar verifisert. En elev kunne ikke lagre kommentaren.
