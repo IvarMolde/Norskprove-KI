@@ -571,6 +571,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Pause av vanlig øving er verifisert. Lytteøkten viste Oppgave 1 av
+  18, Hunden. Etter pause viste listen at økten er pauset. Fortsett
+  åpnet samme oppgave. Skriveøkten viste Sms til en kollega. Etter
+  pause viste listen at økten er pauset. Fortsett åpnet samme oppgave.
+  Ingen av øktene ble fullført. Fasen er ikke ferdig.
 - Beslutning: vanlig lytting og skriving kan pauses. Samme oppgaver
   kommer tilbake. En adaptiv lytteprøve er en annen økt. Fasen er ikke
   ferdig.
