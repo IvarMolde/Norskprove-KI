@@ -539,6 +539,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Muntlig økt med to oppgaver er verifisert. Ny økt viste Oppgave 1 av
+  2, Fortell om dagen din, uten bilde. Etter første svar viste samme
+  økt Oppgave 2 av 2 med kjøkkenbildet. Økten ble stående åpen til
+  begge svarene var lagret. Anonym bruker ble avvist. usikker_pga_lyd
+  ble lagret som sant. Fasen er ikke ferdig. Muntlig fase 2 venter.
 - Beslutning: en muntlig økt har først fortelle, så beskrive bilde.
   Fasen er ikke ferdig.
 - Opplasting av svg og pdf er verifisert. Skjemaet tar imot png, pdf,
