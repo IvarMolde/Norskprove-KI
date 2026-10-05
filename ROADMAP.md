@@ -563,6 +563,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Pause er verifisert. Muntlig økt viste Oppgave 1 av 2, Fortell om
+  dagen din, uten bilde. Etter pause viste listen at økten er pauset.
+  Fortsett åpnet samme oppgave. Adaptiv lesing viste Del 1, Bussen til
+  jobb. Etter pause viste listen at prøven er pauset. Fortsett åpnet
+  samme Del 1. Ingen av øktene ble fullført. Fasen er ikke ferdig.
 - Beslutning: Komplett kan pause en muntlig fase-1-økt og en adaptiv
   prøve. Samme oppgaver kommer tilbake. Fasen er ikke ferdig.
 - Vurderingen er verifisert. Oppgave 1 viste formidling A1, uten bilde.
