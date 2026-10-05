@@ -580,6 +580,13 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Tekstkladd er verifisert. Skriveøkten viste Sms til en kollega. Feltet
+  viste Lagret og teksten «Jeg blir sen i dag.». Ny lasting viste samme
+  tekst. Etter pause viste listen at økten er pauset. Fortsett åpnet
+  samme tekst. Muntlig økt viste Oppgave 1 av 2, Fortell om dagen din.
+  Teksten «I dag sto jeg opp klokka sju.» sto igjen etter ny lasting og
+  etter pause. Økten gikk ikke til oppgave 2. Ingen av øktene ble
+  fullført. Fasen er ikke ferdig.
 - Beslutning: teksten i skriving og muntlig lagres mens eleven skriver.
   En kladd er ikke et svar. Fasen er ikke ferdig.
 - Pause av vanlig øving er verifisert. Lytteøkten viste Oppgave 1 av
