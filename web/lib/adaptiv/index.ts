@@ -46,6 +46,43 @@ export function delTekst(fase: AdaptivTilstand["fase"]): string {
   return "Ferdig";
 }
 
+const aktivStatusSchema = z.enum(["pagaende", "avbrutt_lagret"]);
+
+export async function hentAktivAdaptiv(
+  ferdighet: "lesing" | "lytting",
+): Promise<{ id: string; status: "pagaende" | "avbrutt_lagret" } | null> {
+  try {
+    const id = await hentAktivAdaptivId(ferdighet);
+    if (!id) {
+      return null;
+    }
+
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("okt_tilstand")
+      .select("status")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (error || !data) {
+      if (error) {
+        console.error("hentAktivAdaptiv", error.code);
+      }
+      return null;
+    }
+
+    const status = aktivStatusSchema.safeParse(data.status);
+    if (!status.success) {
+      return null;
+    }
+
+    return { id, status: status.data };
+  } catch (error) {
+    console.error("hentAktivAdaptiv", error);
+    return null;
+  }
+}
+
 export async function hentAktivAdaptivId(
   ferdighet: "lesing" | "lytting",
 ): Promise<string | null> {

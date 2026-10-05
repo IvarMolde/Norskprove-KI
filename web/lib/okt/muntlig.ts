@@ -11,7 +11,9 @@ function somFeil(message: string | undefined): OktResultat<never> {
   return { ok: false, feil: oktFeilTekst(message) };
 }
 
-export async function hentSisteFullfortMuntligOktId(): Promise<string | null> {
+async function hentMuntligOktId(
+  status: "pagaende" | "fullfort" | "avbrutt_lagret",
+): Promise<string | null> {
   try {
     const supabase = await createClient();
     const {
@@ -27,14 +29,14 @@ export async function hentSisteFullfortMuntligOktId(): Promise<string | null> {
       .select("id")
       .eq("bruker_id", user.id)
       .eq("ferdighet", "muntlig")
-      .eq("status", "fullfort")
+      .eq("status", status)
       .order("startet", { ascending: false })
       .limit(1)
       .maybeSingle();
 
     if (error || !data) {
       if (error) {
-        console.error("hentSisteFullfortMuntligOktId", error.code);
+        console.error("hentMuntligOktId", error.code);
       }
       return null;
     }
@@ -42,45 +44,21 @@ export async function hentSisteFullfortMuntligOktId(): Promise<string | null> {
     const id = z.string().uuid().safeParse(data.id);
     return id.success ? id.data : null;
   } catch (error) {
-    console.error("hentSisteFullfortMuntligOktId", error);
+    console.error("hentMuntligOktId", error);
     return null;
   }
 }
 
-export async function hentAktivMuntligOktId(): Promise<string | null> {
-  try {
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+export function hentSisteFullfortMuntligOktId(): Promise<string | null> {
+  return hentMuntligOktId("fullfort");
+}
 
-    if (!user) {
-      return null;
-    }
+export function hentAktivMuntligOktId(): Promise<string | null> {
+  return hentMuntligOktId("pagaende");
+}
 
-    const { data, error } = await supabase
-      .from("okt_tilstand")
-      .select("id")
-      .eq("bruker_id", user.id)
-      .eq("ferdighet", "muntlig")
-      .eq("status", "pagaende")
-      .order("startet", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (error || !data) {
-      if (error) {
-        console.error("hentAktivMuntligOktId", error.code);
-      }
-      return null;
-    }
-
-    const id = z.string().uuid().safeParse(data.id);
-    return id.success ? id.data : null;
-  } catch (error) {
-    console.error("hentAktivMuntligOktId", error);
-    return null;
-  }
+export function hentPausetMuntligOktId(): Promise<string | null> {
+  return hentMuntligOktId("avbrutt_lagret");
 }
 
 export async function hentMuntligOkt(

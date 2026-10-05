@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { hentMuntligOkt } from "@/lib/okt/muntlig";
+import { harRettighet } from "@/lib/rettigheter";
 import { Ramme } from "../../lesing/ramme";
 import { MuntligBilde } from "../bilde";
+import { GjenopptaKnapp, PauseKnapp } from "../pause-knapp";
 import { MuntligSkjema } from "../skjema";
 
 export const maxDuration = 300;
@@ -28,6 +30,20 @@ export default async function MuntligOktPage({
   }
 
   const { oppgave, status, deler, nummer, antall } = resultat.data;
+  const kanPause = await harRettighet("pause_gjenoppta");
+
+  if (status === "avbrutt_lagret") {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Økten er pauset</h1>
+        <p>Oppgavene er de samme når du fortsetter.</p>
+        {kanPause ? <GjenopptaKnapp oktId={resultat.data.id} /> : null}
+        <Link className="underline" href="/ov/muntlig">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
 
   if (status !== "pagaende" && deler.some((del) => !del.vurdering)) {
     return (
@@ -141,6 +157,7 @@ export default async function MuntligOktPage({
         tekst={oppgave.tekst}
         tittel={oppgave.tittel}
       />
+      {kanPause ? <PauseKnapp oktId={resultat.data.id} /> : null}
     </Ramme>
   );
 }

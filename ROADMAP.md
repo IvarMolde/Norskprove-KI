@@ -31,7 +31,8 @@ Ikke la veikartet ligge etter koden.
 ## Status nå
 
 Aktiv fase: **8. Muntlig og adaptiv prøve**. Fase 1 til 6 er ferdige.
-Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke.
+Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Komplett kan
+pause en muntlig fase-1-økt og en adaptiv prøve. Fasen er ikke ferdig.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -376,6 +377,13 @@ rekkefølge, med bilde når det finnes, lyd og tekst. Læreren skriver
 én kommentar per oppgave. Åpning merker alle opptakene i økten som
 hørt. En økt uten lydfil vises ikke. Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: Komplett kan pause en muntlig fase-1-økt og en
+adaptiv prøve. Samme oppgaver kommer tilbake. Pause gjør ikke økten
+ferdig og teller ikke som brukt økt. Uten `pause_gjenoppta` avvises
+pause og gjenopptakelse. En pauset muntlig økt fortsettes, den byttes
+ikke ut. En pauset adaptiv prøve blir på samme del. Lytting og skriving
+som vanlig øving er ikke med i denne beslutningen. Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -555,6 +563,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: Komplett kan pause en muntlig fase-1-økt og en adaptiv
+  prøve. Samme oppgaver kommer tilbake. Fasen er ikke ferdig.
 - Vurderingen er verifisert. Oppgave 1 viste formidling A1, uten bilde.
   Oppgave 2 viste formidling B1 og kjøkkenbildet. Språk, samlet nivå
   og tilbakemelding kom én gang, fra siste vurdering. Første oppgaves

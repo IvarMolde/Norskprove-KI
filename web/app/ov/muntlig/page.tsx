@@ -1,9 +1,14 @@
 import Link from "next/link";
-import { hentAktivMuntligOktId, hentSisteFullfortMuntligOktId } from "@/lib/okt/muntlig";
+import {
+  hentAktivMuntligOktId,
+  hentPausetMuntligOktId,
+  hentSisteFullfortMuntligOktId,
+} from "@/lib/okt/muntlig";
 import { harRettighet, hentOktGrense, oktGrenseTekst } from "@/lib/rettigheter";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { createClient } from "@/lib/supabase/server";
 import { Ramme } from "../lesing/ramme";
+import { GjenopptaKnapp } from "./pause-knapp";
 import { StartKnapp } from "./start-knapp";
 
 export default async function MuntligPage() {
@@ -35,6 +40,8 @@ export default async function MuntligPage() {
   }
 
   const aktiv = await hentAktivMuntligOktId();
+  const pauset = aktiv ? null : await hentPausetMuntligOktId();
+  const kanPause = await harRettighet("pause_gjenoppta");
   const ferdig = await hentSisteFullfortMuntligOktId();
   const grense = await hentOktGrense();
 
@@ -46,6 +53,12 @@ export default async function MuntligPage() {
         <Link className="underline" href={`/ov/muntlig/${aktiv}`}>
           Fortsett økten
         </Link>
+      ) : pauset ? (
+        <>
+          <p>Økten er pauset.</p>
+          <p>Oppgavene er de samme når du fortsetter.</p>
+          {kanPause ? <GjenopptaKnapp oktId={pauset} /> : null}
+        </>
       ) : grense && !grense.kanStarte ? (
         <p>{oktGrenseTekst()}</p>
       ) : (

@@ -1,12 +1,19 @@
 import Link from "next/link";
-import { delTekst, videreAdaptivFase, type AdaptivTilstand } from "@/lib/adaptiv";
+import {
+  delTekst,
+  hentAdaptivProve,
+  videreAdaptivFase,
+  type AdaptivTilstand,
+} from "@/lib/adaptiv";
 import { hentLeseokt } from "@/lib/okt/lesing";
 import { hentLytteokt } from "@/lib/okt/lytting";
 import type { Leseoppgave } from "@/lib/oppgaver/lesing";
 import type { LyttePastand } from "@/lib/oppgaver/lytting";
+import { harRettighet } from "@/lib/rettigheter";
 import { OppgaveSkjema } from "../../../ov/lesing/oppgave-skjema";
 import { Ramme } from "../../../ov/lesing/ramme";
 import { LydPastand } from "../../../ov/lytting/lyd-pastand";
+import { GjenopptaKnapp, PauseKnapp } from "../pause-knapp";
 
 type Rad = { id: string; besvart: boolean; rekkefolge: number };
 
@@ -58,6 +65,35 @@ export default async function AdaptivOktSide({
 }) {
   const { oktId } = await params;
   const { gjennomgang } = await searchParams;
+  const hentet = await hentAdaptivProve(oktId);
+
+  if (!hentet.ok) {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Adaptiv prøve</h1>
+        <p role="alert">{hentet.feil}</p>
+        <Link className="underline" href="/prove/adaptiv">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
+
+  const kanPause = await harRettighet("pause_gjenoppta");
+
+  if (hentet.data.status === "avbrutt_lagret") {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Økten er pauset</h1>
+        <p>Oppgavene er de samme når du fortsetter.</p>
+        {kanPause ? <GjenopptaKnapp oktId={hentet.data.id} /> : null}
+        <Link className="underline" href="/prove/adaptiv">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
+
   const prove = await videreAdaptivFase(oktId);
 
   if (!prove.ok) {
@@ -132,6 +168,7 @@ export default async function AdaptivOktSide({
           {prove.data.status === "fullfort" ? "Se resultatet" : "Neste oppgave"}
         </Link>
       ) : null}
+      {prove.data.status === "pagaende" && kanPause ? <PauseKnapp oktId={oktId} /> : null}
     </Ramme>
   );
 }
