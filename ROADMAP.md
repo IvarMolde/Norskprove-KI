@@ -511,6 +511,15 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Adaptiv lytteprøve verifisert. Uten rettigheten ble brukeren avvist.
+  Ugyldig ferdighet ble avvist. Alle riktige svar ga B1-B2. Alle feil
+  svar ga A1-A2. Tre riktige i del 1 og full pott i del 2 ga A2-B1.
+  Fire riktige i del 1 ga den vanskelige veien og B1-B2. Oppgavene var
+  bare lytting. Lesing ga fortsatt bare leseoppgaver. Eleven kunne
+  ikke endre nivågruppen. Lesing og lytting kunne pågå samtidig. En
+  vanlig lytteøkt ble ikke den adaptive prøven. I nettleseren viste
+  Start lytting del 1 med seks oppgaver, lydfilen og riktig svar.
+  Nivågruppen ble B1-B2. Fasen er ikke ferdig.
 - Beslutning: adaptiv prøve finnes også i lytting. Samme terskler.
   Leseoppgaver og lytteoppgaver blandes ikke.
 - Adaptiv leseprøve verifisert. Uten rettigheten ble brukeren avvist.
