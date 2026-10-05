@@ -495,6 +495,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Lærerkommentar verifisert. En elev kunne ikke lagre kommentaren.
+  Listen viste «Mangler kommentar». Læreren satte nivå A2 og skrev
+  til eleven. Eleven leste nivå og tekst under «Fra læreren».
+  KI-nivået ble liggende. Ny tekst oppdaterte samme rad. Fasen er
+  ikke ferdig.
 - Beslutning: læreren kommenterer nivået på opptaket. Eleven leser
   kommentaren på sin vurdering.
 - Lærer verifisert. En elev så ikke innleveringene og kunne ikke
