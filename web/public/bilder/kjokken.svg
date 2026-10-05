@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img">
-  <title>En person sitter på en stol ved et bord. Det står en kopp på bordet. Det er et vindu bak personen.</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img">
+  <title>En person sitter pÃ¥ en stol ved et bord. Det stÃ¥r en kopp pÃ¥ bordet. Det er et vindu bak personen.</title>
   <rect width="640" height="400" fill="#f6f1e7"/>
   <rect x="390" y="36" width="180" height="120" fill="#d7ebf7" stroke="#243247" stroke-width="6"/>
   <line x1="480" y1="36" x2="480" y2="156" stroke="#243247" stroke-width="6"/>
