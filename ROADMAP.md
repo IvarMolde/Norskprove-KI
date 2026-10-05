@@ -476,6 +476,12 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Muntlig økt verifisert. En bruker uten rettigheten ble avvist.
+  Komplett fikk vurdering, nivå A1. Teksten ble liggende. Opptaket
+  ble lagret, og adressen ble ikke vist. `usikker_pga_lyd` var sant.
+  Samme oppgave kom ikke igjen. En adresse på 31 dager ble
+  nullstilt, og filen ble slettet. En ny fil ble liggende. Fasen er
+  ikke ferdig. Adaptiv prøve er ikke startet.
 - Beslutning: brukeren ba om å fortsette. Fase 7 er ikke ferdig.
   Første del av fase 8 er én muntlig økt. Adaptiv prøve venter.
 - Beslutning: resten av fase 7 venter på domene, Vercel, signerte
