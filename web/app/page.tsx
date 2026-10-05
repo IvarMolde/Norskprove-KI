@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LarerLenke } from "@/app/larer/lenke";
 import { erRedaktor } from "@/lib/rolle";
 import { createClient } from "@/lib/supabase/server";
 
@@ -50,6 +51,7 @@ export default async function Home({
         <p>
           <Link href="/mine-data">Mine data</Link>
         </p>
+        <LarerLenke />
         {redaktor ? (
           <p>
             <Link href="/rediger">Rediger oppgaver</Link>
@@ -104,6 +106,7 @@ export default async function Home({
       <p>
         <Link href="/mine-data">Mine data</Link>
       </p>
+      <LarerLenke />
       {redaktor ? (
         <p>
           <Link href="/rediger">Rediger oppgaver</Link>

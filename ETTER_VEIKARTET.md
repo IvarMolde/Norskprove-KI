@@ -134,7 +134,8 @@ Fase 6 er ferdig uten ekte trekk. Stripe og SMS er utsatt med vilje.
 ### Etter v1
 
 - [ ] Institusjonsvisning for voksenopplæringssentre. v1 skal ikke
-      vise enkeltelevers fremgang til en skole.
+      vise enkeltelevers fremgang til en skole. Å høre ett muntlig
+      opptak er ikke denne visningen. Det ligger i fase 8.
 - [ ] Egen gjennomgang mot WCAG 2.1 AA før salg til slike sentre.
       Kravet underveis er tastatur, alt-tekst, transkripsjon og
       tekst på A2.

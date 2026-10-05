@@ -25,6 +25,8 @@ const TEKSTER: Record<string, string> = {
   mangler_muntlig: "Du kan ikke øve på muntlig.",
   mangler_lyd: "Ta opp svaret ditt først.",
   transkripsjon_mangler: "Skriv teksten du sa.",
+  ikke_larer: "Du kan ikke høre elevsvar.",
+  innlevering_mangler: "Vi fant ikke innleveringen.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

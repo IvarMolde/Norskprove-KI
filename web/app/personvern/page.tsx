@@ -37,6 +37,10 @@ export default function Personvern() {
       <h2 className="text-xl font-semibold">Hvor lenge</h2>
       <p>Skriftlige svar blir liggende så lenge kontoen er aktiv.</p>
       <p>Lyd slettes etter 30 dager.</p>
+      <p>
+        En lærer kan høre muntlige opptak. Nye opptak merkes til en lærer
+        har åpnet dem.
+      </p>
       <h2 className="text-xl font-semibold">Alder</h2>
       <p>
         Du må være 18 år. Når du registrerer deg, sier du det selv. Vi

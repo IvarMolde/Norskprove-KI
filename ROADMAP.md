@@ -297,6 +297,18 @@ Nettleseren skriver teksten eleven sa. Eleven kan rette den.
 NB Whisper er ikke koblet på. Den lokale modellen kan ikke høre lyd,
 så lydfilen sendes ikke med i kallet. `usikker_pga_lyd` lagres som
 sant. Fasen er ikke ferdig. Adaptiv prøve er ikke startet.
+
+Beslutning 2026-10-05: en lærer skal kunne høre det eleven sendte inn.
+`brukerprofil.rolle` kan også være `larer`. Eleven kan ikke sette rollen
+selv. Rollen settes i databasen, som for redaktør.
+
+Når svaret har en fil i `muntlig-opptak`, er innleveringen ny til en
+lærer åpner den. `bruker_svar.larer_sett` er da tom. Listen viser «Ny».
+Eleven kan ikke fjerne merket eller lydadressen. Læreren får e-post,
+oppgavetittel, tid og avspilling. Lydadressen sendes ikke til
+nettleseren. Dette er ikke en skolevisning av all fremgang. Adaptiv
+prøve er ikke startet. Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -476,6 +488,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: en lærer kan høre muntlige opptak. Nye innleveringer
+  merkes til en lærer har åpnet dem. Rollen settes i databasen.
 - Muntlig økt verifisert. En bruker uten rettigheten ble avvist.
   Komplett fikk vurdering, nivå A1. Teksten ble liggende. Opptaket
   ble lagret, og adressen ble ikke vist. `usikker_pga_lyd` var sant.

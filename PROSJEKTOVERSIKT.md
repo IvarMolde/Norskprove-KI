@@ -112,8 +112,9 @@ betalende, også under full eksamenssimulering.
 EU/EØS-datalagring (Supabase-prosjektet kjører i Irland). Lydopptak
 slettes automatisk etter 30 dager. Skriftlige besvarelser/øvingsdata
 beholdes så lenge kontoen er aktiv. Ingen analytics eller
-samtykkebanner – kun nødvendige cookies. Ingen institusjonsvisning av
-enkeltelevers fremgang i v1. Rettslig grunnlag er avtale (ikke samtykke)
+samtykkebanner – kun nødvendige cookies. En lærer kan høre muntlige
+opptak. Nye opptak merkes til læreren har åpnet dem. En skole ser ikke
+elevenes øvrige fremgang i v1. Rettslig grunnlag er avtale (ikke samtykke)
 for kjernefunksjonalitet. Personvernerklæring og databehandleravtaler med
 alle underleverandører (Supabase, Google, Vercel, Stripe, Vipps) er
 obligatorisk og under arbeid. Utkastet i appen er ikke signert.
