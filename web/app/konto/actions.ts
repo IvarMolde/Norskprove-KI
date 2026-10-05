@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { erOmdirigering } from "@/lib/okt/omdirigering";
+import { slettOpptakForBruker } from "@/lib/personvern/slett-lyd";
 import { createClient } from "@/lib/supabase/server";
 
 const bekreftSkjema = z.object({
@@ -30,6 +31,8 @@ export async function slettKonto(
     if (!user) {
       return { feil: oktFeilTekst("ikke_innlogget") };
     }
+
+    await slettOpptakForBruker(user.id);
 
     const slettet = await supabase.rpc("slett_egen_konto");
     if (slettet.error) {

@@ -10,35 +10,46 @@ insert into storage.buckets (id, name, public)
 values ('muntlig-opptak', 'muntlig-opptak', false)
 on conflict (id) do nothing;
 
-create or replace function public.slett_gammel_lyd()
-returns int
+drop function if exists public.slett_gammel_lyd();
+
+create function public.slett_gammel_lyd()
+returns text[]
 language plpgsql
 security definer
 set search_path = public
 as $$
 declare
-  v_antall int;
+  v_adresser text[];
 begin
   if coalesce(auth.role(), '') <> 'service_role' then
     raise exception 'ikke_innlogget' using errcode = 'P0001';
   end if;
 
-  delete from storage.objects o
-  using public.bruker_svar s
-  where s.svar_lyd_url like 'muntlig-opptak/%'
-    and s.innsendt_dato < now() - interval '30 days'
-    and o.bucket_id = 'muntlig-opptak'
-    and o.name = substring(s.svar_lyd_url from '^muntlig-opptak/(.+)$');
+  with merkede as (
+    select id, svar_lyd_url
+    from public.bruker_svar
+    where svar_lyd_url is not null
+      and innsendt_dato < now() - interval '30 days'
+  ),
+  oppdatert as (
+    update public.bruker_svar b
+    set svar_lyd_url = null
+    from merkede m
+    where b.id = m.id
+    returning m.svar_lyd_url
+  )
+  select coalesce(array_agg(svar_lyd_url), '{}')
+    into v_adresser
+  from oppdatert;
 
-  update public.bruker_svar
-  set svar_lyd_url = null
-  where svar_lyd_url is not null
-    and innsendt_dato < now() - interval '30 days';
-
-  get diagnostics v_antall = row_count;
-  return v_antall;
+  return v_adresser;
 end;
 $$;
+
+revoke all on function public.slett_gammel_lyd() from public;
+revoke all on function public.slett_gammel_lyd() from anon;
+revoke all on function public.slett_gammel_lyd() from authenticated;
+grant execute on function public.slett_gammel_lyd() to service_role;
 
 create or replace function public.slett_egen_konto()
 returns text
@@ -54,10 +65,6 @@ begin
   end if;
 
   begin
-    delete from storage.objects
-    where bucket_id = 'muntlig-opptak'
-      and name like v_uid::text || '/%';
-
     delete from public.bruker_svar where bruker_id = v_uid;
     delete from public.bruker_oppgave_historikk where bruker_id = v_uid;
     delete from public.okt_tilstand where bruker_id = v_uid;
