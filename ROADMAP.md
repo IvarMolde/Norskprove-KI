@@ -520,6 +520,12 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Muntlig bildeoppgave verifisert. Uten rettigheten ble brukeren avvist.
+  Etter fortelleoppgaven fikk eleven «Beskriv bildet» med bildet og
+  alt-teksten. Læreren så det samme bildet. Fortelleoppgaven har ikke
+  bilde. En oppgave uten godkjent bilde ble ikke delt ut. Eleven kunne
+  ikke endre bildet. I nettleseren viste Start økt bildet, personen,
+  bordet, koppen og vinduet. Fasen er ikke ferdig.
 - Beslutning: muntlig fase 1 har også én bildeoppgave. Eleven ser
   bildet og forteller. En oppgave uten godkjent bilde blir ikke delt
   ut. Fasen er ikke ferdig.
