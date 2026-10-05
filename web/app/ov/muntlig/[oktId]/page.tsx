@@ -107,7 +107,7 @@ export default async function MuntligOktPage({
                   <audio
                     aria-label={`Opptak for ${del.tittel}`}
                     controls
-                    preload="none"
+                    preload="metadata"
                     src={`/ov/muntlig/lyd/${oktId}/${del.id}`}
                   >
                     Nettleseren kan ikke spille av lyden.
