@@ -55,6 +55,15 @@ export default async function MuntligOktPage({
           ))}
         </ol>
         <p>Bra: {vurdering.positivt_element}</p>
+        <h2 className="text-xl font-semibold">Fra læreren</h2>
+        {oppgave.larer ? (
+          <>
+            <p>Nivå: {oppgave.larer.niva}</p>
+            <p className="whitespace-pre-wrap">{oppgave.larer.kommentar}</p>
+          </>
+        ) : (
+          <p>Læreren har ikke skrevet noe ennå.</p>
+        )}
         <h2 className="text-xl font-semibold">Teksten du sa</h2>
         <p className="whitespace-pre-wrap">{oppgave.svar}</p>
         {oppgave.har_lyd ? <p>Opptaket er lagret.</p> : null}

@@ -309,6 +309,13 @@ oppgavetittel, tid og avspilling. Lydadressen sendes ikke til
 nettleseren. Dette er ikke en skolevisning av all fremgang. Adaptiv
 prøve er ikke startet. Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: læreren skriver en kommentar til eleven om
+nivået på opptaket. Nivået er `Under A1`, `A1`, `A2`, `B1` eller `B2`.
+Kommentaren er tekst. Den lagres i `larer_kommentar`, ikke i
+KI-vurderingen. Bare en lærer kan skrive den. Eleven leser den på
+sin vurdering. Listen viser «Mangler kommentar» til den er sendt.
+Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -488,6 +495,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: læreren kommenterer nivået på opptaket. Eleven leser
+  kommentaren på sin vurdering.
 - Lærer verifisert. En elev så ikke innleveringene og kunne ikke
   fjerne merket. Læreren så «Ny» og fikk spilt av lydfilen.
   Adressen ble ikke vist. Merket var borte etter åpning. Fasen er

@@ -27,6 +27,8 @@ const TEKSTER: Record<string, string> = {
   transkripsjon_mangler: "Skriv teksten du sa.",
   ikke_larer: "Du kan ikke høre elevsvar.",
   innlevering_mangler: "Vi fant ikke innleveringen.",
+  ugyldig_larerniva: "Velg et nivå.",
+  kommentar_mangler: "Skriv en kommentar til eleven.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

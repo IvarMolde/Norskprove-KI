@@ -43,6 +43,7 @@ export default async function LarerPage() {
   }
 
   const nye = liste.data.filter((rad) => rad.ny).length;
+  const uten = liste.data.filter((rad) => !rad.har_kommentar).length;
 
   return (
     <Ramme>
@@ -50,18 +51,28 @@ export default async function LarerPage() {
       {liste.data.length === 0 ? (
         <p>Ingen muntlige innleveringer ennå.</p>
       ) : (
-        <p>
-          {nye === 0
-            ? "Ingen nye innleveringer."
-            : nye === 1
-              ? "1 ny innlevering."
-              : `${nye} nye innleveringer.`}
-        </p>
+        <>
+          <p>
+            {nye === 0
+              ? "Ingen nye innleveringer."
+              : nye === 1
+                ? "1 ny innlevering."
+                : `${nye} nye innleveringer.`}
+          </p>
+          <p>
+            {uten === 0
+              ? "Alle har en kommentar."
+              : uten === 1
+                ? "1 mangler kommentar."
+                : `${uten} mangler kommentar.`}
+          </p>
+        </>
       )}
       <ul className="flex flex-col gap-4">
         {liste.data.map((rad) => (
           <li key={rad.id}>
             {rad.ny ? <strong>Ny. </strong> : null}
+            {rad.har_kommentar ? null : <strong>Mangler kommentar. </strong>}
             {rad.epost}. {rad.tittel}. {datoTekst(rad.innsendt)}.{" "}
             <Link className="underline" href={`/larer/${rad.id}`}>
               Hør

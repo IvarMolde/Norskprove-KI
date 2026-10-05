@@ -8,11 +8,18 @@ const radSchema = z.object({
   tittel: z.string().min(1),
   innsendt: z.string().min(1),
   ny: z.boolean(),
+  har_kommentar: z.boolean(),
+});
+
+const larerKommentarSchema = z.object({
+  niva: z.enum(["Under A1", "A1", "A2", "B1", "B2"]),
+  kommentar: z.string().min(1),
 });
 
 const detaljSchema = radSchema.extend({
   oppgavetekst: z.string().min(1),
   svar: z.string().nullable(),
+  larer: larerKommentarSchema.nullable(),
 });
 
 export type InnleveringRad = z.infer<typeof radSchema>;
@@ -46,6 +53,22 @@ export function nyTekst(antall: number): string {
     return `Ny: ${antall} muntlige innleveringer`;
   }
   return "Muntlige innleveringer";
+}
+
+export async function antallUtenKommentar(): Promise<number> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("antall_uten_larerkommentar");
+    if (error) {
+      console.error("antallUtenKommentar", error.code);
+      return 0;
+    }
+    const antall = z.number().int().nonnegative().safeParse(data);
+    return antall.success ? antall.data : 0;
+  } catch (error) {
+    console.error("antallUtenKommentar", error);
+    return 0;
+  }
 }
 
 export async function antallNyeMuntlige(): Promise<number> {

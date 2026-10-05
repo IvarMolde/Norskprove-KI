@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { antallNyeMuntlige, nyTekst } from "@/lib/larer";
+import { antallNyeMuntlige, antallUtenKommentar, nyTekst } from "@/lib/larer";
 import { erLarer } from "@/lib/rolle";
 
 export async function LarerLenke() {
@@ -9,10 +9,19 @@ export async function LarerLenke() {
   }
 
   const antall = await antallNyeMuntlige();
+  const uten = await antallUtenKommentar();
+  const tekst =
+    antall > 0
+      ? nyTekst(antall)
+      : uten === 1
+        ? "Mangler kommentar: 1"
+        : uten > 1
+          ? `Mangler kommentar: ${uten}`
+          : "Muntlige innleveringer";
 
   return (
     <p>
-      <Link href="/larer">{nyTekst(antall)}</Link>
+      <Link href="/larer">{tekst}</Link>
     </p>
   );
 }

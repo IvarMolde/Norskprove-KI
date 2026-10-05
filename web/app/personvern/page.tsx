@@ -39,7 +39,8 @@ export default function Personvern() {
       <p>Lyd slettes etter 30 dager.</p>
       <p>
         En lærer kan høre muntlige opptak. Nye opptak merkes til en lærer
-        har åpnet dem.
+        har åpnet dem. Læreren kan skrive en kommentar om nivået. Eleven
+        kan lese den.
       </p>
       <h2 className="text-xl font-semibold">Alder</h2>
       <p>

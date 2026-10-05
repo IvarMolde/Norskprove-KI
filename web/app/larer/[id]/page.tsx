@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { datoTekst, hentInnlevering, markerHort } from "@/lib/larer";
 import { Ramme } from "../../ov/lesing/ramme";
+import { KommentarSkjema } from "../kommentar-skjema";
 
 export default async function InnleveringPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ sendt?: string }>;
 }) {
   const { id } = await params;
+  const { sendt } = await searchParams;
   const resultat = await hentInnlevering(id);
 
   if (!resultat.ok) {
@@ -40,6 +44,12 @@ export default async function InnleveringPage({
       </audio>
       <h2 className="text-xl font-semibold">Teksten eleven sa</h2>
       <p className="whitespace-pre-wrap">{rad.svar}</p>
+      {sendt === "1" ? <p>Kommentaren er sendt.</p> : null}
+      <KommentarSkjema
+        kommentar={rad.larer?.kommentar ?? null}
+        niva={rad.larer?.niva ?? null}
+        svarId={rad.id}
+      />
       <Link className="underline" href="/larer">
         Tilbake
       </Link>

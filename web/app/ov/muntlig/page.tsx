@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { hentAktivMuntligOktId } from "@/lib/okt/muntlig";
+import { hentAktivMuntligOktId, hentSisteFullfortMuntligOktId } from "@/lib/okt/muntlig";
 import { harRettighet, hentOktGrense, oktGrenseTekst } from "@/lib/rettigheter";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { createClient } from "@/lib/supabase/server";
@@ -35,6 +35,7 @@ export default async function MuntligPage() {
   }
 
   const aktiv = await hentAktivMuntligOktId();
+  const ferdig = await hentSisteFullfortMuntligOktId();
   const grense = await hentOktGrense();
 
   return (
@@ -50,6 +51,11 @@ export default async function MuntligPage() {
       ) : (
         <StartKnapp />
       )}
+      {ferdig && ferdig !== aktiv ? (
+        <Link className="underline" href={`/ov/muntlig/${ferdig}`}>
+          Se vurderingen
+        </Link>
+      ) : null}
     </Ramme>
   );
 }

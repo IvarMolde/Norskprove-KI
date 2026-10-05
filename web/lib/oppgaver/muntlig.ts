@@ -48,6 +48,12 @@ export const muntligOktSchema = z.object({
     nivagruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
     svar: z.string().nullable(),
     har_lyd: z.boolean(),
+    larer: z
+      .object({
+        niva: nivaSchema,
+        kommentar: z.string().min(1),
+      })
+      .nullable(),
     vurdering: elevVurderingSchema.nullable(),
   }),
 });
