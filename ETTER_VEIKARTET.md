@@ -26,7 +26,9 @@ Fase 1 til 6 er ferdige mot lokal Supabase.
   `/mine-data`.
 
 Fase 7 er aktiv og ikke ferdig. Det offentlige domenet finnes ikke.
-Fase 8 er ikke startet.
+Fase 8 er ikke startet. Beslutning 2026-10-05: den aktive fasen
+flyttes ikke, selv om resten av fase 7 venter på domene, Vercel,
+signerte avtaler og Vipps.
 
 Avkrysningene i `PROSJEKTOVERSIKT.md` er grovere enn veikartet. Noen
 står åpne selv om en del av arbeidet er gjort. Bruk veikartet for

@@ -260,6 +260,12 @@ Skriftlig tekst blir liggende. Bare serveren kan kalle funksjonen.
 Det finnes ingen brukeropptak å slette ennå. Muntlig økt er fortsatt
 fase 8. Fasen ut til brukere er ikke ferdig.
 
+Beslutning 2026-10-05: resten av fase 7 ligger utenfor denne koden.
+Offentlig domene og Vercel-prosjekt er ikke satt opp. Avtalene signeres
+ikke uten navn, organisasjonsnummer, adresse og e-post. Vipps kobles
+ikke på. Prompten for skriftlig vurdering endres ikke. Fase 8 startes
+ikke mens denne fasen er aktiv.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
@@ -444,6 +450,11 @@ Vurderingen lagres i `skriftlig_vurdering` med formen fra
 ## Logg
 
 Nyeste øverst.
+
+### 2026-10-05
+
+- Beslutning: resten av fase 7 venter på domene, Vercel, signerte
+  avtaler og Vipps. Fase 8 er ikke startet.
 
 ### 2026-10-04
 
