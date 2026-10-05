@@ -11,7 +11,9 @@ function somFeil(message: string | undefined): OktResultat<never> {
   return { ok: false, feil: oktFeilTekst(message) };
 }
 
-export async function hentAktivSkriveoktId(): Promise<string | null> {
+async function hentSkriveoktId(
+  status: "pagaende" | "avbrutt_lagret",
+): Promise<string | null> {
   try {
     const supabase = await createClient();
     const {
@@ -27,14 +29,14 @@ export async function hentAktivSkriveoktId(): Promise<string | null> {
       .select("id")
       .eq("bruker_id", user.id)
       .eq("ferdighet", "skriving")
-      .eq("status", "pagaende")
+      .eq("status", status)
       .order("startet", { ascending: false })
       .limit(1)
       .maybeSingle();
 
     if (error || !data) {
       if (error) {
-        console.error("hentAktivSkriveoktId", error.code);
+        console.error("hentSkriveoktId", error.code);
       }
       return null;
     }
@@ -42,9 +44,17 @@ export async function hentAktivSkriveoktId(): Promise<string | null> {
     const id = z.string().uuid().safeParse(data.id);
     return id.success ? id.data : null;
   } catch (error) {
-    console.error("hentAktivSkriveoktId", error);
+    console.error("hentSkriveoktId", error);
     return null;
   }
+}
+
+export function hentAktivSkriveoktId(): Promise<string | null> {
+  return hentSkriveoktId("pagaende");
+}
+
+export function hentPausetSkriveoktId(): Promise<string | null> {
+  return hentSkriveoktId("avbrutt_lagret");
 }
 
 export async function hentSkriveokt(

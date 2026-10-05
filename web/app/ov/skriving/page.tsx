@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { hentAktivSkriveoktId } from "@/lib/okt/skriving";
+import { hentAktivSkriveoktId, hentPausetSkriveoktId } from "@/lib/okt/skriving";
 import { harRettighet, hentOktGrense, oktGrenseTekst } from "@/lib/rettigheter";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { createClient } from "@/lib/supabase/server";
 import { Ramme } from "../lesing/ramme";
+import { GjenopptaKnapp } from "./pause-knapp";
 import { StartKnapp } from "./start-knapp";
 
 export default async function SkrivingPage() {
@@ -35,6 +36,8 @@ export default async function SkrivingPage() {
   }
 
   const aktiv = await hentAktivSkriveoktId();
+  const pauset = aktiv ? null : await hentPausetSkriveoktId();
+  const kanPause = await harRettighet("pause_gjenoppta");
   const grense = await hentOktGrense();
 
   return (
@@ -45,6 +48,12 @@ export default async function SkrivingPage() {
         <Link className="underline" href={`/ov/skriving/${aktiv}`}>
           Fortsett økten
         </Link>
+      ) : pauset ? (
+        <>
+          <p>Økten er pauset.</p>
+          <p>Oppgavene er de samme når du fortsetter.</p>
+          {kanPause ? <GjenopptaKnapp oktId={pauset} /> : null}
+        </>
       ) : grense && !grense.kanStarte ? (
         <p>{oktGrenseTekst()}</p>
       ) : (

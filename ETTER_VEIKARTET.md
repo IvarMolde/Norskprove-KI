@@ -64,6 +64,7 @@ Fase 8, muntlig og adaptiv prøve:
   Eleven ser formidling per oppgave og språk for hele økten.
   Adaptiv prøve finnes i lesing og lytting.
   Komplett kan pause en muntlig fase-1-økt og en adaptiv prøve.
+  Betalende kan også pause vanlig lytting og skriving.
   Fasen er ikke ferdig. Muntlig fase 2 venter.
 - Lydadressen i databasen nullstilles etter 30 dager. Filen i
   `muntlig-opptak` slettes samtidig, og når kontoen slettes.

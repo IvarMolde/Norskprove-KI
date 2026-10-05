@@ -12,7 +12,9 @@ function somFeil(message: string | undefined): OktResultat<never> {
   return { ok: false, feil: oktFeilTekst(message) };
 }
 
-export async function hentAktivLytteoktId(): Promise<string | null> {
+async function hentLytteoktId(
+  status: "pagaende" | "avbrutt_lagret",
+): Promise<string | null> {
   try {
     const supabase = await createClient();
     const {
@@ -28,13 +30,13 @@ export async function hentAktivLytteoktId(): Promise<string | null> {
       .select("id")
       .eq("bruker_id", user.id)
       .eq("ferdighet", "lytting")
-      .eq("status", "pagaende")
+      .eq("status", status)
       .order("startet", { ascending: false })
       .limit(10);
 
     if (error || !data) {
       if (error) {
-        console.error("hentAktivLytteoktId", error.code);
+        console.error("hentLytteoktId", error.code);
       }
       return null;
     }
@@ -54,16 +56,24 @@ export async function hentAktivLytteoktId(): Promise<string | null> {
       .in("okt_id", ids);
 
     if (proveFeil) {
-      console.error("hentAktivLytteoktId prove", proveFeil.code);
+      console.error("hentLytteoktId prove", proveFeil.code);
       return null;
     }
 
     const adaptive = new Set((prove ?? []).map((rad) => rad.okt_id));
     return ids.find((id) => !adaptive.has(id)) ?? null;
   } catch (error) {
-    console.error("hentAktivLytteoktId", error);
+    console.error("hentLytteoktId", error);
     return null;
   }
+}
+
+export function hentAktivLytteoktId(): Promise<string | null> {
+  return hentLytteoktId("pagaende");
+}
+
+export function hentPausetLytteoktId(): Promise<string | null> {
+  return hentLytteoktId("avbrutt_lagret");
 }
 
 export async function hentLytteokt(

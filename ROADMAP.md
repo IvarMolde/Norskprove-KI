@@ -31,8 +31,9 @@ Ikke la veikartet ligge etter koden.
 ## Status nå
 
 Aktiv fase: **8. Muntlig og adaptiv prøve**. Fase 1 til 6 er ferdige.
-Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Komplett kan
-pause en muntlig fase-1-økt og en adaptiv prøve. Fasen er ikke ferdig.
+Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Betalende kan
+pause en muntlig fase-1-økt, en adaptiv prøve, og en vanlig lytte- eller
+skriveøkt. Fasen er ikke ferdig.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -384,6 +385,13 @@ pause og gjenopptakelse. En pauset muntlig økt fortsettes, den byttes
 ikke ut. En pauset adaptiv prøve blir på samme del. Lytting og skriving
 som vanlig øving er ikke med i denne beslutningen. Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: betalende kan også pause en vanlig lytteøkt og en
+skriveøkt. Samme oppgaver kommer tilbake. Pause gjør ikke økten ferdig
+og teller ikke som brukt økt. Uten `pause_gjenoppta` avvises pause og
+gjenopptakelse. En pauset økt fortsettes, den byttes ikke ut. En pauset
+adaptiv lytteprøve er en annen økt og blir ikke en vanlig lytteøkt.
+Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -563,6 +571,9 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: vanlig lytting og skriving kan pauses. Samme oppgaver
+  kommer tilbake. En adaptiv lytteprøve er en annen økt. Fasen er ikke
+  ferdig.
 - Pause er verifisert. Muntlig økt viste Oppgave 1 av 2, Fortell om
   dagen din, uten bilde. Etter pause viste listen at økten er pauset.
   Fortsett åpnet samme oppgave. Adaptiv lesing viste Del 1, Bussen til

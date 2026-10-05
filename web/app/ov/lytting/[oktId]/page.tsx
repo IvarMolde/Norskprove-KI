@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { hentLyttePoengsum, hentLytteokt } from "@/lib/okt/lytting";
+import { harRettighet } from "@/lib/rettigheter";
 import { Ramme } from "../../lesing/ramme";
 import { FerdigKnapp } from "../ferdig-knapp";
 import { LydPastand } from "../lyd-pastand";
+import { GjenopptaKnapp, PauseKnapp } from "../pause-knapp";
 
 export default async function LytteOktPage({
   params,
@@ -28,6 +30,20 @@ export default async function LytteOktPage({
   }
 
   const okt = resultat.data;
+  const kanPause = await harRettighet("pause_gjenoppta");
+
+  if (okt.status === "avbrutt_lagret") {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Økten er pauset</h1>
+        <p>Oppgavene er de samme når du fortsetter.</p>
+        {kanPause ? <GjenopptaKnapp oktId={okt.id} /> : null}
+        <Link className="underline" href="/ov/lytting">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
 
   if (okt.status === "fullfort") {
     const poeng = await hentLyttePoengsum(okt.id);
@@ -60,6 +76,7 @@ export default async function LytteOktPage({
         <h1 className="text-2xl font-semibold">Økten er klar</h1>
         <p>Du har svart på alle oppgavene.</p>
         <FerdigKnapp oktId={okt.id} />
+        {kanPause ? <PauseKnapp oktId={okt.id} /> : null}
       </Ramme>
     );
   }
@@ -83,6 +100,7 @@ export default async function LytteOktPage({
         </Link>
       ) : null}
       {vist && !flereUbesvart ? <FerdigKnapp oktId={okt.id} /> : null}
+      {kanPause ? <PauseKnapp oktId={okt.id} /> : null}
     </Ramme>
   );
 }

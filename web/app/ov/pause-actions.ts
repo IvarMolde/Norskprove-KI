@@ -7,18 +7,25 @@ import { erOmdirigering } from "@/lib/okt/omdirigering";
 import { createClient } from "@/lib/supabase/server";
 
 const uuidSchema = z.string().uuid();
-const malSchema = z.enum(["muntlig", "adaptiv"]);
+const malSchema = z.enum(["muntlig", "adaptiv", "lytting", "skriving"]);
+type Mal = z.infer<typeof malSchema>;
 
-function liste(mal: "muntlig" | "adaptiv"): string {
-  return mal === "muntlig" ? "/ov/muntlig" : "/prove/adaptiv";
+function liste(mal: Mal): string {
+  if (mal === "muntlig") return "/ov/muntlig";
+  if (mal === "lytting") return "/ov/lytting";
+  if (mal === "skriving") return "/ov/skriving";
+  return "/prove/adaptiv";
 }
 
-function oktSti(mal: "muntlig" | "adaptiv", id: string): string {
-  return mal === "muntlig" ? `/ov/muntlig/${id}` : `/prove/adaptiv/${id}`;
+function oktSti(mal: Mal, id: string): string {
+  if (mal === "muntlig") return `/ov/muntlig/${id}`;
+  if (mal === "lytting") return `/ov/lytting/${id}`;
+  if (mal === "skriving") return `/ov/skriving/${id}`;
+  return `/prove/adaptiv/${id}`;
 }
 
 export async function pauseOkt(
-  mal: "muntlig" | "adaptiv",
+  mal: Mal,
   _forrige: { feil: string } | null,
   formData: FormData,
 ): Promise<{ feil: string } | null> {
@@ -47,7 +54,7 @@ export async function pauseOkt(
 }
 
 export async function gjenopptaOkt(
-  mal: "muntlig" | "adaptiv",
+  mal: Mal,
   _forrige: { feil: string } | null,
   formData: FormData,
 ): Promise<{ feil: string } | null> {

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { hentSkriveokt } from "@/lib/okt/skriving";
+import { harRettighet } from "@/lib/rettigheter";
 import { Ramme } from "../../lesing/ramme";
+import { GjenopptaKnapp, PauseKnapp } from "../pause-knapp";
 import { SkriveSkjema } from "../skjema";
 
 export const maxDuration = 300;
@@ -27,6 +29,20 @@ export default async function SkriveOktPage({
 
   const { oppgave, status } = resultat.data;
   const vurdering = oppgave.vurdering;
+  const kanPause = await harRettighet("pause_gjenoppta");
+
+  if (status === "avbrutt_lagret") {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Økten er pauset</h1>
+        <p>Oppgavene er de samme når du fortsetter.</p>
+        {kanPause ? <GjenopptaKnapp oktId={resultat.data.id} /> : null}
+        <Link className="underline" href="/ov/skriving">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
 
   if (status !== "pagaende" && !vurdering) {
     return (
@@ -74,6 +90,7 @@ export default async function SkriveOktPage({
         tekst={oppgave.tekst}
         tittel={oppgave.tittel}
       />
+      {kanPause ? <PauseKnapp oktId={resultat.data.id} /> : null}
     </Ramme>
   );
 }
