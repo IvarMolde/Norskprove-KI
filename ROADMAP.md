@@ -587,6 +587,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Nivågruppen er verifisert. Listen viste lesing A2-B1 og lytting
+  A1-A2. Lenkene åpnet de resultatsidene. Etter start av en ny
+  lytteprøve sto begge nivågruppene igjen, og lytting viste Fortsett
+  lytting. De ferdige prøvene ble stående fullført. Valgt nivå ble
+  ikke endret. Fasen er ikke ferdig.
 - Beslutning: nivågruppen fra siste ferdige adaptive prøve vises på
   listen, for lesing og lytting hver for seg. Fasen er ikke ferdig.
 - Tekstkladd er verifisert. Skriveøkten viste Sms til en kollega. Feltet
