@@ -30,13 +30,10 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **8. Muntlig og adaptiv prøve**. Fase 1 til 6 er ferdige.
-Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Betalende kan
-pause en muntlig fase-1-økt, en adaptiv prøve, og en vanlig lytte- eller
-skriveøkt. Teksten i skriving og muntlig lagres mens eleven skriver.
-Eleven ser nivågruppen fra siste ferdige adaptive prøve på listen.
-Etter en ferdig adaptiv prøve kan eleven se svarene sine.
-Fasen er ikke ferdig.
+Aktiv fase: **7. Ut til brukere**. Fase 1 til 6 og fase 8 er ferdige.
+Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Resten av
+fase 7 ligger utenfor denne koden: domene, Vercel, signerte avtaler og
+Vipps. Komplett kan ta en muntlig fase-1-økt og en adaptiv prøve.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -277,6 +274,12 @@ fase 7 ikke kan gjøres i denne koden. Adaptiv prøve venter.
 
 ## Fase 8. Muntlig og adaptiv prøve
 
+Ferdig 2026-10-05. Komplett kan ta en muntlig fase-1-økt og en adaptiv
+prøve etter reglene som hører til fasen. Eleven hører egne opptak.
+Nivågruppen og svarene blir stående etter prøven. Muntlig fase 2,
+justering av terskler, ekte IRT, full eksamenssimulering og full
+bildebank venter.
+
 Ferdig når Komplett-planen kan ta en muntlig fase-1-økt og en adaptiv prøve
 etter reglene i prosjektoversikten.
 
@@ -418,7 +421,12 @@ Fasen er ikke ferdig.
 Beslutning 2026-10-05: eleven kan høre sitt eget opptak på vurderingen.
 Lagringsadressen sendes ikke til nettleseren. Bare eieren kan høre det,
 og bare når svaret er vurdert. En kladd har ikke lyd. En annen bruker
-får ikke filen. Fasen er ikke ferdig.
+får ikke filen.
+
+Beslutning 2026-10-05: fase 8 er ferdig. Komplett kan ta en muntlig
+fase-1-økt og en adaptiv prøve etter reglene som hører til fasen.
+Muntlig fase 2, justering av terskler, ekte IRT, full eksamenssimulering
+og full bildebank venter. Aktiv fase er igjen 7. Den er ikke ferdig.
 
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
@@ -599,6 +607,15 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Fase 8 er ferdig. Komplett kan ta en muntlig fase-1-økt og en adaptiv
+  prøve. Eleven hørte egne opptak. Muntlig fase 2, justering av terskler,
+  ekte IRT, full eksamenssimulering og full bildebank venter. Aktiv fase
+  er igjen 7. Den er ikke ferdig.
+- Opptaket er verifisert. Vurderingen viste oppgave 1, Fortell om dagen
+  din, med formidling A1. Oppgave 2 viste Beskriv bildet, kjøkkenbildet
+  og formidling B1. Begge opptakene kunne spilles av. Språk sto én gang.
+  Lydfilen ble lastet uten lagringsadresse. En annen bruker fikk ikke
+  filen. Økten var fullført.
 - Beslutning: eleven kan høre sitt eget opptak på vurderingen.
   Lagringsadressen sendes ikke ut. Fasen er ikke ferdig.
 - Svarene er verifisert. Resultatet viste lesing og nivågruppen B1-B2.

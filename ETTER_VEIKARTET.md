@@ -25,12 +25,11 @@ Fase 1 til 6 er ferdige mot lokal Supabase.
   sletting av egen konto, usignerte databehandleravtaler, og siden
   `/mine-data`.
 
+Fase 8 er ferdig mot lokal Supabase. Komplett kan ta en muntlig
+fase-1-økt og en adaptiv prøve. Eleven hører egne opptak.
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke.
-Fase 8 er i gang. Muntlig fase 1 har to oppgaver i én økt. Adaptiv
-prøve finnes i lesing og lytting. Fasen er ikke ferdig.
-Beslutning 2026-10-05: resten av fase 7 venter på domene, Vercel,
-signerte avtaler og Vipps. Den aktive fasen er likevel 8, fordi
-brukeren ba om å fortsette.
+Aktiv fase er igjen 7. Punktene under skal ikke startes før fase 7
+er ferdig.
 
 Avkrysningene i `PROSJEKTOVERSIKT.md` er grovere enn veikartet. Noen
 står åpne selv om en del av arbeidet er gjort. Bruk veikartet for
@@ -68,7 +67,8 @@ Fase 8, muntlig og adaptiv prøve:
   Teksten i skriving og muntlig lagres mens eleven skriver.
   Nivågruppen fra siste ferdige adaptive prøve vises på listen.
   Etter en ferdig prøve kan eleven se svarene sine.
-  Fasen er ikke ferdig. Muntlig fase 2 venter.
+  Eleven hører egne opptak på vurderingen.
+  Fasen er ferdig. Muntlig fase 2 venter.
 - Lydadressen i databasen nullstilles etter 30 dager. Filen i
   `muntlig-opptak` slettes samtidig, og når kontoen slettes.
 - Adaptiv prøve med tersklene som finnes. De er startestimater.
