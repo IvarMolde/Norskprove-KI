@@ -13,7 +13,11 @@ export function OppgaveSkjema({ oppgave }: { oppgave: LarerOppgave | null }) {
   const bilde = type === "individuell_beskrive_bilde";
 
   return (
-    <form action={handling} className="flex flex-col gap-4">
+    <form
+      action={handling}
+      className="flex flex-col gap-4"
+      onReset={(event) => event.preventDefault()}
+    >
       {oppgave ? <input name="id" type="hidden" value={oppgave.id} /> : null}
       {oppgave?.bilde ? (
         <input name="bildeId" type="hidden" value={oppgave.bilde.id} />
