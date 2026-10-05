@@ -488,6 +488,10 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Lærer verifisert. En elev så ikke innleveringene og kunne ikke
+  fjerne merket. Læreren så «Ny» og fikk spilt av lydfilen.
+  Adressen ble ikke vist. Merket var borte etter åpning. Fasen er
+  ikke ferdig.
 - Beslutning: en lærer kan høre muntlige opptak. Nye innleveringer
   merkes til en lærer har åpnet dem. Rollen settes i databasen.
 - Muntlig økt verifisert. En bruker uten rettigheten ble avvist.
