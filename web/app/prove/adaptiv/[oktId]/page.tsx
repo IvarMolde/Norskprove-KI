@@ -1,8 +1,10 @@
 import Link from "next/link";
 import {
   delTekst,
+  hentAdaptivGjennomgang,
   hentAdaptivProve,
   videreAdaptivFase,
+  type AdaptivSvar,
   type AdaptivTilstand,
 } from "@/lib/adaptiv";
 import { hentLeseokt } from "@/lib/okt/lesing";
@@ -39,7 +41,13 @@ function velgOppgave<T extends Rad>(
   };
 }
 
-function Resultat({ prove }: { prove: AdaptivTilstand }) {
+function Resultat({
+  prove,
+  svar,
+}: {
+  prove: AdaptivTilstand;
+  svar: AdaptivSvar[];
+}) {
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Nivågruppen din</h1>
@@ -50,6 +58,21 @@ function Resultat({ prove }: { prove: AdaptivTilstand }) {
       ) : (
         <p role="alert">Noe gikk galt. Prøv igjen.</p>
       )}
+      {svar.length > 0 ? (
+        <section aria-label="Svarene dine" className="flex flex-col gap-4">
+          <h2 className="text-xl font-semibold">Svarene dine</h2>
+          <ul className="flex flex-col gap-4">
+            {svar.map((rad) => (
+              <li className="flex flex-col gap-1" key={rad.id}>
+                <Link className="underline" href={`/prove/adaptiv/${prove.id}?gjennomgang=${rad.id}`}>
+                  {rad.del}. Oppgave {rad.nummer}. {rad.tittel}
+                </Link>
+                <p>{rad.riktig ? "Riktig" : "Feil"}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       <Link className="underline" href="/prove/adaptiv">
         Tilbake
       </Link>
@@ -126,10 +149,30 @@ export default async function AdaptivOktSide({
     );
   }
 
+  const svarliste =
+    prove.data.status === "fullfort"
+      ? await hentAdaptivGjennomgang(oktId)
+      : { ok: true as const, data: [] as AdaptivSvar[] };
+
+  if (!svarliste.ok) {
+    return (
+      <Ramme>
+        <h1 className="text-2xl font-semibold">Adaptiv prøve</h1>
+        <p role="alert">{svarliste.feil}</p>
+        <Link className="underline" href="/prove/adaptiv">
+          Tilbake
+        </Link>
+      </Ramme>
+    );
+  }
+
   const valgt = velgOppgave(oppgaver.data.oppgaver, new Set(prove.data.oppgaver), gjennomgang);
+  const svarRad = valgt?.vist
+    ? svarliste.data.find((rad) => rad.id === valgt.visning.id)
+    : undefined;
 
   if (prove.data.status === "fullfort" && !valgt?.vist) {
-    return <Resultat prove={prove.data} />;
+    return <Resultat prove={prove.data} svar={svarliste.data} />;
   }
 
   if (!valgt) {
@@ -144,24 +187,30 @@ export default async function AdaptivOktSide({
     );
   }
 
+  const visning = svarRad
+    ? { ...valgt.visning, rekkefolge: svarRad.nummer }
+    : valgt.visning;
+  const antall = svarRad ? svarRad.antall : valgt.antall;
+
   return (
     <Ramme>
       <p>{valgt.vist ? "Svaret ditt" : delTekst(prove.data.fase)}</p>
+      {svarRad ? <p>{svarRad.del}</p> : null}
       {prove.data.ferdighet === "lytting" ? (
         <LydPastand
-          antall={valgt.antall}
+          antall={antall}
           gjennomgang={valgt.vist}
-          key={`${valgt.visning.id}:${valgt.vist ? "gjennomgang" : "svar"}`}
+          key={`${visning.id}:${valgt.vist ? "gjennomgang" : "svar"}`}
           oktId={oktId}
-          oppgave={valgt.visning as LyttePastand}
+          oppgave={visning as LyttePastand}
         />
       ) : (
         <OppgaveSkjema
-          antall={valgt.antall}
+          antall={antall}
           gjennomgang={valgt.vist}
-          key={`${valgt.visning.id}:${valgt.vist ? "gjennomgang" : "svar"}`}
+          key={`${visning.id}:${valgt.vist ? "gjennomgang" : "svar"}`}
           oktId={oktId}
-          oppgave={valgt.visning as Leseoppgave}
+          oppgave={visning as Leseoppgave}
         />
       )}
       {valgt.vist ? (

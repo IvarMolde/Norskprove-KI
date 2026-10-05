@@ -35,6 +35,7 @@ Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Betalende kan
 pause en muntlig fase-1-økt, en adaptiv prøve, og en vanlig lytte- eller
 skriveøkt. Teksten i skriving og muntlig lagres mens eleven skriver.
 Eleven ser nivågruppen fra siste ferdige adaptive prøve på listen.
+Etter en ferdig adaptiv prøve kan eleven se svarene sine.
 Fasen er ikke ferdig.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
@@ -408,6 +409,12 @@ Den siste ferdige prøven vises. En pågående prøve skjuler den ikke.
 Lenken åpner samme resultatside. Nivågruppen endrer ikke valgt nivå.
 Tersklene endres ikke. Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: etter en ferdig adaptiv prøve kan eleven se
+svarene sine. Resultatsiden viser nivågruppen og en liste over
+oppgavene. Hver oppgave er merket riktig eller feil. Lenken åpner
+det svaret. En pågående prøve endres ikke. Tersklene endres ikke.
+Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -587,6 +594,9 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: etter en ferdig adaptiv prøve kan eleven se svarene sine.
+  En pågående prøve endres ikke. Tersklene endres ikke. Fasen er ikke
+  ferdig.
 - Nivågruppen er verifisert. Listen viste lesing A2-B1 og lytting
   A1-A2. Lenkene åpnet de resultatsidene. Etter start av en ny
   lytteprøve sto begge nivågruppene igjen, og lytting viste Fortsett

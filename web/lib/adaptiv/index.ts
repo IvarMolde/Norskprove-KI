@@ -55,6 +55,49 @@ const sisteNivaSchema = z.object({
 
 export type SisteAdaptivNiva = z.infer<typeof sisteNivaSchema>;
 
+const adaptivSvarSchema = z.object({
+  id: z.string().uuid(),
+  tittel: z.string().min(1),
+  del: z.enum(["Del 1", "Del 2", "Del 3"]),
+  nummer: z.number().int().positive(),
+  antall: z.number().int().positive(),
+  riktig: z.boolean(),
+});
+
+export type AdaptivSvar = z.infer<typeof adaptivSvarSchema>;
+
+export async function hentAdaptivGjennomgang(
+  oktId: string,
+): Promise<AdaptivResultat<AdaptivSvar[]>> {
+  try {
+    const id = z.string().uuid().safeParse(oktId);
+    if (!id.success) {
+      return somFeil("okt_ikke_funnet");
+    }
+
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("adaptiv_gjennomgang", {
+      p_okt_id: id.data,
+    });
+
+    if (error) {
+      console.error("hentAdaptivGjennomgang", error.code);
+      return somFeil(error.message);
+    }
+
+    const parsed = z.array(adaptivSvarSchema).safeParse(data ?? []);
+    if (!parsed.success) {
+      console.error("hentAdaptivGjennomgang form");
+      return somFeil(undefined);
+    }
+
+    return { ok: true, data: parsed.data };
+  } catch (error) {
+    console.error("hentAdaptivGjennomgang", error);
+    return somFeil(undefined);
+  }
+}
+
 export async function hentSisteAdaptivNiva(
   ferdighet: "lesing" | "lytting",
 ): Promise<SisteAdaptivNiva | null> {
