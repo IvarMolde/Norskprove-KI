@@ -48,6 +48,44 @@ export function delTekst(fase: AdaptivTilstand["fase"]): string {
 
 const aktivStatusSchema = z.enum(["pagaende", "avbrutt_lagret"]);
 
+const sisteNivaSchema = z.object({
+  id: z.string().uuid(),
+  niva_gruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
+});
+
+export type SisteAdaptivNiva = z.infer<typeof sisteNivaSchema>;
+
+export async function hentSisteAdaptivNiva(
+  ferdighet: "lesing" | "lytting",
+): Promise<SisteAdaptivNiva | null> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("siste_adaptiv_niva", {
+      p_ferdighet: ferdighet,
+    });
+
+    if (error) {
+      console.error("hentSisteAdaptivNiva", error.code);
+      return null;
+    }
+
+    if (data === null) {
+      return null;
+    }
+
+    const parsed = sisteNivaSchema.safeParse(data);
+    if (!parsed.success) {
+      console.error("hentSisteAdaptivNiva form");
+      return null;
+    }
+
+    return parsed.data;
+  } catch (error) {
+    console.error("hentSisteAdaptivNiva", error);
+    return null;
+  }
+}
+
 export async function hentAktivAdaptiv(
   ferdighet: "lesing" | "lytting",
 ): Promise<{ id: string; status: "pagaende" | "avbrutt_lagret" } | null> {

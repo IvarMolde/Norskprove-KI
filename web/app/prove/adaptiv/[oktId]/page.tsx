@@ -43,6 +43,7 @@ function Resultat({ prove }: { prove: AdaptivTilstand }) {
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Nivågruppen din</h1>
+      <p>{prove.ferdighet === "lytting" ? "Lytting" : "Lesing"}</p>
       <p>Dette er øving. Det er ikke et offisielt resultat.</p>
       {prove.niva_gruppe ? (
         <p>Nivågruppen din er {prove.niva_gruppe}.</p>

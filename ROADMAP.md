@@ -34,6 +34,7 @@ Aktiv fase: **8. Muntlig og adaptiv prøve**. Fase 1 til 6 er ferdige.
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Betalende kan
 pause en muntlig fase-1-økt, en adaptiv prøve, og en vanlig lytte- eller
 skriveøkt. Teksten i skriving og muntlig lagres mens eleven skriver.
+Eleven ser nivågruppen fra siste ferdige adaptive prøve på listen.
 Fasen er ikke ferdig.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
@@ -401,6 +402,12 @@ ser den ikke. Tom tekst fjerner kladden. Etter pause eller ny lasting
 står teksten i feltet. Lydfilen lagres når eleven sender inn. Fasen er
 ikke ferdig.
 
+Beslutning 2026-10-05: etter en ferdig adaptiv prøve ser eleven
+nivågruppen igjen på listen. Lesing og lytting vises hver for seg.
+Den siste ferdige prøven vises. En pågående prøve skjuler den ikke.
+Lenken åpner samme resultatside. Nivågruppen endrer ikke valgt nivå.
+Tersklene endres ikke. Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -580,6 +587,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: nivågruppen fra siste ferdige adaptive prøve vises på
+  listen, for lesing og lytting hver for seg. Fasen er ikke ferdig.
 - Tekstkladd er verifisert. Skriveøkten viste Sms til en kollega. Feltet
   viste Lagret og teksten «Jeg blir sen i dag.». Ny lasting viste samme
   tekst. Etter pause viste listen at økten er pauset. Fortsett åpnet
