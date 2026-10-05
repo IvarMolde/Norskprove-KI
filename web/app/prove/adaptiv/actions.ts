@@ -6,10 +6,21 @@ import { oktFeilTekst } from "@/lib/okt/feil";
 import { erOmdirigering } from "@/lib/okt/omdirigering";
 import { createClient } from "@/lib/supabase/server";
 
-export async function startAdaptivProve(): Promise<{ feil: string } | null> {
+const ferdighetSchema = z.enum(["lesing", "lytting"]);
+
+export async function startAdaptivProve(
+  ferdighet: "lesing" | "lytting",
+): Promise<{ feil: string } | null> {
   try {
+    const valgt = ferdighetSchema.safeParse(ferdighet);
+    if (!valgt.success) {
+      return { feil: oktFeilTekst("ugyldig_ferdighet") };
+    }
+
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc("start_adaptiv_prove");
+    const { data, error } = await supabase.rpc("start_adaptiv_prove", {
+      p_ferdighet: valgt.data,
+    });
 
     if (error) {
       console.error("startAdaptivProve", error.code);

@@ -34,22 +34,34 @@ export default async function AdaptivSide() {
     );
   }
 
-  const aktiv = await hentAktivAdaptivId();
-  const grense = await hentOktGrense();
+  const [lesing, lytting, grense] = await Promise.all([
+    hentAktivAdaptivId("lesing"),
+    hentAktivAdaptivId("lytting"),
+    hentOktGrense(),
+  ]);
+  const stengt = Boolean(grense && !grense.kanStarte);
 
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Adaptiv prøve</h1>
-      <p>Dette er en leseprøve. Du får en nivågruppe etterpå.</p>
+      <p>Velg lesing eller lytting. Du får en nivågruppe etterpå.</p>
       <p>Dette er øving. Det er ikke et offisielt resultat.</p>
-      {aktiv ? (
-        <Link className="underline" href={`/prove/adaptiv/${aktiv}`}>
-          Fortsett prøven
+      {stengt && !lesing && !lytting ? <p>{oktGrenseTekst()}</p> : null}
+      <h2 className="text-xl font-semibold">Lesing</h2>
+      {lesing ? (
+        <Link className="underline" href={`/prove/adaptiv/${lesing}`}>
+          Fortsett lesing
         </Link>
-      ) : grense && !grense.kanStarte ? (
-        <p>{oktGrenseTekst()}</p>
-      ) : (
-        <StartKnapp />
+      ) : stengt ? null : (
+        <StartKnapp ferdighet="lesing" />
+      )}
+      <h2 className="text-xl font-semibold">Lytting</h2>
+      {lytting ? (
+        <Link className="underline" href={`/prove/adaptiv/${lytting}`}>
+          Fortsett lytting
+        </Link>
+      ) : stengt ? null : (
+        <StartKnapp ferdighet="lytting" />
       )}
     </Ramme>
   );

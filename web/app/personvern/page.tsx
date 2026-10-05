@@ -16,7 +16,7 @@ export default function Personvern() {
         <li>E-post og passord. Passordet ligger hos innloggingen.</li>
         <li>Profilen din: plan, om du har sagt at du er 18 år, og nivå.</li>
         <li>Svarene dine og øktene dine.</li>
-        <li>Nivågruppen fra en adaptiv prøve, når du tar den.</li>
+        <li>Nivågruppen fra en adaptiv prøve i lesing eller lytting.</li>
         <li>Vurdering av tekst, når du har den rettigheten.</li>
         <li>Bestilling av plan: hvilken plan, beløp og status.</li>
       </ul>

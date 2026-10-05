@@ -12,9 +12,12 @@ const faseSchema = z.enum([
   "ferdig",
 ]);
 
+const ferdighetSchema = z.enum(["lesing", "lytting"]);
+
 const tilstandSchema = z.object({
   id: z.string().uuid(),
   status: z.enum(["pagaende", "fullfort", "avbrutt_lagret"]),
+  ferdighet: ferdighetSchema,
   fase: faseSchema,
   niva_gruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]).nullable(),
   oppgaver: z.array(z.string().uuid()),
@@ -43,10 +46,14 @@ export function delTekst(fase: AdaptivTilstand["fase"]): string {
   return "Ferdig";
 }
 
-export async function hentAktivAdaptivId(): Promise<string | null> {
+export async function hentAktivAdaptivId(
+  ferdighet: "lesing" | "lytting",
+): Promise<string | null> {
   try {
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc("aktiv_adaptiv_prove");
+    const { data, error } = await supabase.rpc("aktiv_adaptiv_prove", {
+      p_ferdighet: ferdighet,
+    });
     if (error) {
       console.error("hentAktivAdaptivId", error.code);
       return null;

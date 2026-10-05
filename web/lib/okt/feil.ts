@@ -32,6 +32,7 @@ const TEKSTER: Record<string, string> = {
   mangler_adaptiv: "Du kan ikke ta den adaptive prøven.",
   terskel_mangler: "Vi fant ikke neste del av prøven.",
   adaptiv_pagaar: "Denne økten er en adaptiv prøve.",
+  ugyldig_ferdighet: "Velg lesing eller lytting.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

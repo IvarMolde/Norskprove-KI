@@ -59,8 +59,8 @@ Fase 8, muntlig og adaptiv prøve:
 
 - Muntlig fase 1 med `prompts/muntlig-vurdering-prompt.md` og
   `muntlig_vurdering`. Første økt er `individuell_fortelle`.
-  Bildeoppgave gjenstår. Første adaptive prøve er lesing. Lytting i
-  den adaptive prøven venter. Fasen er ikke ferdig.
+  Bildeoppgave gjenstår. Adaptiv prøve finnes i lesing og lytting.
+  Fasen er ikke ferdig.
 - Lydadressen i databasen nullstilles etter 30 dager. Filen i
   `muntlig-opptak` slettes samtidig, og når kontoen slettes.
 - Adaptiv prøve med tersklene som finnes. De er startestimater.

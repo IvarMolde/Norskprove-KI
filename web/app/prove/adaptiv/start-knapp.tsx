@@ -3,11 +3,16 @@
 import { useActionState } from "react";
 import { startAdaptivProve } from "./actions";
 
-export function StartKnapp() {
+export function StartKnapp({
+  ferdighet,
+}: {
+  ferdighet: "lesing" | "lytting";
+}) {
   const [tilstand, handling, venter] = useActionState(
-    async () => startAdaptivProve(),
+    async () => startAdaptivProve(ferdighet),
     null,
   );
+  const tekst = ferdighet === "lesing" ? "Start lesing" : "Start lytting";
 
   return (
     <form action={handling}>
@@ -16,7 +21,7 @@ export function StartKnapp() {
         disabled={venter}
         type="submit"
       >
-        {venter ? "Starter…" : "Start prøven"}
+        {venter ? "Starter…" : tekst}
       </button>
       {tilstand?.feil ? (
         <p className="mt-4" role="alert">

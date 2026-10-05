@@ -1,8 +1,53 @@
 import Link from "next/link";
-import { delTekst, videreAdaptivFase } from "@/lib/adaptiv";
+import { delTekst, videreAdaptivFase, type AdaptivTilstand } from "@/lib/adaptiv";
 import { hentLeseokt } from "@/lib/okt/lesing";
+import { hentLytteokt } from "@/lib/okt/lytting";
+import type { Leseoppgave } from "@/lib/oppgaver/lesing";
+import type { LyttePastand } from "@/lib/oppgaver/lytting";
 import { OppgaveSkjema } from "../../../ov/lesing/oppgave-skjema";
 import { Ramme } from "../../../ov/lesing/ramme";
+import { LydPastand } from "../../../ov/lytting/lyd-pastand";
+
+type Rad = { id: string; besvart: boolean; rekkefolge: number };
+
+function velgOppgave<T extends Rad>(
+  oppgaver: T[],
+  faseIder: Set<string>,
+  gjennomgang: string | undefined,
+) {
+  const vist = gjennomgang
+    ? oppgaver.find((oppgave) => oppgave.id === gjennomgang && oppgave.besvart)
+    : undefined;
+  const faseOppgaver = oppgaver.filter((oppgave) => faseIder.has(oppgave.id));
+  const neste = faseOppgaver.find((oppgave) => !oppgave.besvart);
+  const oppgave = vist ?? neste;
+  if (!oppgave) {
+    return null;
+  }
+  const nummer = faseOppgaver.findIndex((rad) => rad.id === oppgave.id);
+  return {
+    vist: Boolean(vist),
+    visning: { ...oppgave, rekkefolge: nummer >= 0 ? nummer + 1 : 1 },
+    antall: nummer >= 0 ? faseOppgaver.length : 1,
+  };
+}
+
+function Resultat({ prove }: { prove: AdaptivTilstand }) {
+  return (
+    <Ramme>
+      <h1 className="text-2xl font-semibold">Nivågruppen din</h1>
+      <p>Dette er øving. Det er ikke et offisielt resultat.</p>
+      {prove.niva_gruppe ? (
+        <p>Nivågruppen din er {prove.niva_gruppe}.</p>
+      ) : (
+        <p role="alert">Noe gikk galt. Prøv igjen.</p>
+      )}
+      <Link className="underline" href="/prove/adaptiv">
+        Tilbake
+      </Link>
+    </Ramme>
+  );
+}
 
 export default async function AdaptivOktSide({
   params,
@@ -27,12 +72,16 @@ export default async function AdaptivOktSide({
     );
   }
 
-  const lesing = await hentLeseokt(oktId);
-  if (!lesing.ok) {
+  const oppgaver =
+    prove.data.ferdighet === "lytting"
+      ? await hentLytteokt(oktId)
+      : await hentLeseokt(oktId);
+
+  if (!oppgaver.ok) {
     return (
       <Ramme>
         <h1 className="text-2xl font-semibold">Adaptiv prøve</h1>
-        <p role="alert">{lesing.feil}</p>
+        <p role="alert">{oppgaver.feil}</p>
         <Link className="underline" href="/prove/adaptiv">
           Tilbake
         </Link>
@@ -40,33 +89,13 @@ export default async function AdaptivOktSide({
     );
   }
 
-  const vist = gjennomgang
-    ? lesing.data.oppgaver.find((oppgave) => oppgave.id === gjennomgang && oppgave.besvart)
-    : undefined;
+  const valgt = velgOppgave(oppgaver.data.oppgaver, new Set(prove.data.oppgaver), gjennomgang);
 
-  if (prove.data.status === "fullfort" && !vist) {
-    return (
-      <Ramme>
-        <h1 className="text-2xl font-semibold">Nivågruppen din</h1>
-        <p>Dette er øving. Det er ikke et offisielt resultat.</p>
-        {prove.data.niva_gruppe ? (
-          <p>Nivågruppen din er {prove.data.niva_gruppe}.</p>
-        ) : (
-          <p role="alert">Noe gikk galt. Prøv igjen.</p>
-        )}
-        <Link className="underline" href="/prove/adaptiv">
-          Tilbake
-        </Link>
-      </Ramme>
-    );
+  if (prove.data.status === "fullfort" && !valgt?.vist) {
+    return <Resultat prove={prove.data} />;
   }
 
-  const faseIder = new Set(prove.data.oppgaver);
-  const faseOppgaver = lesing.data.oppgaver.filter((oppgave) => faseIder.has(oppgave.id));
-  const neste = faseOppgaver.find((oppgave) => !oppgave.besvart);
-  const oppgave = vist ?? neste;
-
-  if (!oppgave) {
+  if (!valgt) {
     return (
       <Ramme>
         <h1 className="text-2xl font-semibold">Adaptiv prøve</h1>
@@ -78,22 +107,27 @@ export default async function AdaptivOktSide({
     );
   }
 
-  const nummer = faseOppgaver.findIndex((rad) => rad.id === oppgave.id);
-  const visning =
-    nummer >= 0 ? { ...oppgave, rekkefolge: nummer + 1 } : { ...oppgave, rekkefolge: 1 };
-  const antall = nummer >= 0 ? faseOppgaver.length : 1;
-
   return (
     <Ramme>
-      <p>{vist ? "Svaret ditt" : delTekst(prove.data.fase)}</p>
-      <OppgaveSkjema
-        antall={antall}
-        gjennomgang={Boolean(vist)}
-        key={`${oppgave.id}:${vist ? "gjennomgang" : "svar"}`}
-        oktId={oktId}
-        oppgave={visning}
-      />
-      {vist ? (
+      <p>{valgt.vist ? "Svaret ditt" : delTekst(prove.data.fase)}</p>
+      {prove.data.ferdighet === "lytting" ? (
+        <LydPastand
+          antall={valgt.antall}
+          gjennomgang={valgt.vist}
+          key={`${valgt.visning.id}:${valgt.vist ? "gjennomgang" : "svar"}`}
+          oktId={oktId}
+          oppgave={valgt.visning as LyttePastand}
+        />
+      ) : (
+        <OppgaveSkjema
+          antall={valgt.antall}
+          gjennomgang={valgt.vist}
+          key={`${valgt.visning.id}:${valgt.vist ? "gjennomgang" : "svar"}`}
+          oktId={oktId}
+          oppgave={valgt.visning as Leseoppgave}
+        />
+      )}
+      {valgt.vist ? (
         <Link className="underline" href={`/prove/adaptiv/${oktId}`}>
           {prove.data.status === "fullfort" ? "Se resultatet" : "Neste oppgave"}
         </Link>

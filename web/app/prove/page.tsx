@@ -14,8 +14,8 @@ export default function ProveInfo() {
       </p>
       <p>Du kan øve på lesing, lytting, skriving og muntlig.</p>
       <p>
-        Komplett kan ta en adaptiv leseprøve. Den gir en nivågruppe til
-        øving. Den er ikke offisiell.
+        Komplett kan ta en adaptiv prøve i lesing eller lytting. Den gir
+        en nivågruppe til øving. Den er ikke offisiell.
       </p>
       <p>
         Vurdering av tekst og muntlig er ikke med i alle planer. Se{" "}

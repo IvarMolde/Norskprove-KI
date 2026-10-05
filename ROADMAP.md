@@ -322,8 +322,15 @@ Beslutning 2026-10-05: første adaptive prøve er lesing. Den følger
 `adaptiv_terskler` er startestimater. Ett riktig svar gir ett poeng.
 Del 1 har åtte oppgaver. Hver del 2 har fire. Hovedprøvene har to, én
 og én. Banken har bare publiserte A2-leseoppgaver, så alle deler bruker
-A2. Nivågruppen settes av poengene. Lytting venter. Ekte IRT venter.
+A2. Nivågruppen settes av poengene. Ekte IRT venter.
 Fasen er ikke ferdig.
+
+Beslutning 2026-10-05: adaptiv prøve finnes også i lytting. Samme
+terskler. Del 1 har seks oppgaver, fordi banken har 18 publiserte
+lytteoppgaver. Hver del 2 har fire. Hovedprøvene har to, én og én.
+Poeng på 0 til 3 gir den lette veien. Poeng på 4 eller mer gir den
+vanskelige. Lytteoppgavene blandes ikke med leseoppgavene. En vanlig
+lytteøkt holdes utenfor prøven. Banken har bare A2. Fasen er ikke ferdig.
 
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
@@ -504,6 +511,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: adaptiv prøve finnes også i lytting. Samme terskler.
+  Leseoppgaver og lytteoppgaver blandes ikke.
 - Adaptiv leseprøve verifisert. Uten rettigheten ble brukeren avvist.
   Alle riktige svar ga B1-B2. Alle feil svar ga A1-A2. Tre riktige i
   del 1 og full pott i del 2 ga A2-B1. Eleven kunne ikke endre
