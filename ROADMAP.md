@@ -547,6 +547,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Lærerens innlevering er verifisert. En økt med to opptak viste én
+  rad, «2 oppgaver». Siden viste begge oppgavene. Den andre hadde
+  kjøkkenbildet. Begge lydfilene kunne spilles. To uhørte opptak talte
+  som én ny innlevering. Kommentar skrives per oppgave. Fasen er ikke
+  ferdig.
 - Beslutning: læreren ser én innlevering per muntlig økt, med begge
   opptakene. Fasen er ikke ferdig.
 - Muntlig økt med to oppgaver er verifisert. Ny økt viste Oppgave 1 av
