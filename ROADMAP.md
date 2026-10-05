@@ -594,6 +594,13 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Svarene er verifisert. Resultatet viste lesing og nivågruppen B1-B2.
+  Svarene dine viste Del 1, oppgave 1, Bussen til jobb, som Feil. Neste
+  oppgave var Riktig. Lenken åpnet svaret. Der sto Feil og Riktig, og
+  Oppgave 1 av 8. Se resultatet førte tilbake til listen. En ny
+  lytteprøve viste Del 1, Oppgave 1 av 6, uten svarlisten. Den ferdige
+  prøven ble stående fullført. Valgt nivå ble ikke endret. Fasen er
+  ikke ferdig.
 - Beslutning: etter en ferdig adaptiv prøve kan eleven se svarene sine.
   En pågående prøve endres ikke. Tersklene endres ikke. Fasen er ikke
   ferdig.
