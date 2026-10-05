@@ -101,7 +101,19 @@ export default async function MuntligOktPage({
               )}
               <h3 className="text-lg font-semibold">Teksten du sa</h3>
               <p className="whitespace-pre-wrap">{del.svar}</p>
-              {del.har_lyd ? <p>Opptaket er lagret.</p> : null}
+              {del.har_lyd ? (
+                <figure className="flex flex-col gap-2">
+                  <figcaption>Opptaket ditt</figcaption>
+                  <audio
+                    aria-label={`Opptak for ${del.tittel}`}
+                    controls
+                    preload="none"
+                    src={`/ov/muntlig/lyd/${oktId}/${del.id}`}
+                  >
+                    Nettleseren kan ikke spille av lyden.
+                  </audio>
+                </figure>
+              ) : null}
             </section>
           );
         })}

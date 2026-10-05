@@ -415,6 +415,11 @@ oppgavene. Hver oppgave er merket riktig eller feil. Lenken åpner
 det svaret. En pågående prøve endres ikke. Tersklene endres ikke.
 Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: eleven kan høre sitt eget opptak på vurderingen.
+Lagringsadressen sendes ikke til nettleseren. Bare eieren kan høre det,
+og bare når svaret er vurdert. En kladd har ikke lyd. En annen bruker
+får ikke filen. Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -594,6 +599,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: eleven kan høre sitt eget opptak på vurderingen.
+  Lagringsadressen sendes ikke ut. Fasen er ikke ferdig.
 - Svarene er verifisert. Resultatet viste lesing og nivågruppen B1-B2.
   Svarene dine viste Del 1, oppgave 1, Bussen til jobb, som Feil. Neste
   oppgave var Riktig. Lenken åpnet svaret. Der sto Feil og Riktig, og
