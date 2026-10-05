@@ -90,7 +90,13 @@ export default async function BetalingPage({
           </Link>
         </p>
       ) : null}
-      {adaptiv ? <p>Du kan ta en adaptiv prøve.</p> : null}
+      {adaptiv ? (
+        <p>
+          <Link className="underline" href="/prove/adaptiv">
+            Ta adaptiv prøve
+          </Link>
+        </p>
+      ) : null}
       {lokal ? (
         <ul className="flex flex-col gap-6">
           {planer.data.map((plan) => (

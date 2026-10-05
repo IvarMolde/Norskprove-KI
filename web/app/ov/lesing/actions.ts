@@ -65,6 +65,28 @@ export async function lagreSvar(
     }
 
     if (besvart) {
+      const { data: prove, error: proveFeil } = await supabase
+        .from("prove_sesjon")
+        .select("id")
+        .eq("okt_id", okt.data)
+        .maybeSingle();
+
+      if (proveFeil) {
+        console.error("lagreSvar prove", proveFeil.code);
+        return { feil: oktFeilTekst(undefined) };
+      }
+
+      if (prove) {
+        const { error: videreFeil } = await supabase.rpc("videre_adaptiv_fase", {
+          p_okt_id: okt.data,
+        });
+        if (videreFeil) {
+          console.error("lagreSvar videre", videreFeil.code);
+          return { feil: oktFeilTekst(videreFeil.message) };
+        }
+        redirect(`/prove/adaptiv/${okt.data}?gjennomgang=${oppgave.data}`);
+      }
+
       redirect(`/ov/lesing/${okt.data}?gjennomgang=${oppgave.data}`);
     }
 

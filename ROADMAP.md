@@ -316,6 +316,15 @@ KI-vurderingen. Bare en lærer kan skrive den. Eleven leser den på
 sin vurdering. Listen viser «Mangler kommentar» til den er sendt.
 Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: første adaptive prøve er lesing. Den følger
+`forprove1` → `forprove2_lett` eller `forprove2_vanskelig` → én av
+`hovedprove_a1a2`, `hovedprove_a2b1`, `hovedprove_b1b2`. Tersklene i
+`adaptiv_terskler` er startestimater. Ett riktig svar gir ett poeng.
+Del 1 har åtte oppgaver. Hver del 2 har fire. Hovedprøvene har to, én
+og én. Banken har bare publiserte A2-leseoppgaver, så alle deler bruker
+A2. Nivågruppen settes av poengene. Lytting venter. Ekte IRT venter.
+Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -495,6 +504,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: første adaptive prøve er lesing. Forgreningen følger
+  tersklene. Nivågruppen settes av poengene. Lytting venter.
 - Lærerkommentar verifisert. En elev kunne ikke lagre kommentaren.
   Listen viste «Mangler kommentar». Læreren satte nivå A2 og skrev
   til eleven. Eleven leste nivå og tekst under «Fra læreren».

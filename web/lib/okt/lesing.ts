@@ -37,8 +37,7 @@ async function hentLeseoktId(
       .eq("ferdighet", "lesing")
       .eq("status", status)
       .order("startet", { ascending: false })
-      .limit(1)
-      .maybeSingle();
+      .limit(10);
 
     if (error || !data) {
       if (error) {
@@ -47,8 +46,27 @@ async function hentLeseoktId(
       return null;
     }
 
-    const id = z.string().uuid().safeParse(data.id);
-    return id.success ? id.data : null;
+    const ids = data
+      .map((rad) => z.string().uuid().safeParse(rad.id))
+      .filter((rad) => rad.success)
+      .map((rad) => rad.data);
+
+    if (ids.length === 0) {
+      return null;
+    }
+
+    const { data: prove, error: proveFeil } = await supabase
+      .from("prove_sesjon")
+      .select("okt_id")
+      .in("okt_id", ids);
+
+    if (proveFeil) {
+      console.error("hentLeseoktId prove", proveFeil.code);
+      return null;
+    }
+
+    const adaptive = new Set((prove ?? []).map((rad) => rad.okt_id));
+    return ids.find((id) => !adaptive.has(id)) ?? null;
   } catch (error) {
     console.error("hentLeseoktId", error);
     return null;
