@@ -48,6 +48,11 @@ export default async function LarerPage() {
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Muntlige innleveringer</h1>
+      <p>
+        <Link className="underline" href="/larer/oppgave">
+          Lag oppgave
+        </Link>
+      </p>
       {liste.data.length === 0 ? (
         <p>Ingen muntlige innleveringer ennå.</p>
       ) : (

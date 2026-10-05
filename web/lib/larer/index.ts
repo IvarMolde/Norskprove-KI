@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { oppgaveBildeSchema } from "@/lib/oppgaver/bilde";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { createClient } from "@/lib/supabase/server";
 
@@ -18,12 +19,7 @@ const larerKommentarSchema = z.object({
 
 const detaljSchema = radSchema.extend({
   oppgavetekst: z.string().min(1),
-  bilde: z
-    .object({
-      url: z.string().regex(/^\/bilder\/[a-z0-9-]+\.(svg|png|webp)$/),
-      beskrivelse: z.string().min(1),
-    })
-    .nullable(),
+  bilde: oppgaveBildeSchema,
   svar: z.string().nullable(),
   larer: larerKommentarSchema.nullable(),
 });

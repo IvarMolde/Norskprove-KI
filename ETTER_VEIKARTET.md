@@ -110,7 +110,8 @@ Venter:
 ### Lyd, bilde og generering
 
 - [ ] Bildebank, manuell godkjenning av opplastede bilder, og
-      kreditering når `kreditering_pakrevd` er sant.
+      kreditering når `kreditering_pakrevd` er sant. En lærer kan
+      allerede legge ett bilde på en muntlig beskrive-oppgave.
 - [ ] Opptaksstudio i nettleseren.
 - [ ] Google TTS, normalisering av lyd, og NB Whisper mot
       transkripsjonen.
