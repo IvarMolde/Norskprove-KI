@@ -529,6 +529,11 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Lærerens oppgave verifisert. Fortelle har ikke bildefelt. Beskriv
+  bilde avviste en fil som ikke er bilde, og godtok png. Oppgaven ble
+  publisert. Eleven som hadde svart på de andre muntlige oppgavene,
+  fikk oppgaven og så bildet. Kladdbilde var skjult for eleven. Elev
+  og redaktør ble avvist. Fasen er ikke ferdig.
 - Beslutning: en lærer kan lage en muntlig oppgave. Bilde legges inn
   bare når eleven skal beskrive det. Fasen er ikke ferdig.
 - Muntlig bildeoppgave verifisert. Uten rettigheten ble brukeren avvist.
