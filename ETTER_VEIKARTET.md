@@ -61,6 +61,7 @@ Fase 8, muntlig og adaptiv prøve:
 - Muntlig fase 1 med `prompts/muntlig-vurdering-prompt.md` og
   `muntlig_vurdering`. Én økt har først fortelle, så beskrive bilde.
   Læreren ser én rad per økt og hører begge opptakene.
+  Eleven ser formidling per oppgave og språk for hele økten.
   Adaptiv prøve finnes i lesing og lytting.
   Fasen er ikke ferdig. Muntlig fase 2 venter.
 - Lydadressen i databasen nullstilles etter 30 dager. Filen i

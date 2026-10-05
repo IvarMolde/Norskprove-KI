@@ -360,6 +360,14 @@ ferdig når begge svarene er lagret. Hver oppgave vurderes med
 prompten som den er. `usikker_pga_lyd` lagres som sant. Fasen er ikke
 ferdig. Muntlig fase 2 venter.
 
+Beslutning 2026-10-05: formidling vurderes for den oppgaven eleven
+svarer på. De språklige kriteriene gjelder hele økten. Promptfilen
+endres ikke. Første svar sendes alene. Neste svar tar også med det
+eleven sa før, i `{{TRANSKRIPSJON}}`. Eleven ser formidling på hver
+oppgave. Språk, samlet nivå og tilbakemelding vises én gang, fra
+siste vurdering. `usikker_pga_lyd` lagres som sant. Fasen er ikke
+ferdig.
+
 Beslutning 2026-10-05: læreren ser én innlevering per muntlig økt.
 Listen viser e-post, tid, og om økten er ny eller mangler kommentar.
 Ny betyr at minst ett opptak i økten ikke er hørt. Mangler kommentar
@@ -547,6 +555,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: formidling er per oppgave. Språk gjelder hele økten.
+  Fasen er ikke ferdig.
 - Lærerens innlevering er verifisert. En økt med to opptak viste én
   rad, «2 oppgaver». Siden viste begge oppgavene. Den andre hadde
   kjøkkenbildet. Begge lydfilene kunne spilles. To uhørte opptak talte

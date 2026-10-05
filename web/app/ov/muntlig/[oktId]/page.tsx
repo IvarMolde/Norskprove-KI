@@ -42,6 +42,16 @@ export default async function MuntligOktPage({
   }
 
   if (status === "fullfort") {
+    const siste = [...deler].reverse().find((del) => del.vurdering)?.vurdering ?? null;
+    const sprak: { navn: string; niva: string; begrunnelse: string }[] = siste
+      ? [
+          { navn: "Flyt", ...siste.sprakligekriterier.flyt },
+          { navn: "Uttale", ...siste.sprakligekriterier.uttale },
+          { navn: "Ordforråd", ...siste.sprakligekriterier.ordforrad },
+          { navn: "Grammatikk", ...siste.sprakligekriterier.grammatikk },
+        ]
+      : [];
+
     return (
       <Ramme>
         <h1 className="text-2xl font-semibold">Din vurdering</h1>
@@ -62,21 +72,12 @@ export default async function MuntligOktPage({
                   url={del.bilde.url}
                 />
               ) : null}
-              <p>Nivå: {vurdering.samlet_niva}</p>
-              {vurdering.usikker_vurdering ? <p>Vi er ikke sikre på vurderingen.</p> : null}
-              {vurdering.usikker_pga_lyd ? <p>Vi er ikke sikre på uttale og flyt.</p> : null}
-              <p>{vurdering.tilbakemelding_til_elev}</p>
-              <h3 className="text-lg font-semibold">Dette kan du øve på</h3>
-              <ol className="list-decimal pl-6">
-                {vurdering.forbedringspunkter.map((punkt, punktIndex) => (
-                  <li key={`${punktIndex}:${punkt}`}>{punkt}</li>
-                ))}
-              </ol>
-              <p>Bra: {vurdering.positivt_element}</p>
+              <p>Formidling: {vurdering.formidling.niva}</p>
+              <p>{vurdering.formidling.begrunnelse}</p>
               <h3 className="text-lg font-semibold">Fra læreren</h3>
               {del.larer ? (
                 <>
-                  <p>Nivå: {del.larer.niva}</p>
+                  <p>Læreren setter nivået til {del.larer.niva}.</p>
                   <p className="whitespace-pre-wrap">{del.larer.kommentar}</p>
                 </>
               ) : (
@@ -88,6 +89,27 @@ export default async function MuntligOktPage({
             </section>
           );
         })}
+        {siste ? (
+          <section className="flex flex-col gap-4">
+            <h2 className="text-xl font-semibold">Språk i hele økten</h2>
+            {sprak.map((kriterium) => (
+              <p key={kriterium.navn}>
+                {kriterium.navn}: {kriterium.niva}. {kriterium.begrunnelse}
+              </p>
+            ))}
+            <p>Nivå: {siste.samlet_niva}</p>
+            {siste.usikker_vurdering ? <p>Vi er ikke sikre på vurderingen.</p> : null}
+            {siste.usikker_pga_lyd ? <p>Vi er ikke sikre på uttale og flyt.</p> : null}
+            <p>{siste.tilbakemelding_til_elev}</p>
+            <h3 className="text-lg font-semibold">Dette kan du øve på</h3>
+            <ol className="list-decimal pl-6">
+              {siste.forbedringspunkter.map((punkt, punktIndex) => (
+                <li key={`${punktIndex}:${punkt}`}>{punkt}</li>
+              ))}
+            </ol>
+            <p>Bra: {siste.positivt_element}</p>
+          </section>
+        ) : null}
         <Link className="underline" href="/ov/muntlig">
           Tilbake
         </Link>

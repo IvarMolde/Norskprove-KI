@@ -44,6 +44,26 @@ export function muntligSystemprompt(): string {
 }
 
 /**
+ * Første svar sendes alene. Senere svar tar med det eleven sa før,
+ * slik at de språklige kriteriene gjelder hele økten. Formidling
+ * bruker fortsatt bare oppgaveteksten for oppgaven som vurderes.
+ */
+export function transkripsjonForOkt(
+  tidligere: { oppgavetype: string; svar: string }[],
+  detteSvaret: string,
+): string {
+  const ferdige = tidligere.filter((del) => del.svar.trim().length > 0);
+  if (ferdige.length === 0) {
+    return detteSvaret;
+  }
+
+  const linjer = ferdige.map(
+    (del, index) => `Oppgave ${index + 1} (${del.oppgavetype}):\n${del.svar.trim()}`,
+  );
+  return `${linjer.join("\n\n")}\n\nDette svaret:\n${detteSvaret}`;
+}
+
+/**
  * Bytter bare de fire variablene. Teksten eleven sa settes inn som verdi,
  * og blir ikke lest som en ny mal.
  */

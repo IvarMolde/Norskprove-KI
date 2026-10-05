@@ -9,7 +9,11 @@ import { slettGammelLyd } from "@/lib/personvern/slett-lyd";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { vurderMuntlig } from "@/lib/vurdering/muntlig";
-import { fyllMuntligPrompt, muntligSystemprompt } from "@/lib/vurdering/muntlig-prompt";
+import {
+  fyllMuntligPrompt,
+  muntligSystemprompt,
+  transkripsjonForOkt,
+} from "@/lib/vurdering/muntlig-prompt";
 
 const uuidSchema = z.string().uuid();
 const tekstSchema = z.string().trim().min(1).max(4000);
@@ -146,11 +150,17 @@ export async function sendMuntligSvar(
       return { feil: oktFeilTekst("vurdering_utilgjengelig") };
     }
 
+    const tidligere = hentet.data.deler.flatMap((del) => {
+      if (del.id === oppgave.data || !del.svar?.trim()) {
+        return [];
+      }
+      return [{ oppgavetype: del.oppgavetype, svar: del.svar }];
+    });
     const fylt = fyllMuntligPrompt(muntligSystemprompt(), {
       NIVAGRUPPE: hentet.data.oppgave.nivagruppe,
       OPPGAVETYPE: hentet.data.oppgave.oppgavetype,
       OPPGAVETEKST: hentet.data.oppgave.tekst,
-      TRANSKRIPSJON: tekst.data,
+      TRANSKRIPSJON: transkripsjonForOkt(tidligere, tekst.data),
     });
 
     const vurdering = await vurderMuntlig(fylt);

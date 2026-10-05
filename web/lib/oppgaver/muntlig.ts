@@ -27,6 +27,13 @@ export const muntligVurderingSchema = z.object({
 export type MuntligVurdering = z.infer<typeof muntligVurderingSchema>;
 
 const elevVurderingSchema = z.object({
+  formidling: kriteriumSchema,
+  sprakligekriterier: z.object({
+    flyt: kriteriumSchema,
+    uttale: kriteriumSchema,
+    ordforrad: kriteriumSchema,
+    grammatikk: kriteriumSchema,
+  }),
   samlet_niva: nivaSchema,
   forbedringspunkter: z.array(z.string().min(1)).length(2),
   positivt_element: z.string().min(1),
