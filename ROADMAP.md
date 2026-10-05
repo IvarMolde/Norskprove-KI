@@ -555,6 +555,10 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Vurderingen er verifisert. Oppgave 1 viste formidling A1, uten bilde.
+  Oppgave 2 viste formidling B1 og kjøkkenbildet. Språk, samlet nivå
+  og tilbakemelding kom én gang, fra siste vurdering. Første oppgaves
+  språknivå ble ikke vist der. Fasen er ikke ferdig.
 - Beslutning: formidling er per oppgave. Språk gjelder hele økten.
   Fasen er ikke ferdig.
 - Lærerens innlevering er verifisert. En økt med to opptak viste én
