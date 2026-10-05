@@ -78,6 +78,7 @@ export default async function LarerPage() {
           <li key={rad.id}>
             {rad.ny ? <strong>Ny. </strong> : null}
             {rad.har_kommentar ? null : <strong>Mangler kommentar. </strong>}
+            {rad.antall > 1 ? `${rad.antall} oppgaver. ` : null}
             {rad.epost}. {rad.tittel}. {datoTekst(rad.innsendt)}.{" "}
             <Link className="underline" href={`/larer/${rad.id}`}>
               Hør

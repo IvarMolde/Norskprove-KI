@@ -35,29 +35,37 @@ export default async function InnleveringPage({
 
   return (
     <Ramme>
-      <h1 className="text-2xl font-semibold">{rad.tittel}</h1>
+      <h1 className="text-2xl font-semibold">Muntlig økt</h1>
       {rad.ny ? <p><strong>Ny</strong></p> : null}
       <p>{rad.epost}</p>
       <p>{datoTekst(rad.innsendt)}</p>
-      <p>{rad.oppgavetekst}</p>
-      {rad.bilde ? (
-        <MuntligBilde
-          beskrivelse={rad.bilde.beskrivelse}
-          endelse={rad.bilde.endelse}
-          url={rad.bilde.url}
-        />
-      ) : null}
-      <audio controls preload="none" src={`/larer/lyd/${rad.id}`}>
-        Nettleseren kan ikke spille av lyden.
-      </audio>
-      <h2 className="text-xl font-semibold">Teksten eleven sa</h2>
-      <p className="whitespace-pre-wrap">{rad.svar}</p>
+      {rad.deler.length > 1 ? <p>Du hører begge opptakene.</p> : null}
       {sendt === "1" ? <p>Kommentaren er sendt.</p> : null}
-      <KommentarSkjema
-        kommentar={rad.larer?.kommentar ?? null}
-        niva={rad.larer?.niva ?? null}
-        svarId={rad.id}
-      />
+      {rad.deler.map((del, index) => (
+        <section className="flex flex-col gap-4" key={del.id}>
+          <h2 className="text-xl font-semibold">
+            Oppgave {index + 1}: {del.tittel}
+          </h2>
+          <p>{del.oppgavetekst}</p>
+          {del.bilde ? (
+            <MuntligBilde
+              beskrivelse={del.bilde.beskrivelse}
+              endelse={del.bilde.endelse}
+              url={del.bilde.url}
+            />
+          ) : null}
+          <audio aria-label={`Opptak for ${del.tittel}`} controls preload="none" src={`/larer/lyd/${del.id}`}>
+            Nettleseren kan ikke spille av lyden.
+          </audio>
+          <h3 className="text-lg font-semibold">Teksten eleven sa</h3>
+          <p className="whitespace-pre-wrap">{del.svar}</p>
+          <KommentarSkjema
+            kommentar={del.larer?.kommentar ?? null}
+            niva={del.larer?.niva ?? null}
+            svarId={del.id}
+          />
+        </section>
+      ))}
       <Link className="underline" href="/larer">
         Tilbake
       </Link>

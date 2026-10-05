@@ -16,8 +16,16 @@ export function KommentarSkjema({
 }) {
   const [tilstand, handling, venter] = useActionState(sendLarerKommentar, null);
 
+  const feltId = `kommentar-${svarId}`;
+
   return (
-    <form action={handling} className="flex flex-col gap-4">
+    <form
+      action={handling}
+      className="flex flex-col gap-4"
+      onReset={(hendelse) => {
+        hendelse.preventDefault();
+      }}
+    >
       <h2 className="text-xl font-semibold">Kommentar til eleven</h2>
       <input name="svarId" type="hidden" value={svarId} />
       <fieldset className="flex flex-col gap-2">
@@ -36,13 +44,13 @@ export function KommentarSkjema({
           </label>
         ))}
       </fieldset>
-      <label className="flex flex-col gap-2" htmlFor="kommentar">
+      <label className="flex flex-col gap-2" htmlFor={feltId}>
         Skriv til eleven
         <textarea
           className="min-h-32 w-full rounded border border-current p-3"
           defaultValue={kommentar ?? ""}
           disabled={venter}
-          id="kommentar"
+          id={feltId}
           maxLength={1000}
           name="kommentar"
           required

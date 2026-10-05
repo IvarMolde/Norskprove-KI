@@ -7,6 +7,7 @@ const radSchema = z.object({
   id: z.string().uuid(),
   epost: z.string().email(),
   tittel: z.string().min(1),
+  antall: z.number().int().positive(),
   innsendt: z.string().min(1),
   ny: z.boolean(),
   har_kommentar: z.boolean(),
@@ -17,11 +18,19 @@ const larerKommentarSchema = z.object({
   kommentar: z.string().min(1),
 });
 
-const detaljSchema = radSchema.extend({
+const delSchema = z.object({
+  id: z.string().uuid(),
+  tittel: z.string().min(1),
   oppgavetekst: z.string().min(1),
   bilde: oppgaveBildeSchema,
   svar: z.string().nullable(),
+  ny: z.boolean(),
+  har_kommentar: z.boolean(),
   larer: larerKommentarSchema.nullable(),
+});
+
+const detaljSchema = radSchema.omit({ antall: true }).extend({
+  deler: z.array(delSchema).min(1),
 });
 
 export type InnleveringRad = z.infer<typeof radSchema>;

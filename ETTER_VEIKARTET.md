@@ -26,7 +26,8 @@ Fase 1 til 6 er ferdige mot lokal Supabase.
   `/mine-data`.
 
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke.
-Fase 8 er startet med én muntlig økt. Adaptiv prøve er ikke startet.
+Fase 8 er i gang. Muntlig fase 1 har to oppgaver i én økt. Adaptiv
+prøve finnes i lesing og lytting. Fasen er ikke ferdig.
 Beslutning 2026-10-05: resten av fase 7 venter på domene, Vercel,
 signerte avtaler og Vipps. Den aktive fasen er likevel 8, fordi
 brukeren ba om å fortsette.
@@ -59,6 +60,7 @@ Fase 8, muntlig og adaptiv prøve:
 
 - Muntlig fase 1 med `prompts/muntlig-vurdering-prompt.md` og
   `muntlig_vurdering`. Én økt har først fortelle, så beskrive bilde.
+  Læreren ser én rad per økt og hører begge opptakene.
   Adaptiv prøve finnes i lesing og lytting.
   Fasen er ikke ferdig. Muntlig fase 2 venter.
 - Lydadressen i databasen nullstilles etter 30 dager. Filen i

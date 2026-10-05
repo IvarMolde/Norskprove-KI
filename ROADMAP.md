@@ -360,6 +360,14 @@ ferdig når begge svarene er lagret. Hver oppgave vurderes med
 prompten som den er. `usikker_pga_lyd` lagres som sant. Fasen er ikke
 ferdig. Muntlig fase 2 venter.
 
+Beslutning 2026-10-05: læreren ser én innlevering per muntlig økt.
+Listen viser e-post, tid, og om økten er ny eller mangler kommentar.
+Ny betyr at minst ett opptak i økten ikke er hørt. Mangler kommentar
+betyr at minst ett opptak mangler kommentar. Siden viser oppgavene i
+rekkefølge, med bilde når det finnes, lyd og tekst. Læreren skriver
+én kommentar per oppgave. Åpning merker alle opptakene i økten som
+hørt. En økt uten lydfil vises ikke. Fasen er ikke ferdig.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -539,6 +547,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: læreren ser én innlevering per muntlig økt, med begge
+  opptakene. Fasen er ikke ferdig.
 - Muntlig økt med to oppgaver er verifisert. Ny økt viste Oppgave 1 av
   2, Fortell om dagen din, uten bilde. Etter første svar viste samme
   økt Oppgave 2 av 2 med kjøkkenbildet. Økten ble stående åpen til
