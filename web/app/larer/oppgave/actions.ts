@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { erOmdirigering } from "@/lib/okt/omdirigering";
+import { rensSvg } from "@/lib/oppgaver/svg";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
@@ -21,7 +22,19 @@ const skjema = z.object({
   beskrivelse: z.string().trim().max(300),
 });
 
-function bildeEndelse(bytes: Uint8Array): "png" | "webp" | null {
+type BildeFil = {
+  endelse: "png" | "webp" | "svg" | "pdf";
+  bytes: Uint8Array;
+};
+
+function innholdstype(endelse: BildeFil["endelse"]): string {
+  if (endelse === "png") return "image/png";
+  if (endelse === "webp") return "image/webp";
+  if (endelse === "svg") return "image/svg+xml";
+  return "application/pdf";
+}
+
+function lesBilde(bytes: Uint8Array): BildeFil | null {
   if (
     bytes.length >= 8 &&
     bytes[0] === 0x89 &&
@@ -29,7 +42,7 @@ function bildeEndelse(bytes: Uint8Array): "png" | "webp" | null {
     bytes[2] === 0x4e &&
     bytes[3] === 0x47
   ) {
-    return "png";
+    return { endelse: "png", bytes };
   }
 
   if (
@@ -43,10 +56,25 @@ function bildeEndelse(bytes: Uint8Array): "png" | "webp" | null {
     bytes[10] === 0x42 &&
     bytes[11] === 0x50
   ) {
-    return "webp";
+    return { endelse: "webp", bytes };
   }
 
-  return null;
+  if (
+    bytes.length >= 5 &&
+    bytes[0] === 0x25 &&
+    bytes[1] === 0x50 &&
+    bytes[2] === 0x44 &&
+    bytes[3] === 0x46 &&
+    bytes[4] === 0x2d
+  ) {
+    return { endelse: "pdf", bytes };
+  }
+
+  const svg = rensSvg(bytes);
+  if (!svg || svg.byteLength > bytes.byteLength + 256) {
+    return null;
+  }
+  return { endelse: "svg", bytes: svg };
 }
 
 export async function lagreLarerOppgave(
@@ -93,15 +121,15 @@ export async function lagreLarerOppgave(
       }
 
       const bytes = new Uint8Array(await fil.arrayBuffer());
-      const endelse = bildeEndelse(bytes);
-      if (!endelse) {
+      const bilde = lesBilde(bytes);
+      if (!bilde || bilde.bytes.byteLength > maksBilde) {
         return { feil: oktFeilTekst("ugyldig_bilde") };
       }
 
       bildeId = randomUUID();
-      objekt = `${bildeId}.${endelse}`;
-      const lastet = await admin.storage.from("oppgave-bilder").upload(objekt, bytes, {
-        contentType: endelse === "png" ? "image/png" : "image/webp",
+      objekt = `${bildeId}.${bilde.endelse}`;
+      const lastet = await admin.storage.from("oppgave-bilder").upload(objekt, bilde.bytes, {
+        contentType: innholdstype(bilde.endelse),
         upsert: false,
       });
       if (lastet.error) {
@@ -113,7 +141,7 @@ export async function lagreLarerOppgave(
       const lagretBilde = await supabase.rpc("larer_lagre_bilde", {
         p_id: bildeId,
         p_beskrivelse: parsed.data.beskrivelse,
-        p_endelse: endelse,
+        p_endelse: bilde.endelse,
       });
       if (lagretBilde.error) {
         console.error("lagreLarerOppgave bilde", lagretBilde.error.code);

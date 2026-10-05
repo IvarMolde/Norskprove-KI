@@ -50,6 +50,7 @@ export default async function MuntligOktPage({
         {oppgave.bilde ? (
           <MuntligBilde
             beskrivelse={oppgave.bilde.beskrivelse}
+            endelse={oppgave.bilde.endelse}
             url={oppgave.bilde.url}
           />
         ) : null}

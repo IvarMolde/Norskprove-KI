@@ -29,7 +29,7 @@ const TEKSTER: Record<string, string> = {
   ikke_larer: "Du kan ikke høre elevsvar.",
   kan_ikke_lage_oppgave: "Du kan ikke lage oppgaver.",
   bilde_pakrevd: "Legg inn et bilde og skriv hva som er på det.",
-  ugyldig_bilde: "Bildet må være png eller webp.",
+  ugyldig_bilde: "Bildet må være png, pdf, svg eller webp.",
   bilde_utilgjengelig: "Bildet kunne ikke lagres nå. Prøv igjen.",
   innlevering_mangler: "Vi fant ikke innleveringen.",
   ugyldig_larerniva: "Velg et nivå.",

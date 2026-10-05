@@ -5,7 +5,14 @@ import { createClient } from "@/lib/supabase/server";
 const idSkjema =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const filSkjema =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(png|webp)$/;
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(png|webp|svg|pdf)$/;
+
+function innholdstype(filnavn: string): string {
+  if (filnavn.endsWith(".webp")) return "image/webp";
+  if (filnavn.endsWith(".svg")) return "image/svg+xml";
+  if (filnavn.endsWith(".pdf")) return "application/pdf";
+  return "image/png";
+}
 
 export async function GET(
   _request: Request,
@@ -43,16 +50,20 @@ export async function GET(
       return new Response(oktFeilTekst("bilde_mangler"), { status: 404 });
     }
 
-    const endelse = data.endsWith(".webp") ? "webp" : "png";
     const bytes = new Uint8Array(await fil.data.arrayBuffer());
-    return new Response(bytes, {
-      headers: {
-        "Content-Type": endelse === "webp" ? "image/webp" : "image/png",
-        "Cache-Control": "private, no-store",
-        "Content-Length": String(bytes.byteLength),
-        "X-Content-Type-Options": "nosniff",
-      },
-    });
+    const type = innholdstype(data);
+    const headers: Record<string, string> = {
+      "Content-Type": type,
+      "Cache-Control": "private, no-store",
+      "Content-Disposition": "inline",
+      "Content-Length": String(bytes.byteLength),
+      "X-Content-Type-Options": "nosniff",
+    };
+    if (type === "image/svg+xml") {
+      headers["Content-Security-Policy"] =
+        "default-src 'none'; style-src 'unsafe-inline'; sandbox";
+    }
+    return new Response(bytes, { headers });
   } catch (error) {
     console.error("oppgaveBilde", error);
     return new Response(oktFeilTekst(undefined), { status: 500 });

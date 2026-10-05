@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { bildeAdresseSchema, oppgaveBildeSchema } from "@/lib/oppgaver/bilde";
+import {
+  bildeAdresseSchema,
+  bildeEndelseSchema,
+  oppgaveBildeSchema,
+} from "@/lib/oppgaver/bilde";
 import { oktFeilTekst } from "@/lib/okt/feil";
 import { createClient } from "@/lib/supabase/server";
 
@@ -25,6 +29,7 @@ export const larerOppgaveSchema = listeSchema.extend({
       id: z.string().uuid(),
       url: bildeAdresseSchema,
       beskrivelse: z.string().min(1),
+      endelse: bildeEndelseSchema,
     })
     .nullable(),
 });

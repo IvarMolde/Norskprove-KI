@@ -343,12 +343,16 @@ venter.
 
 Beslutning 2026-10-05: en lærer kan lage muntlige oppgaver i appen.
 Typen er `individuell_fortelle` eller `individuell_beskrive_bilde`.
-Bilde kreves bare for beskrive-bilde. Filen er png eller webp, med
-alt-tekst, og ligger i bøtten `oppgave-bilder`. Nettleseren får
-`/bilde/{id}`, ikke lagringsnavnet. Eleven ser bildet når oppgaven er
-publisert. Læreren ser det også som kladd. En elev kan ikke lage
-oppgaven. Redaktøren beholder leseoppgavene. Full bildebank venter.
-Fasen er ikke ferdig.
+Bilde kreves bare for beskrive-bilde. Filen er png, webp, pdf eller
+svg, med alt-tekst, og ligger i bøtten `oppgave-bilder`. SVG renses
+før lagring. PDF vises på siden. Nettleseren får `/bilde/{id}`, ikke
+lagringsnavnet. Eleven ser bildet når oppgaven er publisert. Læreren
+ser det også som kladd. En elev kan ikke lage oppgaven. Redaktøren
+beholder leseoppgavene. Full bildebank venter. Fasen er ikke ferdig.
+
+Beslutning 2026-10-05: læreren kan laste opp png, pdf og svg, i tillegg
+til webp, når eleven skal beskrive bildet. SVG renses før lagring.
+PDF vises i oppgaven. Fasen er ikke ferdig.
 
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
@@ -529,6 +533,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: læreren kan laste opp png, pdf og svg til en
+  beskrive-oppgave. SVG renses før lagring. Fasen er ikke ferdig.
 - Lærerens oppgave verifisert. Fortelle har ikke bildefelt. Beskriv
   bilde avviste en fil som ikke er bilde, og godtok png. Oppgaven ble
   publisert. Eleven som hadde svart på de andre muntlige oppgavene,

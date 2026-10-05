@@ -41,7 +41,11 @@ export default async function InnleveringPage({
       <p>{datoTekst(rad.innsendt)}</p>
       <p>{rad.oppgavetekst}</p>
       {rad.bilde ? (
-        <MuntligBilde beskrivelse={rad.bilde.beskrivelse} url={rad.bilde.url} />
+        <MuntligBilde
+          beskrivelse={rad.bilde.beskrivelse}
+          endelse={rad.bilde.endelse}
+          url={rad.bilde.url}
+        />
       ) : null}
       <audio controls preload="none" src={`/larer/lyd/${rad.id}`}>
         Nettleseren kan ikke spille av lyden.

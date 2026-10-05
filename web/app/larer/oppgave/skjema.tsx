@@ -102,10 +102,11 @@ export function OppgaveSkjema({ oppgave }: { oppgave: LarerOppgave | null }) {
           {oppgave?.bilde ? (
             <MuntligBilde
               beskrivelse={oppgave.bilde.beskrivelse}
+              endelse={oppgave.bilde.endelse}
               url={oppgave.bilde.url}
             />
           ) : (
-            <p>Bildet trengs når eleven skal beskrive det.</p>
+            <p>Bildet trengs når eleven skal beskrive det. Filen kan være png, pdf, svg eller webp.</p>
           )}
           <label className="flex flex-col gap-2" htmlFor="beskrivelse">
             Hva er på bildet?
@@ -121,7 +122,7 @@ export function OppgaveSkjema({ oppgave }: { oppgave: LarerOppgave | null }) {
           <label className="flex flex-col gap-2" htmlFor="bilde">
             Bildefil
             <input
-              accept="image/png,image/webp"
+              accept=".png,.pdf,.svg,.webp,image/png,image/webp,image/svg+xml,application/pdf"
               id="bilde"
               name="bilde"
               required={!oppgave?.bilde}

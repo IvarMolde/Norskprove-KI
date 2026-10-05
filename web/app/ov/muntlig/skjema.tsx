@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useRef, useState } from "react";
+import type { OppgaveBilde } from "@/lib/oppgaver/bilde";
 import { MuntligBilde } from "./bilde";
 import { sendMuntligSvar } from "./actions";
 
@@ -44,7 +45,7 @@ export function MuntligSkjema({
   oppgaveId: string;
   tittel: string;
   tekst: string;
-  bilde: { url: string; beskrivelse: string } | null;
+  bilde: OppgaveBilde;
 }) {
   const [tilstand, handling, venter] = useActionState(sendMuntligSvar, null);
   const [tarOpp, setTarOpp] = useState(false);
@@ -147,7 +148,13 @@ export function MuntligSkjema({
     <form action={handling} className="flex flex-col gap-4">
       <p>Oppgave 1 av 1</p>
       <h2 className="text-xl font-semibold">{tittel}</h2>
-      {bilde ? <MuntligBilde beskrivelse={bilde.beskrivelse} url={bilde.url} /> : null}
+      {bilde ? (
+        <MuntligBilde
+          beskrivelse={bilde.beskrivelse}
+          endelse={bilde.endelse}
+          url={bilde.url}
+        />
+      ) : null}
       <p>{tekst}</p>
       <p>Vi lagrer lyden. Vurderingen leser teksten du sendte. Uttale og flyt er usikre.</p>
       <input name="oktId" type="hidden" value={oktId} />
