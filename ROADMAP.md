@@ -533,6 +533,9 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Opplasting av svg og pdf er verifisert. Skjemaet tar imot png, pdf,
+  svg og webp. En svg med script ble renset. Eleven så sirkelen og
+  firkanten. Eleven så pdf-filen i oppgaven. Fasen er ikke ferdig.
 - Beslutning: læreren kan laste opp png, pdf og svg til en
   beskrive-oppgave. SVG renses før lagring. Fasen er ikke ferdig.
 - Lærerens oppgave verifisert. Fortelle har ikke bildefelt. Beskriv
