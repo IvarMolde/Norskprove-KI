@@ -83,7 +83,13 @@ export default async function BetalingPage({
       {kjopt === "1" ? <p>Planen er endret.</p> : null}
       {pause ? <p>Du kan pause en økt.</p> : null}
       {skriftlig ? <p>Du kan få vurdering av tekst.</p> : null}
-      {muntlig ? <p>Du kan øve på muntlig.</p> : null}
+      {muntlig ? (
+        <p>
+          <Link className="underline" href="/ov/muntlig">
+            Øv på muntlig
+          </Link>
+        </p>
+      ) : null}
       {adaptiv ? <p>Du kan ta en adaptiv prøve.</p> : null}
       {lokal ? (
         <ul className="flex flex-col gap-6">

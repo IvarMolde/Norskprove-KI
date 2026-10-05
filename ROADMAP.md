@@ -30,7 +30,8 @@ Ikke la veikartet ligge etter koden.
 
 ## Status nå
 
-Aktiv fase: **7. Ut til brukere**. Fase 1 til 6 er ferdige.
+Aktiv fase: **8. Muntlig og adaptiv prøve**. Fase 1 til 6 er ferdige.
+Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -263,8 +264,11 @@ fase 8. Fasen ut til brukere er ikke ferdig.
 Beslutning 2026-10-05: resten av fase 7 ligger utenfor denne koden.
 Offentlig domene og Vercel-prosjekt er ikke satt opp. Avtalene signeres
 ikke uten navn, organisasjonsnummer, adresse og e-post. Vipps kobles
-ikke på. Prompten for skriftlig vurdering endres ikke. Fase 8 startes
-ikke mens denne fasen er aktiv.
+ikke på. Prompten for skriftlig vurdering endres ikke.
+
+Beslutning 2026-10-05: brukeren ba om å fortsette. Fase 7 er fortsatt
+ikke ferdig. Første del av fase 8 starter likevel, fordi resten av
+fase 7 ikke kan gjøres i denne koden. Adaptiv prøve venter.
 
 ## Fase 8. Muntlig og adaptiv prøve
 
@@ -274,6 +278,25 @@ etter reglene i prosjektoversikten.
 - Muntlig fase 1 bruker `prompts/muntlig-vurdering-prompt.md` og
   `muntlig_vurdering`. Lydadressen i databasen nullstilles etter 30
   dager. Selve opptaket slettes når muntlig økt lagrer en fil.
+
+Beslutning 2026-10-05: første muntlige økt er én håndskrevet, publisert
+oppgave. `ferdighet = muntlig`, `type = muntlig_opptak`,
+`oppgavetype = individuell_fortelle`, nivågruppe `A1-A2`. Ingen bilde.
+Rettigheten `muntlig_ki_vurdering` sjekkes i databasen. Uten den
+avvises start og lagring med `mangler_muntlig`.
+
+Eleven tar opp svaret, eller velger en lydfil. Filen lagres i bøtten
+`muntlig-opptak`. Adressen i `svar_lyd_url` starter med
+`muntlig-opptak/`. Etter 30 dager nullstilles adressen, og filen
+slettes. Samme sletting skjer når kontoen slettes. Lydfiler for
+lytteoppgaver ligger ikke i denne bøtten, og de slettes ikke.
+
+Promptfilen endres ikke. Kallet bytter bare `{{NIVAGRUPPE}}`,
+`{{OPPGAVETYPE}}`, `{{OPPGAVETEKST}}` og `{{TRANSKRIPSJON}}`.
+Nettleseren skriver teksten eleven sa. Eleven kan rette den.
+NB Whisper er ikke koblet på. Den lokale modellen kan ikke høre lyd,
+så lydfilen sendes ikke med i kallet. `usikker_pga_lyd` lagres som
+sant. Fasen er ikke ferdig. Adaptiv prøve er ikke startet.
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -453,8 +476,10 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: brukeren ba om å fortsette. Fase 7 er ikke ferdig.
+  Første del av fase 8 er én muntlig økt. Adaptiv prøve venter.
 - Beslutning: resten av fase 7 venter på domene, Vercel, signerte
-  avtaler og Vipps. Fase 8 er ikke startet.
+  avtaler og Vipps.
 
 ### 2026-10-04
 

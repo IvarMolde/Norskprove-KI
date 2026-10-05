@@ -22,6 +22,9 @@ const TEKSTER: Record<string, string> = {
   okt_pauset: "Økten er pauset.",
   konto_ikke_slettet: "Vi fikk ikke slettet kontoen. Prøv igjen.",
   ugyldig_niva: "Velg A1, A2, B1 eller B2.",
+  mangler_muntlig: "Du kan ikke øve på muntlig.",
+  mangler_lyd: "Ta opp svaret ditt først.",
+  transkripsjon_mangler: "Skriv teksten du sa.",
 };
 
 const GENERELL = "Noe gikk galt. Prøv igjen.";

@@ -25,10 +25,11 @@ Fase 1 til 6 er ferdige mot lokal Supabase.
   sletting av egen konto, usignerte databehandleravtaler, og siden
   `/mine-data`.
 
-Fase 7 er aktiv og ikke ferdig. Det offentlige domenet finnes ikke.
-Fase 8 er ikke startet. Beslutning 2026-10-05: den aktive fasen
-flyttes ikke, selv om resten av fase 7 venter på domene, Vercel,
-signerte avtaler og Vipps.
+Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke.
+Fase 8 er startet med én muntlig økt. Adaptiv prøve er ikke startet.
+Beslutning 2026-10-05: resten av fase 7 venter på domene, Vercel,
+signerte avtaler og Vipps. Den aktive fasen er likevel 8, fordi
+brukeren ba om å fortsette.
 
 Avkrysningene i `PROSJEKTOVERSIKT.md` er grovere enn veikartet. Noen
 står åpne selv om en del av arbeidet er gjort. Bruk veikartet for
@@ -57,9 +58,11 @@ Fase 7, ut til brukere:
 Fase 8, muntlig og adaptiv prøve:
 
 - Muntlig fase 1 med `prompts/muntlig-vurdering-prompt.md` og
-  `muntlig_vurdering`.
-- Lydadressen i databasen nullstilles etter 30 dager. Filen slettes
-  når muntlig økt begynner å lagre opptak.
+  `muntlig_vurdering`. Første økt er `individuell_fortelle`.
+  Bildeoppgave gjenstår. Fasen er ikke ferdig før adaptiv prøve også
+  virker.
+- Lydadressen i databasen nullstilles etter 30 dager. Filen i
+  `muntlig-opptak` slettes samtidig, og når kontoen slettes.
 - Adaptiv prøve med tersklene som finnes. De er startestimater.
 - Tersklene justeres når det finnes brukerdata. Ekte IRT venter til
   etter veikartet.

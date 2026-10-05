@@ -30,6 +30,9 @@ export default async function Home({
           <Link href="/ov/skriving">Øv på skriving</Link>
         </p>
         <p>
+          <Link href="/ov/muntlig">Øv på muntlig</Link>
+        </p>
+        <p>
           <Link href="/betaling">Betaling</Link>
         </p>
         <p>
@@ -76,6 +79,9 @@ export default async function Home({
       </p>
       <p>
         <Link href="/ov/skriving">Øv på skriving</Link>
+      </p>
+      <p>
+        <Link href="/ov/muntlig">Øv på muntlig</Link>
       </p>
       <p>
         <Link href="/betaling">Betaling</Link>

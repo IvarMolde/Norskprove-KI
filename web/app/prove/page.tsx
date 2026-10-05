@@ -12,9 +12,9 @@ export default function ProveInfo() {
         Denne appen er øving. Den er ikke den offisielle prøven, og den
         gir ikke et offisielt resultat.
       </p>
-      <p>Du kan øve på lesing, lytting og skriving.</p>
+      <p>Du kan øve på lesing, lytting, skriving og muntlig.</p>
       <p>
-        Vurdering av tekst er ikke med i alle planer. Se{" "}
+        Vurdering av tekst og muntlig er ikke med i alle planer. Se{" "}
         <Link className="underline" href="/betaling">
           betaling
         </Link>
