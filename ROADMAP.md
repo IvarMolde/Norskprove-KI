@@ -354,6 +354,12 @@ Beslutning 2026-10-05: læreren kan laste opp png, pdf og svg, i tillegg
 til webp, når eleven skal beskrive bildet. SVG renses før lagring.
 PDF vises i oppgaven. Fasen er ikke ferdig.
 
+Beslutning 2026-10-05: en muntlig fase-1-økt har to oppgaver. Først
+fortelle, uten bilde. Deretter beskrive et godkjent bilde. Økten er
+ferdig når begge svarene er lagret. Hver oppgave vurderes med
+prompten som den er. `usikker_pga_lyd` lagres som sant. Fasen er ikke
+ferdig. Muntlig fase 2 venter.
+
 - Adaptiv prøve følger `forprove1` → `forprove2_lett` eller
   `forprove2_vanskelig` → én av `hovedprove_a1a2`, `hovedprove_a2b1`,
   `hovedprove_b1b2`. Tersklene i `adaptiv_terskler` er startestimater.
@@ -533,6 +539,8 @@ Nyeste øverst.
 
 ### 2026-10-05
 
+- Beslutning: en muntlig økt har først fortelle, så beskrive bilde.
+  Fasen er ikke ferdig.
 - Opplasting av svg og pdf er verifisert. Skjemaet tar imot png, pdf,
   svg og webp. En svg med script ble renset. Eleven så sirkelen og
   firkanten. Eleven så pdf-filen i oppgaven. Fasen er ikke ferdig.

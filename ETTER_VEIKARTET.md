@@ -58,8 +58,8 @@ Fase 7, ut til brukere:
 Fase 8, muntlig og adaptiv prøve:
 
 - Muntlig fase 1 med `prompts/muntlig-vurdering-prompt.md` og
-  `muntlig_vurdering`. Det finnes én fortelleoppgave og én
-  bildeoppgave. Adaptiv prøve finnes i lesing og lytting.
+  `muntlig_vurdering`. Én økt har først fortelle, så beskrive bilde.
+  Adaptiv prøve finnes i lesing og lytting.
   Fasen er ikke ferdig. Muntlig fase 2 venter.
 - Lydadressen i databasen nullstilles etter 30 dager. Filen i
   `muntlig-opptak` slettes samtidig, og når kontoen slettes.

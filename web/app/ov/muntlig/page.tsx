@@ -41,7 +41,7 @@ export default async function MuntligPage() {
   return (
     <Ramme>
       <h1 className="text-2xl font-semibold">Øv på muntlig</h1>
-      <p>Du forteller, eller du beskriver et bilde. Du får en vurdering etterpå.</p>
+      <p>Du forteller først. Så beskriver du et bilde. Du får en vurdering etterpå.</p>
       {aktiv ? (
         <Link className="underline" href={`/ov/muntlig/${aktiv}`}>
           Fortsett økten

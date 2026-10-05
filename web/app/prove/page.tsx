@@ -13,7 +13,7 @@ export default function ProveInfo() {
         gir ikke et offisielt resultat.
       </p>
       <p>Du kan øve på lesing, lytting, skriving og muntlig.</p>
-      <p>På muntlig kan du fortelle, eller beskrive et bilde.</p>
+      <p>På muntlig forteller du først. Så beskriver du et bilde.</p>
       <p>En lærer kan lage oppgaven. Bildet legges inn når du skal beskrive det.</p>
       <p>
         Komplett kan ta en adaptiv prøve i lesing eller lytting. Den gir

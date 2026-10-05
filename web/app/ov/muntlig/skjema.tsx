@@ -40,12 +40,16 @@ export function MuntligSkjema({
   tittel,
   tekst,
   bilde,
+  nummer,
+  antall,
 }: {
   oktId: string;
   oppgaveId: string;
   tittel: string;
   tekst: string;
   bilde: OppgaveBilde;
+  nummer: number;
+  antall: number;
 }) {
   const [tilstand, handling, venter] = useActionState(sendMuntligSvar, null);
   const [tarOpp, setTarOpp] = useState(false);
@@ -146,7 +150,7 @@ export function MuntligSkjema({
 
   return (
     <form action={handling} className="flex flex-col gap-4">
-      <p>Oppgave 1 av 1</p>
+      <p>Oppgave {nummer} av {antall}</p>
       <h2 className="text-xl font-semibold">{tittel}</h2>
       {bilde ? (
         <MuntligBilde

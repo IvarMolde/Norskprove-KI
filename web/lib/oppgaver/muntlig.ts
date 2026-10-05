@@ -35,29 +35,34 @@ const elevVurderingSchema = z.object({
   usikker_pga_lyd: z.boolean(),
 });
 
+const muntligOppgaveSchema = z.object({
+  id: z.string().uuid(),
+  tittel: z.string().min(1),
+  tekst: z.string().min(1),
+  oppgavetype: z.enum([
+    "individuell_fortelle",
+    "individuell_beskrive_bilde",
+  ]),
+  nivagruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
+  bilde: oppgaveBildeSchema,
+  svar: z.string().nullable(),
+  har_lyd: z.boolean(),
+  larer: z
+    .object({
+      niva: nivaSchema,
+      kommentar: z.string().min(1),
+    })
+    .nullable(),
+  vurdering: elevVurderingSchema.nullable(),
+});
+
 export const muntligOktSchema = z.object({
   id: z.string().uuid(),
   status: z.enum(["pagaende", "fullfort", "avbrutt_lagret"]),
-  oppgave: z.object({
-    id: z.string().uuid(),
-    tittel: z.string().min(1),
-    tekst: z.string().min(1),
-    oppgavetype: z.enum([
-      "individuell_fortelle",
-      "individuell_beskrive_bilde",
-    ]),
-    nivagruppe: z.enum(["A1-A2", "A2-B1", "B1-B2"]),
-    bilde: oppgaveBildeSchema,
-    svar: z.string().nullable(),
-    har_lyd: z.boolean(),
-    larer: z
-      .object({
-        niva: nivaSchema,
-        kommentar: z.string().min(1),
-      })
-      .nullable(),
-    vurdering: elevVurderingSchema.nullable(),
-  }),
+  nummer: z.number().int().positive(),
+  antall: z.number().int().positive(),
+  oppgave: muntligOppgaveSchema,
+  deler: z.array(muntligOppgaveSchema).min(1),
 });
 
 export type MuntligOkt = z.infer<typeof muntligOktSchema>;
