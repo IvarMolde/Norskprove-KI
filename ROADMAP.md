@@ -272,6 +272,11 @@ Beslutning 2026-10-05: brukeren ba om å fortsette. Fase 7 er fortsatt
 ikke ferdig. Første del av fase 8 starter likevel, fordi resten av
 fase 7 ikke kan gjøres i denne koden. Adaptiv prøve venter.
 
+Beslutning 2026-10-07: feil ved innlogging og registrering vises på A2.
+Teksten fra innloggingstjenesten vises ikke. Feil e-post eller passord
+får én setning. En e-post som allerede er i bruk får én setning.
+Fasen er ikke ferdig.
+
 ## Fase 8. Muntlig og adaptiv prøve
 
 Ferdig 2026-10-05. Komplett kan ta en muntlig fase-1-økt og en adaptiv
@@ -604,6 +609,11 @@ Vurderingen lagres i `skriftlig_vurdering` med formen fra
 ## Logg
 
 Nyeste øverst.
+
+### 2026-10-07
+
+- Beslutning: feil ved innlogging og registrering vises på A2.
+  Teksten fra innloggingstjenesten vises ikke. Fasen er ikke ferdig.
 
 ### 2026-10-05
 

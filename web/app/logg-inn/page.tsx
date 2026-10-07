@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { z } from "zod";
+import { innloggingFeilTekst } from "@/lib/auth/feil";
 import { createClient } from "@/lib/supabase/client";
 
 const registreringSkjema = z.object({
@@ -54,7 +55,7 @@ export default function LoggInn() {
           await lagreAlder();
           return;
         }
-        setMelding(`Feil: ${error.message}`);
+        setMelding(innloggingFeilTekst(error, "registrer"));
         return;
       }
       if (!data.session) {
@@ -73,7 +74,7 @@ export default function LoggInn() {
         email: epost,
         password: passord,
       });
-      setMelding(error ? `Feil: ${error.message}` : "Innlogget!");
+      setMelding(error ? innloggingFeilTekst(error, "inn") : "Innlogget!");
     } catch {
       setMelding("Vi fikk ikke logget deg inn. Prøv igjen.");
     }
