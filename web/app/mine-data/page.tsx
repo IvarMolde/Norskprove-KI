@@ -59,12 +59,15 @@ export default async function MineData({
       .eq("id", profil.data.abonnement_plan_id)
       .single();
 
-    const [okter, svar, bestillinger, vurderinger, liste, mineSvar] = await Promise.all([
+    const [okter, svar, bestillinger, vurderinger, muntlige, liste, mineSvar] = await Promise.all([
       supabase.from("okt_tilstand").select("id", { count: "exact", head: true }),
       supabase.from("bruker_svar").select("id", { count: "exact", head: true }),
       supabase.from("betaling").select("id", { count: "exact", head: true }),
       supabase
         .from("skriftlig_vurdering")
+        .select("id", { count: "exact", head: true }),
+      supabase
+        .from("muntlig_vurdering")
         .select("id", { count: "exact", head: true }),
       supabase
         .from("okt_tilstand")
@@ -85,6 +88,7 @@ export default async function MineData({
       svar.error ||
       bestillinger.error ||
       vurderinger.error ||
+      muntlige.error ||
       liste.error ||
       mineSvar.error ||
       !svarRader
@@ -115,7 +119,7 @@ export default async function MineData({
         <ul className="list-disc pl-6">
           <li>Økter: {okter.count ?? 0}</li>
           <li>Svar: {svar.count ?? 0}</li>
-          <li>Vurderinger: {vurderinger.count ?? 0}</li>
+          <li>Vurderinger: {(vurderinger.count ?? 0) + (muntlige.count ?? 0)}</li>
           <li>Bestillinger: {bestillinger.count ?? 0}</li>
         </ul>
         {liste.data && liste.data.length > 0 ? (
