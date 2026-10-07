@@ -9,7 +9,7 @@ function samlet(error: AuthFeil): string {
 
 export function innloggingFeilTekst(
   error: AuthFeil,
-  handling: "inn" | "registrer",
+  handling: "inn" | "registrer" | "endre",
 ): string {
   const tekst = samlet(error);
 
@@ -49,6 +49,10 @@ export function innloggingFeilTekst(
 
   if (handling === "inn") {
     return "Vi fikk ikke logget deg inn. Prøv igjen.";
+  }
+
+  if (handling === "endre") {
+    return "Vi fikk ikke endret e-posten. Prøv igjen.";
   }
 
   return "Vi fikk ikke opprettet kontoen. Prøv igjen.";

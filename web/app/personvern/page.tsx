@@ -52,7 +52,8 @@ export default function Personvern() {
       <p>Du kan slette kontoen din selv. Se under.</p>
         <p>
           Du kan se det vi har lagret, og velge nivå. Der ser du svarene
-          dine og vurderingsteksten.
+          dine og vurderingsteksten. Du kan be om ny e-post. Den gjelder
+          når du har åpnet e-posten og bekreftet.
         </p>
       <p>
         <Link className="underline" href="/mine-data">

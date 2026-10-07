@@ -10,12 +10,13 @@ import {
 } from "@/lib/personvern/mine-data";
 import { slettGammelLyd } from "@/lib/personvern/slett-lyd";
 import { createClient } from "@/lib/supabase/server";
+import { EpostSkjema } from "./epost-skjema";
 import { NivaSkjema } from "./niva-skjema";
 
 export default async function MineData({
   searchParams,
 }: {
-  searchParams: Promise<{ lagret?: string }>;
+  searchParams: Promise<{ lagret?: string; epost?: string }>;
 }) {
   const params = await searchParams;
   const supabase = await createClient();
@@ -109,7 +110,17 @@ export default async function MineData({
         <h1 className="text-2xl font-semibold">Mine data</h1>
         {params.lagret === "1" ? <p>Nivået er lagret.</p> : null}
         <p>E-post: {user.email}</p>
-        <p>E-posten kan ikke endres her.</p>
+        {user.new_email ? (
+          <p>
+            Ny e-post venter på bekreftelse: {user.new_email}. Åpne e-posten
+            til den gamle eller den nye adressen.
+          </p>
+        ) : null}
+        {params.epost === "1" ? (
+          <p>Vi har sendt en e-post. Åpne den for å bekrefte.</p>
+        ) : null}
+        {params.epost === "2" ? <p>E-posten er endret.</p> : null}
+        <EpostSkjema />
         <p>Plan: {plan.data?.navn ?? "Ukjent"}</p>
         <p>Planen endres ikke her.</p>
         <p>{alderTekst(profil.data.alder_bekreftet_metode)}</p>

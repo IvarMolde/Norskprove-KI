@@ -275,6 +275,13 @@ Beslutning 2026-10-05: brukeren ba om å fortsette. Fase 7 er fortsatt
 ikke ferdig. Første del av fase 8 starter likevel, fordi resten av
 fase 7 ikke kan gjøres i denne koden. Adaptiv prøve venter.
 
+Beslutning 2026-10-07: en innlogget bruker kan be om ny e-post på
+`/mine-data`. De skriver den nye adressen og det nåværende passordet.
+Feil passord og en e-post som er i bruk får de setningene som finnes.
+Samme adresse avvises. Endringen skjer når e-posten er bekreftet.
+Inntil da står den gamle adressen, og siden sier at den nye venter.
+Appen sender ikke e-posten selv. Fasen er ikke ferdig.
+
 Beslutning 2026-10-07: brukeren ordner Vercel, API og betaling senere.
 De punktene startes ikke her. Innsynet på `/mine-data` viser
 svarteksten og vurderingsteksten. Lese- og lyttesvar vises som det
@@ -622,6 +629,8 @@ Nyeste øverst.
 
 ### 2026-10-07
 
+- Beslutning: innlogget bruker kan be om ny e-post på `/mine-data`.
+  Endringen skjer når e-posten er bekreftet. Fasen er ikke ferdig.
 - Innsynet er verifisert. Siden viste «Jeg blir sen i dag.» og
   «Nivå: A2» med «Du skriver kort og tydelig.» Lesesvaret viste
   «lykkelig», ikke fasiten. Utkastet sto som kladd. Muntlig viste
