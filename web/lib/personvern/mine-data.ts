@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export const nivaer = ["A1", "A2", "B1", "B2"] as const;
 
 export type Niva = (typeof nivaer)[number];
@@ -29,4 +31,37 @@ export function oktStatusTekst(status: string): string {
   if (status === "fullfort") return "Ferdig";
   if (status === "avbrutt_lagret") return "Pauset";
   return "Ukjent";
+}
+
+const mineSvarRadSchema = z.object({
+  id: z.string().uuid(),
+  ferdighet: z.string(),
+  tittel: z.string(),
+  er_kladd: z.boolean(),
+  svar: z.array(z.string()),
+  niva: z.string().nullable(),
+  tilbakemelding: z.string().nullable(),
+  positivt: z.string().nullable(),
+  forbedring: z.array(z.string()).nullable(),
+  usikker: z.boolean(),
+  usikker_lyd: z.boolean(),
+  formidling_niva: z.string().nullable(),
+  formidling_tekst: z.string().nullable(),
+  flyt_niva: z.string().nullable(),
+  flyt_tekst: z.string().nullable(),
+  uttale_niva: z.string().nullable(),
+  uttale_tekst: z.string().nullable(),
+  ord_niva: z.string().nullable(),
+  ord_tekst: z.string().nullable(),
+  grammatikk_niva: z.string().nullable(),
+  grammatikk_tekst: z.string().nullable(),
+  larer_niva: z.string().nullable(),
+  larer_tekst: z.string().nullable(),
+});
+
+export type MineSvarRad = z.infer<typeof mineSvarRadSchema>;
+
+export function lesMineSvar(data: unknown): MineSvarRad[] | null {
+  const lest = z.array(mineSvarRadSchema).safeParse(data);
+  return lest.success ? lest.data : null;
 }

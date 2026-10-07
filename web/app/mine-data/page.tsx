@@ -4,7 +4,9 @@ import {
   alderTekst,
   erNiva,
   ferdighetTekst,
+  lesMineSvar,
   oktStatusTekst,
+  type MineSvarRad,
 } from "@/lib/personvern/mine-data";
 import { slettGammelLyd } from "@/lib/personvern/slett-lyd";
 import { createClient } from "@/lib/supabase/server";
@@ -57,7 +59,7 @@ export default async function MineData({
       .eq("id", profil.data.abonnement_plan_id)
       .single();
 
-    const [okter, svar, bestillinger, vurderinger, liste] = await Promise.all([
+    const [okter, svar, bestillinger, vurderinger, liste, mineSvar] = await Promise.all([
       supabase.from("okt_tilstand").select("id", { count: "exact", head: true }),
       supabase.from("bruker_svar").select("id", { count: "exact", head: true }),
       supabase.from("betaling").select("id", { count: "exact", head: true }),
@@ -69,9 +71,24 @@ export default async function MineData({
         .select("id, ferdighet, status, startet")
         .order("startet", { ascending: false })
         .limit(10),
+      supabase.rpc("hent_mine_svar"),
     ]);
 
-    if (okter.error || svar.error || bestillinger.error || vurderinger.error || liste.error) {
+    const svarRader = lesMineSvar(mineSvar.data);
+
+    if (mineSvar.error || !svarRader) {
+      console.error("hent_mine_svar", mineSvar.error?.code ?? "ugyldig");
+    }
+
+    if (
+      okter.error ||
+      svar.error ||
+      bestillinger.error ||
+      vurderinger.error ||
+      liste.error ||
+      mineSvar.error ||
+      !svarRader
+    ) {
       return (
         <Ramme>
           <h1 className="text-2xl font-semibold">Mine data</h1>
@@ -112,6 +129,12 @@ export default async function MineData({
         ) : (
           <p>Du har ingen økter ennå.</p>
         )}
+        <h2 className="text-xl font-semibold">Svarene dine</h2>
+        {svarRader.length === 0 ? (
+          <p>Du har ingen svar ennå.</p>
+        ) : (
+          svarRader.map((rad) => <SvarKort key={rad.id} rad={rad} />)
+        )}
         <p>
           <Link className="underline" href="/konto">
             Slett konto
@@ -132,4 +155,64 @@ export default async function MineData({
       </Ramme>
     );
   }
+}
+
+function SvarKort({ rad }: { rad: MineSvarRad }) {
+  const sprak = [
+    rad.flyt_tekst ? { navn: "Flyt", niva: rad.flyt_niva, tekst: rad.flyt_tekst } : null,
+    rad.uttale_tekst
+      ? { navn: "Uttale", niva: rad.uttale_niva, tekst: rad.uttale_tekst }
+      : null,
+    rad.ord_tekst ? { navn: "Ordforråd", niva: rad.ord_niva, tekst: rad.ord_tekst } : null,
+    rad.grammatikk_tekst
+      ? { navn: "Grammatikk", niva: rad.grammatikk_niva, tekst: rad.grammatikk_tekst }
+      : null,
+  ].filter((linje) => linje !== null);
+
+  return (
+    <article className="flex flex-col gap-2 border border-current p-4">
+      <h3 className="text-lg font-semibold">
+        {ferdighetTekst(rad.ferdighet)}. {rad.tittel}
+      </h3>
+      {rad.er_kladd ? <p>Kladd</p> : null}
+      {rad.svar.map((linje, index) => (
+        <p className="whitespace-pre-wrap" key={`${rad.id}:${index}`}>
+          {linje}
+        </p>
+      ))}
+      {rad.formidling_niva ? <p>Formidling: {rad.formidling_niva}</p> : null}
+      {rad.formidling_tekst ? <p>{rad.formidling_tekst}</p> : null}
+      {sprak.length > 0 ? (
+        <>
+          <h4 className="font-semibold">Språk</h4>
+          {sprak.map((linje) => (
+            <p key={linje.navn}>
+              {linje.navn}: {linje.niva}. {linje.tekst}
+            </p>
+          ))}
+        </>
+      ) : null}
+      {rad.niva ? <p>Nivå: {rad.niva}</p> : null}
+      {rad.niva && rad.usikker ? <p>Vi er ikke sikre på vurderingen.</p> : null}
+      {rad.niva && rad.usikker_lyd ? <p>Vi er ikke sikre på uttale og flyt.</p> : null}
+      {rad.tilbakemelding ? <p>{rad.tilbakemelding}</p> : null}
+      {rad.forbedring && rad.forbedring.length > 0 ? (
+        <>
+          <p>Dette kan du øve på</p>
+          <ol className="list-decimal pl-6">
+            {rad.forbedring.map((punkt, index) => (
+              <li key={`${rad.id}:f:${index}`}>{punkt}</li>
+            ))}
+          </ol>
+        </>
+      ) : null}
+      {rad.positivt ? <p>Bra: {rad.positivt}</p> : null}
+      {rad.larer_tekst ? (
+        <>
+          <p>Læreren setter nivået til {rad.larer_niva}.</p>
+          <p className="whitespace-pre-wrap">{rad.larer_tekst}</p>
+        </>
+      ) : null}
+    </article>
+  );
 }

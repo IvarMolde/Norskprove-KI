@@ -50,7 +50,10 @@ export default function Personvern() {
       </p>
       <h2 className="text-xl font-semibold">Dine rettigheter</h2>
       <p>Du kan slette kontoen din selv. Se under.</p>
-      <p>Du kan se det vi har lagret, og velge nivå.</p>
+        <p>
+          Du kan se det vi har lagret, og velge nivå. Der ser du svarene
+          dine og vurderingsteksten.
+        </p>
       <p>
         <Link className="underline" href="/mine-data">
           Mine data

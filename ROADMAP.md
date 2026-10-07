@@ -273,6 +273,13 @@ Beslutning 2026-10-05: brukeren ba om å fortsette. Fase 7 er fortsatt
 ikke ferdig. Første del av fase 8 starter likevel, fordi resten av
 fase 7 ikke kan gjøres i denne koden. Adaptiv prøve venter.
 
+Beslutning 2026-10-07: brukeren ordner Vercel, API og betaling senere.
+De punktene startes ikke her. Innsynet på `/mine-data` viser
+svarteksten og vurderingsteksten. Lese- og lyttesvar vises som det
+eleven valgte, uten fasit. En kladd vises som kladd. Lagringsadressen
+for lyd sendes ikke. E-posten kan fortsatt ikke endres. Fasen er ikke
+ferdig.
+
 Beslutning 2026-10-07: feil ved innlogging og registrering vises på A2.
 Teksten fra innloggingstjenesten vises ikke. Feil e-post eller passord
 får én setning. En e-post som allerede er i bruk får én setning.
@@ -613,6 +620,9 @@ Nyeste øverst.
 
 ### 2026-10-07
 
+- Beslutning: brukeren ordner Vercel, API og betaling senere.
+  Innsynet viser svartekst og vurderingstekst. Fasit og lagringsadresse
+  sendes ikke. Fasen er ikke ferdig.
 - Innloggingen er verifisert. Feil passord viste «E-post eller passord
   er feil.» Riktig passord viste «Innlogget!». Samme e-post ved
   registrering viste «Denne e-posten er allerede i bruk.» Teksten fra

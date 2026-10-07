@@ -28,8 +28,9 @@ Fase 1 til 6 er ferdige mot lokal Supabase.
 Fase 8 er ferdig mot lokal Supabase. Komplett kan ta en muntlig
 fase-1-økt og en adaptiv prøve. Eleven hører egne opptak.
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke.
-Aktiv fase er igjen 7. Punktene under skal ikke startes før fase 7
-er ferdig.
+Aktiv fase er igjen 7. Brukeren ordner Vercel, API og betaling senere.
+De startes ikke i denne koden. Punktene under skal ikke startes før
+fase 7 er ferdig.
 
 Avkrysningene i `PROSJEKTOVERSIKT.md` er grovere enn veikartet. Noen
 står åpne selv om en del av arbeidet er gjort. Bruk veikartet for
