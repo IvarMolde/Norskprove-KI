@@ -156,6 +156,11 @@ export default async function MineData({
           </Link>
         </p>
         <p>
+          <Link className="underline" href="/utvikling">
+            Utviklingen din
+          </Link>
+        </p>
+        <p>
           <Link className="underline" href="/personvern">
             Personvern
           </Link>

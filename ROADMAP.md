@@ -33,7 +33,7 @@ Ikke la veikartet ligge etter koden.
 Aktiv fase: **7. Ut til brukere**. Fase 1 til 6 og fase 8 er ferdige.
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Resten av
 fase 7 ligger utenfor denne koden: domene, Vercel, signerte avtaler og
-Vipps. Brukeren ordner Vercel, API og betaling senere.
+Vipps. Brukeren ordner Vercel, API, betaling og offentlig domene senere.
 Feil ved innlogging og registrering vises på A2. Innsynet viser
 svartekst og vurderingstekst. Innlogget bruker kan be om ny e-post.
 Den gjelder når e-posten er bekreftet. Komplett kan ta en muntlig
@@ -275,6 +275,13 @@ ikke på. Prompten for skriftlig vurdering endres ikke.
 Beslutning 2026-10-05: brukeren ba om å fortsette. Fase 7 er fortsatt
 ikke ferdig. Første del av fase 8 starter likevel, fordi resten av
 fase 7 ikke kan gjøres i denne koden. Adaptiv prøve venter.
+
+Beslutning 2026-10-07: brukeren sier at offentlig domene også kan
+vente. Vercel, API, betaling og domene startes ikke her. Signerte
+avtaler venter på navn og organisasjonsnummer. Fasen er ikke ferdig.
+Eleven får siden `/utvikling`. Den viser nivå per kriterium over tid,
+eldst først. Rå-JSON vises ikke. En annen brukers vurdering vises
+ikke.
 
 Beslutning 2026-10-07: en innlogget bruker kan be om ny e-post på
 `/mine-data`. De skriver den nye adressen og det nåværende passordet.
@@ -629,6 +636,8 @@ Nyeste øverst.
 
 ### 2026-10-07
 
+- Beslutning: offentlig domene kan vente. Eleven får siden
+  `/utvikling` med nivå per kriterium over tid. Fasen er ikke ferdig.
 - E-postendringen er verifisert. Feil passord viste «E-post eller
   passord er feil.» En adresse som var i bruk viste «Denne e-posten
   er allerede i bruk.» Den gamle adressen ble stående, og siden sa at
