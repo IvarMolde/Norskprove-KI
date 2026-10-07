@@ -35,8 +35,9 @@ Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Resten av
 fase 7 ligger utenfor denne koden: domene, Vercel, signerte avtaler og
 Vipps. Brukeren ordner Vercel, API og betaling senere.
 Feil ved innlogging og registrering vises på A2. Innsynet viser
-svartekst og vurderingstekst. Komplett kan ta en muntlig fase-1-økt
-og en adaptiv prøve.
+svartekst og vurderingstekst. Innlogget bruker kan be om ny e-post.
+Den gjelder når e-posten er bekreftet. Komplett kan ta en muntlig
+fase-1-økt og en adaptiv prøve.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -286,8 +287,7 @@ Beslutning 2026-10-07: brukeren ordner Vercel, API og betaling senere.
 De punktene startes ikke her. Innsynet på `/mine-data` viser
 svarteksten og vurderingsteksten. Lese- og lyttesvar vises som det
 eleven valgte, uten fasit. En kladd vises som kladd. Lagringsadressen
-for lyd sendes ikke. E-posten kan fortsatt ikke endres. Fasen er ikke
-ferdig.
+for lyd sendes ikke. Fasen er ikke ferdig.
 
 Beslutning 2026-10-07: feil ved innlogging og registrering vises på A2.
 Teksten fra innloggingstjenesten vises ikke. Feil e-post eller passord
@@ -629,6 +629,12 @@ Nyeste øverst.
 
 ### 2026-10-07
 
+- E-postendringen er verifisert. Feil passord viste «E-post eller
+  passord er feil.» En adresse som var i bruk viste «Denne e-posten
+  er allerede i bruk.» Den gamle adressen ble stående, og siden sa at
+  den nye ventet. Etter bekreftelse viste siden den nye adressen.
+  Innlogging med den nye adressen viste «Innlogget!». Den gamle
+  adressen ble avvist. Fasen er ikke ferdig.
 - Beslutning: innlogget bruker kan be om ny e-post på `/mine-data`.
   Endringen skjer når e-posten er bekreftet. Fasen er ikke ferdig.
 - Innsynet er verifisert. Siden viste «Jeg blir sen i dag.» og

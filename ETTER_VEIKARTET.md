@@ -156,6 +156,7 @@ Fase 6 er ferdig uten ekte trekk. Stripe og SMS er utsatt med vilje.
 
 - [x] Innsynet på `/mine-data` viser svarteksten og
       vurderingsteksten. Fasit og lagringsadresse sendes ikke.
-- [ ] E-post kan ikke endres i appen.
+- [x] E-post kan endres på `/mine-data`. Endringen gjelder når
+      e-posten er bekreftet.
 - [x] Feil fra innlogging vises på A2. Teksten fra
       innloggingstjenesten vises ikke.
