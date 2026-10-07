@@ -33,7 +33,8 @@ Ikke la veikartet ligge etter koden.
 Aktiv fase: **7. Ut til brukere**. Fase 1 til 6 og fase 8 er ferdige.
 Fase 7 er ikke ferdig. Det offentlige domenet finnes ikke. Resten av
 fase 7 ligger utenfor denne koden: domene, Vercel, signerte avtaler og
-Vipps. Komplett kan ta en muntlig fase-1-økt og en adaptiv prøve.
+Vipps. Feil ved innlogging og registrering vises på A2.
+Komplett kan ta en muntlig fase-1-økt og en adaptiv prøve.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -612,6 +613,10 @@ Nyeste øverst.
 
 ### 2026-10-07
 
+- Innloggingen er verifisert. Feil passord viste «E-post eller passord
+  er feil.» Riktig passord viste «Innlogget!». Samme e-post ved
+  registrering viste «Denne e-posten er allerede i bruk.» Teksten fra
+  innloggingstjenesten kom ikke fram. Fasen er ikke ferdig.
 - Beslutning: feil ved innlogging og registrering vises på A2.
   Teksten fra innloggingstjenesten vises ikke. Fasen er ikke ferdig.
 

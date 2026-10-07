@@ -156,5 +156,5 @@ Fase 6 er ferdig uten ekte trekk. Stripe og SMS er utsatt med vilje.
 - [ ] Innsynet på `/mine-data` viser antall og øktliste, ikke selve
       svarteksten eller vurderingsteksten.
 - [ ] E-post kan ikke endres i appen.
-- [ ] Feil fra innlogging vises fortsatt med teksten fra
-      innloggingstjenesten. Den bør være kort og på A2.
+- [x] Feil fra innlogging vises på A2. Teksten fra
+      innloggingstjenesten vises ikke.
