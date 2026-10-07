@@ -36,8 +36,9 @@ fase 7 ligger utenfor denne koden: domene, Vercel, signerte avtaler og
 Vipps. Brukeren ordner Vercel, API, betaling og offentlig domene senere.
 Feil ved innlogging og registrering vises på A2. Innsynet viser
 svartekst og vurderingstekst. Innlogget bruker kan be om ny e-post.
-Den gjelder når e-posten er bekreftet. Komplett kan ta en muntlig
-fase-1-økt og en adaptiv prøve.
+Den gjelder når e-posten er bekreftet. Utviklingen viser nivå per
+kriterium over tid. Komplett kan ta en muntlig fase-1-økt og en
+adaptiv prøve.
 
 Ferdig fra før: datamodell i produksjon, KI-promptene, Next.js-app som viser
 `abonnement_plan`, og e-post/passord-innlogging.
@@ -636,6 +637,10 @@ Nyeste øverst.
 
 ### 2026-10-07
 
+- Utviklingen er verifisert. Skriving viste 1. okt. 2026: A1 før
+  7. okt. 2026: A2 for tekstoppbygging og samlet nivå. Muntlig viste
+  formidling B1 den 5. okt. 2026. En annen brukers nivå kom ikke fram.
+  Uten innlogging ba siden om innlogging. Fasen er ikke ferdig.
 - Beslutning: offentlig domene kan vente. Eleven får siden
   `/utvikling` med nivå per kriterium over tid. Fasen er ikke ferdig.
 - E-postendringen er verifisert. Feil passord viste «E-post eller

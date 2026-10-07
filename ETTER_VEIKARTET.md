@@ -89,8 +89,8 @@ Fase 8, muntlig og adaptiv prøve:
 
 - [ ] Stikkprøve-dashbord for `usikker_vurdering`, så usikre
       vurderinger kan leses av et menneske.
-- [ ] Visning av progresjon per kriterium over tid. Rå-JSON lagres
-      allerede. Eleven har ingen side for utviklingen.
+- [x] Visning av progresjon per kriterium over tid på `/utvikling`.
+      Eldst står først. Rå-JSON vises ikke.
 - [ ] Ekte IRT-kalibrering når den adaptive prøven har nok svar.
       Fase 8 skal bare bruke startestimatene.
 
