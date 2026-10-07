@@ -112,11 +112,12 @@ betalende, også under full eksamenssimulering.
 EU/EØS-datalagring (Supabase-prosjektet kjører i Irland). Lydopptak
 slettes automatisk etter 30 dager. Skriftlige besvarelser/øvingsdata
 beholdes så lenge kontoen er aktiv. Ingen analytics eller
-samtykkebanner – kun nødvendige cookies. Ingen institusjonsvisning av
-enkeltelevers fremgang i v1. Rettslig grunnlag er avtale (ikke samtykke)
+samtykkebanner – kun nødvendige cookies. En lærer kan høre muntlige
+opptak. Nye opptak merkes til læreren har åpnet dem. En skole ser ikke
+elevenes øvrige fremgang i v1. Rettslig grunnlag er avtale (ikke samtykke)
 for kjernefunksjonalitet. Personvernerklæring og databehandleravtaler med
 alle underleverandører (Supabase, Google, Vercel, Stripe, Vipps) er
-obligatorisk og under arbeid.
+obligatorisk og under arbeid. Utkastet i appen er ikke signert.
 
 ## WCAG / Universell utforming
 
@@ -139,6 +140,13 @@ A2-nivå uavhengig av øvingsnivå.
   avgrenset modul, klar til å kopieres inn i en fremtidig app den dagen
   det faktisk trengs – ingen delt pakke/tjeneste bygget på forskudd
 
+## Leveranse
+
+Rekkefølgen vi bygger i, og loggen over hva som er gjort, ligger i
+`ROADMAP.md`. Det som venter til veikartet er gjennomført, ligger i
+`ETTER_VEIKARTET.md`. Oppdater veikartet i samme endring som arbeidet.
+Dette dokumentet forblir kilden til hvordan produktet skal fungere.
+
 ## Status – hva som faktisk er bygget
 
 - [x] Datamodell ferdig spesifisert og anvendt i produksjon (5
@@ -152,7 +160,7 @@ A2-nivå uavhengig av øvingsnivå.
 - [ ] KI-genereringspipeline (Gemini tekst, Google TTS, Google Imagen)
 - [ ] Betalingsintegrasjon (Vipps + Stripe)
 - [ ] Personvernerklæring + databehandleravtaler
-- [ ] «Info om prøvene»-side
+- [x] «Info om prøvene»-side
 - [ ] Vercel-oppsett og domene
 - [ ] Muntlig fase 2 (samtale-oppgave)
 
